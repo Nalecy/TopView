@@ -4,7 +4,7 @@ public class Customer extends Person{
     private Integer balance;
 
     public Customer() {
-        permission = 2;
+        permission = 1;
     }
 
 

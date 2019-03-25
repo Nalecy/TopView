@@ -20,4 +20,5 @@ public abstract class Person {
     public void setTelephone(String telephone) { this.telephone = telephone; }
     public String getIdNumber() { return idNumber; }
     public void setIdNumber(String idNumber) { this.idNumber = idNumber; }
+    public Integer getPermission() { return permission; }
 }
