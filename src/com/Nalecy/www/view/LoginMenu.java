@@ -5,6 +5,7 @@ import com.Nalecy.www.Runner;
 import com.Nalecy.www.po.Administrator;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.HotelAdmin;
+import com.Nalecy.www.service.HotelService;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,10 +32,38 @@ public class LoginMenu extends Menu{
                     case 1:
                         registerUser();break;
                     case 2:
-                        System.out.println("登录");break;
+                        login();break;
                 }
             } else System.out.println("请检查输入");
         }
+    }
+
+    private void login() {
+        System.out.println("请输入用户名：");
+        userName = in.next();
+        String password = HotelService.getPassword(userName);
+        if(password == null){
+            System.out.println("用户名不存在");
+            return;
+        }
+        System.out.println("请输入密码：");
+        this.password = in.next();
+        if(this.password.equals(password)){
+            Integer p = HotelService.searchPerson(HotelService.getPersonID(userName)).getPermission();
+            switch (p){
+                case 1:showNextMenu(new CustomerMenu());break;
+                case 2:showNextMenu(new HotelAdminMenu());break;
+                case 3:showNextMenu(new AdministratorMenu());break;
+            }
+        }else {
+            System.out.println("密码错误");
+            return;
+        }
+
+    }
+
+    private void showNextMenu(Menu menu) {
+        menu.show();
     }
 
     private void registerUser() {
@@ -53,14 +82,14 @@ public class LoginMenu extends Menu{
                         registerCum();break;
                     case 2:
                         System.out.println("请输入注册码：");
-                        if(!checkPermission("HotelAdmin",in.next())){
+                        if(checkPermission("HotelAdmin", in.next())){
                             System.out.println("注册码错误");
                             break;
                         }
                         registerHAdmin();break;
                     case 3:
                         System.out.println("请输入注册码：");
-                        if(!checkPermission("Administrator",in.next())){
+                        if(checkPermission("Administrator", in.next())){
                         System.out.println("注册码错误");
                         break;
                     }
@@ -77,14 +106,14 @@ public class LoginMenu extends Menu{
         try {
             pro.load(new FileReader(path));
             String S = pro.getProperty(s);
-            return pro.getProperty(s).equals(input);
+            return !pro.getProperty(s).equals(input);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
-    private boolean inputInfo(){
+    private boolean inputInfo(){    //也许以后会增加正则判断输入规范，故先定义为boolean
         System.out.println("请输入用户名：");
         userName = in.next();
         System.out.println("请输入密码：");
@@ -97,7 +126,9 @@ public class LoginMenu extends Menu{
     }
 
     private void registerCum() {
-        inputInfo();
+        if(!inputInfo()){
+            return;
+        }
         Customer c = new Customer();
         c.setUserName(userName);
         c.setPassword(password);
@@ -108,7 +139,9 @@ public class LoginMenu extends Menu{
     }
 
     private void registerHAdmin() {
-        inputInfo();
+        if(!inputInfo()){
+            return;
+        }
         HotelAdmin ha = new HotelAdmin();
         ha.setUserName(userName);
         ha.setPassword(password);
@@ -119,7 +152,9 @@ public class LoginMenu extends Menu{
     }
 
     private void registerAdmin() {
-        inputInfo();
+        if(!inputInfo()){
+            return;
+        }
         Administrator a = new Administrator();
         a.setUserName(userName);
         a.setPassword(password);
