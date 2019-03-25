@@ -1,10 +1,14 @@
 package com.Nalecy.www.view;
 
 
+import com.Nalecy.www.Runner;
 import com.Nalecy.www.po.Administrator;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.HotelAdmin;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.regex.Pattern;
 
 public class LoginMenu extends Menu{
@@ -48,14 +52,38 @@ public class LoginMenu extends Menu{
                     case 1:
                         registerCum();break;
                     case 2:
+                        System.out.println("请输入注册码：");
+                        if(!checkPermission("HotelAdmin",in.next())){
+                            System.out.println("注册码错误");
+                            break;
+                        }
                         registerHAdmin();break;
                     case 3:
+                        System.out.println("请输入注册码：");
+                        if(!checkPermission("Administrator",in.next())){
+                        System.out.println("注册码错误");
+                        break;
+                    }
                         registerAdmin();break;
                 }
             } else System.out.println("请检查输入");
         }
 
     }
+
+    private boolean checkPermission(String s, String input) {
+        Properties pro = new Properties();
+        String path = Runner.class.getResource("HotelSystem.properties").getPath();
+        try {
+            pro.load(new FileReader(path));
+            String S = pro.getProperty(s);
+            return pro.getProperty(s).equals(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private boolean inputInfo(){
         System.out.println("请输入用户名：");
         userName = in.next();
