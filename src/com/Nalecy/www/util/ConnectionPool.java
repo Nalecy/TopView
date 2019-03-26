@@ -34,7 +34,6 @@ public class ConnectionPool {
             Class.forName(ProGetter.getInstance().get("driver"));
             for (int i = 0; i<minConn; i++){
                 Connection conn = DriverManager.getConnection(url,user,password);
-                System.out.println(conn);
                 connPool.add(conn);
             }
         } catch (Exception e) {
