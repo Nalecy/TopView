@@ -6,6 +6,7 @@ import com.Nalecy.www.po.Administrator;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.HotelAdmin;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.ProGetter;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -49,6 +50,11 @@ public class LoginMenu extends Menu{
         System.out.println("请输入密码：");
         this.password = in.next();
         if(this.password.equals(password)){
+            System.out.println("登陆成功，是否保存密码：");
+            System.out.println("保存 --任意键 \t\t 取消 --0 ");
+            if(!in.next().equals("0"))
+                if(HotelService.saveUser(userName)) System.out.println("保存成功");
+                else System.out.println("保存失败");
             Integer p = HotelService.searchPerson(HotelService.getPersonID(userName)).getPermission();
             switch (p){
                 case 1:showNextMenu(new CustomerMenu());break;
@@ -101,16 +107,9 @@ public class LoginMenu extends Menu{
     }
 
     private boolean checkPermission(String s, String input) {
-        Properties pro = new Properties();
-        String path = Runner.class.getResource("HotelSystem.properties").getPath();
-        try {
-            pro.load(new FileReader(path));
-            String S = pro.getProperty(s);
-            return !pro.getProperty(s).equals(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
+
+            return !ProGetter.getInstance().get(s).equals(input);
+
     }
 
     private boolean inputInfo(){    //也许以后会增加正则判断输入规范，故先定义为boolean
