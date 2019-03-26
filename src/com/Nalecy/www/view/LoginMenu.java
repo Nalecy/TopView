@@ -6,6 +6,7 @@ import com.Nalecy.www.po.Administrator;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.HotelAdmin;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.service.ProGetter;
 
 import java.io.FileReader;
@@ -42,31 +43,45 @@ public class LoginMenu extends Menu{
     private void login() {
         System.out.println("请输入用户名：");
         userName = in.next();
-        String password = HotelService.getPassword(userName);
+        String password = PersonService.getPassword(userName);
         if(password == null){
             System.out.println("用户名不存在");
             return;
         }
-        System.out.println("请输入密码：");
-        this.password = in.next();
-        if(this.password.equals(password)){
-            System.out.println("登陆成功，是否保存密码：");
-            System.out.println("保存 --任意键 \t\t 取消 --0 ");
-            if(!in.next().equals("0"))
-                if(HotelService.saveUser(userName)) System.out.println("保存成功");
-                else System.out.println("保存失败");
-            Integer p = HotelService.searchPerson(HotelService.getPersonID(userName)).getPermission();
-            switch (p){
-                case 1:showNextMenu(new CustomerMenu());break;
-                case 2:showNextMenu(new HotelAdminMenu());break;
-                case 3:showNextMenu(new AdministratorMenu());break;
-            }
+        Boolean b = null;
+        if (PersonService.hasLogin(userName)){
+            b = true;
         }else {
-            System.out.println("密码错误");
-            return;
+            System.out.println("请输入密码：");
+            this.password = in.next();
+            b = this.password.equals(password);
+            if (b) {
+                //保存密码
+                System.out.println("登陆成功，是否保存密码：");
+                System.out.println("保存 --任意键 \t\t 取消 --0 ");
+                if(!in.next().equals("0")) {
+                    if (PersonService.saveUser(userName)) System.out.println("保存成功");
+                    else System.out.println("保存失败");
+                }
+            }
+            else {
+                System.out.println("密码错误");
+                return;
+            }
         }
-
+        HotelService.getInstance().setCurrentUser(userName);
+        Integer p = PersonService.searchPerson(PersonService.getPersonID(userName)).getPermission();
+        switch (p){
+            case 1:showNextMenu(new CustomerMenu());
+                break;
+            case 2:showNextMenu(new HotelAdminMenu());
+                break;
+            case 3:showNextMenu(new AdministratorMenu());
+                break;
+        }
     }
+
+
 
     private void showNextMenu(Menu menu) {
         menu.show();
