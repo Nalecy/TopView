@@ -6,6 +6,6 @@ public class HotelListMenu  extends Menu {
 
     @Override
     public void show() {
-
+        System.out.println("这里是查看酒店菜单");
     }
 }
