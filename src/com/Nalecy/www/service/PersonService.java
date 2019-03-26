@@ -16,9 +16,13 @@ public class PersonService {
         return null;
     }
 
-    public static boolean saveUser(String userName) {
+    public static boolean saveLogin(String userName) {
         Integer id = getPersonID(userName);
         //save(id, userName);
+        return true;
+    }
+    public static boolean cancelLogin(String userName){
+        //delete(userName);
         return true;
     }
     public static boolean hasLogin(String userName) {
