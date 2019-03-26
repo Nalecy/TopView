@@ -5,6 +5,7 @@ import com.Nalecy.www.Runner;
 import com.Nalecy.www.po.Administrator;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.HotelAdmin;
+import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.service.ProGetter;
@@ -178,7 +179,7 @@ public class LoginMenu extends Menu{
     }
 
     private void printMenu(){
-        System.out.println("欢迎进入酒店管理系统");
+        System.out.println("欢迎进入酒店管理系统 当前时间是"+ DateService.getInstance().getCurrentDate());
         System.out.println("您想要：");
         System.out.println("1、注册新用户");
         System.out.println("2、登录老用户");
