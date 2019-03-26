@@ -6,6 +6,7 @@ public class PsnlInfoMenu extends Menu {
 
     @Override
     public void show() {
+        System.out.println("这里是修改个人信息菜单");
 
     }
 }
