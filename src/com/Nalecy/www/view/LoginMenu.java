@@ -10,9 +10,6 @@ import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.service.ProGetter;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.regex.Pattern;
 
 public class LoginMenu extends Menu{
@@ -61,7 +58,7 @@ public class LoginMenu extends Menu{
                 System.out.println("登陆成功，是否保存密码：");
                 System.out.println("保存 --任意键 \t\t 取消 --0 ");
                 if(!in.next().equals("0")) {
-                    if (PersonService.saveUser(userName)) System.out.println("保存成功");
+                    if (PersonService.saveLogin(userName)) System.out.println("保存成功");
                     else System.out.println("保存失败");
                 }
             }
