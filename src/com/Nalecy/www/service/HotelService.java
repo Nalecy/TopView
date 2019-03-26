@@ -15,4 +15,10 @@ public class HotelService {
     public static Integer getPersonID(String userName){
         return null;
     }
+
+    public static boolean saveUser(String userName) {
+        Integer id = getPersonID(userName);
+        //save(id, userName);
+        return true;
+    }
 }
