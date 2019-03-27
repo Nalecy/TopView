@@ -43,7 +43,25 @@ public class DatabaseUtil {
         Connection conn = ConnectionPool.getInstance().getConnection();
         String sql = "select "+columnName+" from "+tableName;
         try {
-            ResultSet rs = conn.createStatement().executeQuery(sql); //idea 构建的函数，承接getOneColumnData方法
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            while (rs.next()) {
+                list.add(rs.getString(columnName));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ConnectionPool.getInstance().returnConn(conn);
+        if(0 == list.size())return null;
+        else return list;
+    }
+    public LinkedList<String> getOneColumnData(String tableName,String columnName, String signKey, String signValue){
+        LinkedList<String> list = new LinkedList<>();
+        Connection conn = ConnectionPool.getInstance().getConnection();
+        String sql = "select "+columnName+" from "+tableName+" where "+signKey+" = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,signValue);
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(rs.getString(columnName));
             }
@@ -116,7 +134,5 @@ public class DatabaseUtil {
         ConnectionPool.getInstance().returnConn(conn);
         return number;
     }
-
-
 
 }
