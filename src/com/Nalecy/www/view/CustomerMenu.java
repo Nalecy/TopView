@@ -42,10 +42,7 @@ public class CustomerMenu extends Menu {
     }
 
     private void cancelLogin() {
-        if (PersonService.cancelLogin(HotelService.getInstance().getCurrentUser())) System.out.println("取消成功");
+        if (PersonService.getInstance().cancelLogin(HotelService.getInstance().getCurrentUser())) System.out.println("取消成功");
         else System.out.println("删除失败");
-    }
-    private void showNextMenu(Menu menu) {
-        menu.show();
     }
 }

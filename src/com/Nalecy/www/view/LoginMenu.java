@@ -41,13 +41,13 @@ public class LoginMenu extends Menu{
     private void login() {
         System.out.println("请输入用户名：");
         userName = in.next();
-        String password = PersonService.getPassword(userName);
+        String password = PersonService.getInstance().getPassword(userName);
         if(password == null){
             System.out.println("用户名不存在");
             return;
         }
         Boolean b = null;
-        if (PersonService.hasLogin(userName)){
+        if (PersonService.getInstance().hasLogin(userName)){
             b = true;
         }else {
             System.out.println("请输入密码：");
@@ -58,7 +58,7 @@ public class LoginMenu extends Menu{
                 System.out.println("登陆成功，是否保存密码：");
                 System.out.println("保存 --任意键 \t\t 取消 --0 ");
                 if(!in.next().equals("0")) {
-                    if (PersonService.saveLogin(userName)) System.out.println("保存成功");
+                    if (PersonService.getInstance().saveLogin(userName)) System.out.println("保存成功");
                     else System.out.println("保存失败");
                 }
             }
@@ -68,7 +68,7 @@ public class LoginMenu extends Menu{
             }
         }
         HotelService.getInstance().setCurrentUser(userName);
-        Integer p = PersonService.searchPerson(PersonService.getPersonID(userName)).getPermission();
+        Integer p = PersonService.getInstance().searchPerson(PersonService.getInstance().getPersonID(userName)).getPermission();
         switch (p){
             case 1:showNextMenu(new CustomerMenu());
                 break;
@@ -81,9 +81,6 @@ public class LoginMenu extends Menu{
 
 
 
-    private void showNextMenu(Menu menu) {
-        menu.show();
-    }
 
     private void registerUser() {
         while(true) {
