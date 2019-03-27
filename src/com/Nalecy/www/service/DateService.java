@@ -7,9 +7,10 @@ import java.sql.Date;
 public class DateService {
     private static Date currentDate;
 
-    private static DateService ourInstance = new DateService();
+    private static DateService ourInstance;
 
     public static DateService getInstance() {
+        if(ourInstance == null)ourInstance = new DateService();
         return ourInstance;
     }
 

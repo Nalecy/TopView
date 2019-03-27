@@ -6,26 +6,33 @@ import com.Nalecy.www.po.HotelAdmin;
 import com.Nalecy.www.po.Person;
 
 public class PersonService {
-    public static String getPassword(String userName){
+    private static PersonService ourInstance;
+    public static PersonService getInstance() {
+        if(ourInstance == null)ourInstance = new PersonService();
+        return ourInstance;
+    }
+    private PersonService(){
+    }
+    public String getPassword(String userName){
         return "123456";
     }
-    public static Person searchPerson(Integer personId){
+    public Person searchPerson(Integer personId){
         return new Customer();
     }
-    public static Integer getPersonID(String userName){
+    public Integer getPersonID(String userName){
         return null;
     }
 
-    public static boolean saveLogin(String userName) {
+    public boolean saveLogin(String userName) {
         Integer id = getPersonID(userName);
         //save(id, userName);
         return true;
     }
-    public static boolean cancelLogin(String userName){
+    public boolean cancelLogin(String userName){
         //delete(userName);
         return true;
     }
-    public static boolean hasLogin(String userName) {
+    public boolean hasLogin(String userName) {
         //判断是否保存
         return false;
     }

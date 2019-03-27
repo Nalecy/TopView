@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ProGetter {
-    private static ProGetter ourInstance = new ProGetter();
+    private static ProGetter ourInstance;
     private static Properties pro;
 
     public static ProGetter getInstance() {
+        if(ourInstance == null)ourInstance = new ProGetter();
         return ourInstance;
     }
 
