@@ -1,7 +1,5 @@
 package com.Nalecy.www.util;
 
-import com.Nalecy.www.service.ProGetter;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

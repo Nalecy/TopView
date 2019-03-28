@@ -1,14 +1,13 @@
 package com.Nalecy.www.view;
 
 
-import com.Nalecy.www.Runner;
 import com.Nalecy.www.po.Administrator;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.HotelAdmin;
 import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
-import com.Nalecy.www.service.ProGetter;
+import com.Nalecy.www.util.ProGetter;
 
 import java.util.regex.Pattern;
 
