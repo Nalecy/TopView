@@ -17,7 +17,10 @@ public class PersonService {
         return "123456";
     }
     public Person searchPerson(Integer personId){
-        return new Customer();
+        return new Customer("123","123456","12345678","445281",100);
+    }
+    public Person searchPerson(String userName){
+        return new Customer("123","123456","12345678","445281",100);
     }
     public Integer getPersonID(String userName){
         return null;
@@ -35,5 +38,9 @@ public class PersonService {
     public boolean hasLogin(String userName) {
         //判断是否保存
         return false;
+    }
+
+    public boolean savePersonInfo(Person person) {
+        return true;
     }
 }
