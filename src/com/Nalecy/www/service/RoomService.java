@@ -18,4 +18,12 @@ public class RoomService {
 
     public Room getCurrentRoom() { return currentRoom; }
     public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
+
+    public boolean reserve(String dateChoice) {
+        return true;        //若预定成功返回true，否则返回false
+    }
+
+    public Room getRoomById(Integer roomID) {
+        return new Room(1,1,1,1,1,1);
+    }
 }
