@@ -27,7 +27,7 @@ public class Room {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("房间-- 类型：");
+        sb.append("房间类型：");
         if(type.equals(RoomType.NORMAL))sb.append("普通");
         else if(type.equals(RoomType.ADVANCED))sb.append("高级");
         sb.append("，面积："+area+"平，床宽："+bedWidth+"cm，价格："+price+"元");

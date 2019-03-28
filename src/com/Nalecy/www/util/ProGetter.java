@@ -1,4 +1,4 @@
-package com.Nalecy.www.service;
+package com.Nalecy.www.util;
 
 import com.Nalecy.www.Runner;
 

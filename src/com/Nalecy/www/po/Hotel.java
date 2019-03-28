@@ -30,7 +30,7 @@ public class Hotel {
     public String toString() {
         StringBuilder sb = new StringBuilder(name+"，");
         for(int i = 0; i<star ; i++) sb.append("★");
-        sb.append("级酒店 ，综合评分："+getScore().toString()+"总评分人数"+numOfScore+"详细介绍： "+description);
+        sb.append("级酒店，综合评分："+getScore().toString()+"，总评分人数"+numOfScore+"，详细介绍： "+description);
         return sb.toString();
     }
 

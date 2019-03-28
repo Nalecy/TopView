@@ -23,7 +23,7 @@ public class HotelMenu extends Menu {
             if(choice.equals("0"))break;
             if (Pattern.matches("^\\d+$", choice) && roomList.keySet().contains(Integer.parseInt(choice))) {
                 RoomService.getInstance().setCurrentRoom(roomList.get(Integer.parseInt(choice)));
-                showNextMenu(new RoonMenu());
+                showNextMenu(new RoomMenu());
             } else System.out.println("请检查输入");
         }
     }
