@@ -17,10 +17,10 @@ public class PersonService {
         return "123456";
     }
     public Person searchPerson(Integer personId){
-        return new Customer("123","123456","12345678","445281",100);
+        return new HotelAdmin("123","123456","12345678","445281",1);
     }
     public Person searchPerson(String userName){
-        return new Customer("123","123456","12345678","445281",100);
+        return new HotelAdmin("123","123456","12345678","445281",1);
     }
     public Integer getPersonID(String userName){
         return null;
