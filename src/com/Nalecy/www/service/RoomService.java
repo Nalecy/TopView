@@ -2,8 +2,6 @@ package com.Nalecy.www.service;
 
 import com.Nalecy.www.po.Room;
 
-import java.util.ArrayList;
-
 public class RoomService {
     private static RoomService ourInstance;
     private Room currentRoom = null;
@@ -25,5 +23,18 @@ public class RoomService {
 
     public Room getRoomById(Integer roomID) {
         return new Room(1,1,1,1,1,1);
+    }
+
+    public boolean saveRoomInfo(Room room) {
+        return true;
+    }
+
+    public boolean addRoom(Room room) {
+
+        return true;
+    }
+
+    public void deleteRoom(Integer id) {
+
     }
 }
