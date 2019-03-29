@@ -51,6 +51,7 @@ public class PsnlInfoMenu extends Menu {
                 }
             }else System.out.println("请检查输入");
             printNowInfo();
+
         }
     }
 
