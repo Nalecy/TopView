@@ -21,7 +21,7 @@ public class Runner extends Application {
     }
 
     public void start(Stage a) {
-        LoginView.display();
+        LoginView.getInstance().display();
         //showMenu(new LoginMenu());
     }
     private void showMenu(Menu m){
