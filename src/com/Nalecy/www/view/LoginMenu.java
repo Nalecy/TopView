@@ -116,7 +116,6 @@ public class LoginMenu extends Menu{
     }
 
     private boolean checkPermission(String s, String input) {
-
             return !ProGetter.getInstance().get(s).equals(input);
 
     }
