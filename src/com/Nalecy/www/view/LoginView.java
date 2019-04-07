@@ -17,40 +17,48 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class LoginView{
+    private static LoginView instance;
+    private LoginView(){}
+    public static LoginView getInstance(){
+        if(instance == null){
+            instance = new LoginView();
+        }
+        return instance;
+    }
     //布局要素
-    private static Stage window;
-    private static Scene scene;
-    private static GridPane grid;
+    private Stage window;
+    private Scene scene;
+    private GridPane grid;
 
-    private static Button loginButton;
-    private static Button registerButton;
-    private static Button exitButton;
+    private Button loginButton;
+    private Button registerButton;
+    private Button exitButton;
 
-    private static Label dateLabel;
-    private static Label userLabel;
-    private static Label passwordLabel;
-    private static TextField userText;
-    private static PasswordField passwordText;
-    //业务逻辑要素
-    private static String userName = null;
-    private static String password = null;
-    private static String telephone = null;
-    private static String idNumber = null;
+    private Label dateLabel;
+    private Label userLabel;
+    private Label passwordLabel;
+    private TextField userText;
+    private PasswordField passwordText;
 
-    public static void display() {
+    public void display() {
         init();
+        setButtonAction();
+        window.show();
+    }
+
+    private void setButtonAction() {
         loginButton.setOnAction(e -> {
             login();
         });
         registerButton.setOnAction(e ->{
-            System.out.println("正在注册");
-            PromptAlert.display("aa","Aa");
+            RegisterView.getInstance().display();
+            window.close();
         });
-        window.show();
+        exitButton.setOnAction(e -> window.close());
     }
 
 
-    private static void init(){
+    private void init(){
         loginButton = new Button("登录");
         registerButton = new Button("注册");
         exitButton = new Button("退出");
@@ -87,9 +95,10 @@ public class LoginView{
 
     }
 
-    private static void login() {
-        userName = userText.getText();
+    private void login() {
+        String userName = userText.getText();
         String password = PersonService.getInstance().getPassword(userName);
+
         if (password == null) {
             PromptAlert.display("错误","用户名不存在");
             return;
