@@ -50,10 +50,10 @@ public class ConfirmAlert {
         vBox.setSpacing(10);
         vBox.getChildren().addAll(messageLabel,hBox);
 
-        scene = new Scene(vBox,260,180);
+        scene = new Scene(vBox,260,130);
         window = new Stage();
         window.setTitle(title);
-        //window.initModality(Modality.APPLICATION_MODAL);
+        window.initModality(Modality.APPLICATION_MODAL);
         window.setResizable(false);
         window.setScene(scene);
     }

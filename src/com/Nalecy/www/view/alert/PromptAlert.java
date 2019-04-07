@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PromptAlert {
@@ -30,14 +31,14 @@ public class PromptAlert {
         yesButton.setMinWidth(40);
 
         vBox = new VBox();
-        vBox.setPadding(new Insets(40,10,40,100));
+        vBox.setPadding(new Insets(30,10,40,100));
         vBox.setSpacing(10);
         vBox.getChildren().addAll(messageLabel,yesButton);
 
         scene = new Scene(vBox,250,100);
         window = new Stage();
         window.setTitle(title);
-        //window.initModality(Modality.APPLICATION_MODAL);
+        window.initModality(Modality.APPLICATION_MODAL);
         window.setResizable(false);
         window.setScene(scene);
     }
