@@ -119,11 +119,12 @@ public class LoginView{
                 return;
             }
         }
-        HotelService.getInstance().setCurrentUser(userName);
+        HotelService.getInstance().setCurrentUser(userText.getText());
         Integer p = PersonService.getInstance().searchPerson(PersonService.getInstance().getPersonID(userName)).getPermission();
         switch (p) {
             case 1:
-                PromptAlert.display("顾客菜单","进入顾客菜单");
+                CustomerView.getInstance().display();
+                window.close();
                 break;
             case 2:
                 window.close();
