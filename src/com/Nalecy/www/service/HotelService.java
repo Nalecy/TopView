@@ -3,10 +3,7 @@ package com.Nalecy.www.service;
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.po.Room;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 public class HotelService {
     private String currentUser = null;
@@ -30,12 +27,12 @@ public class HotelService {
         return hotelList;
     }
 
-    public LinkedHashMap<Integer, Room> getRoomList() { //测试
-        LinkedHashMap<Integer, Room> roomList = new LinkedHashMap<>();
-        Room room = new Room(1,1,1,1,1,1);
-        Room room2 = new Room(2,2,2,2,2,2);
-        roomList.put(1,room);
-        roomList.put(2,room2);
+    public ArrayList< Room> getRoomList() { //测试
+        ArrayList< Room> roomList = new ArrayList<>();
+        Room room = new Room(1,"中通",1,1,1,1,1);
+        Room room2 = new Room(2,"圆通",2,2,2,2,2);
+        roomList.add(room);
+        roomList.add(room2);
         return roomList;
     }
 
