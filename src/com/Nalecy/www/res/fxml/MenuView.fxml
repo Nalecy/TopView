@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.Nalecy.www.util.MenuController"
+            prefHeight="400.0" prefWidth="600.0">
+    <MenuBar>
+        <Menu text="操作" >
+            <MenuItem fx:id="back" text="返回上一级"/>
+            <MenuItem fx:id="outLoginMenu" text="退出登录" />
+            <MenuItem fx:id="exit" text="退出系统" />
+        </Menu>
+        <Menu  text="个人信息">
+            <MenuItem fx:id="menuPsnlInfo" text="修改个人信息"/>
+        </Menu>
+    </MenuBar>
+</VBox>
