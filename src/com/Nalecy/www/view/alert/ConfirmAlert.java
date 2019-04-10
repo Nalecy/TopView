@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public final class ConfirmAlert {
+public class ConfirmAlert {
     private static Stage window;
     private static Scene scene;
     private static VBox vBox;
