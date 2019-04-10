@@ -1,6 +1,7 @@
 package com.Nalecy.www.view.alert;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,7 +32,8 @@ public final class PromptAlert {
         yesButton.setMinWidth(40);
 
         vBox = new VBox();
-        vBox.setPadding(new Insets(30,10,40,100));
+        vBox.setPadding(new Insets(10,10,10,10));
+        vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
         vBox.getChildren().addAll(messageLabel,yesButton);
 
