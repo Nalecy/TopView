@@ -5,6 +5,7 @@ import com.Nalecy.www.constantClass.*;
 
 public class Room {
     private Integer id;
+    private String name;
     private Integer type;
     private Integer area;
     private Integer bedWidth;
@@ -14,8 +15,9 @@ public class Room {
     public Room() {
     }
 
-    public Room(Integer id, Integer type, Integer area, Integer bedWidth, Integer price, Integer hotelID) {
+    public Room(Integer id, String name, Integer type, Integer area, Integer bedWidth, Integer price, Integer hotelID) {
         this.id = id;
+        this.name = name;
         this.type = type;
         this.area = area;
         this.bedWidth = bedWidth;
@@ -27,7 +29,7 @@ public class Room {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("房间类型：");
+        sb.append("房间名称："+getName()+" 类型：");
         if(type.equals(RoomType.NORMAL))sb.append("普通");
         else if(type.equals(RoomType.ADVANCED))sb.append("高级");
         sb.append("，面积："+area+"平，床宽："+bedWidth+"cm，价格："+price+"元");
@@ -46,4 +48,6 @@ public class Room {
     public void setPrice(Integer price) { this.price = price; }
     public Integer getHotelID() { return hotelID; }
     public void setHotelID(Integer hotelID) { this.hotelID = hotelID; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }
