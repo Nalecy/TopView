@@ -3,7 +3,10 @@ package com.Nalecy.www.view.customerSubView;
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.po.User;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.view.CustomerView;
+import com.Nalecy.www.view.alert.PromptAlert;
+import com.Nalecy.www.view.customerSubView.sub.RoomListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -36,11 +39,6 @@ public class HotelListView {
     private Label label;
 
     private TableView<Hotel> tableView;
-    private TableColumn<Hotel,String> nameColumn;
-    private TableColumn<Hotel,Integer> starColumn;
-    private TableColumn<Hotel,Double> scoreColumn;
-    private TableColumn<Hotel,Integer> numOfScoreColumn;
-    private TableColumn<Hotel,String> descriptionColumn;
 
     private Button enterHotelButton;
     private Button backButton;
@@ -54,8 +52,13 @@ public class HotelListView {
     private void serButtonAction() {
         enterHotelButton.setOnAction(e -> {
             Hotel hotel = tableView.getSelectionModel().getSelectedItem();
+            if(hotel == null) {
+                PromptAlert.display("错误","未选择酒店");
+                return;
+            }
             HotelService.getInstance().setCurrentHotel(hotel);
-            System.out.println(hotel);
+            RoomListView.getInstance().display();
+            window.close();
         });
         backButton.setOnAction(e -> {
             CustomerView.getInstance().display();
@@ -66,35 +69,16 @@ public class HotelListView {
     private void init(){
         label = new Label("酒店列表：");
 
-        nameColumn = new TableColumn<>("酒店名字");
-        nameColumn.setMinWidth(100);
-        nameColumn.setMaxWidth(100);
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        TableViewCreater<Hotel> tvc = new TableViewCreater<>();
+        tvc.addStringColumn("酒店名字","name",100);
+        tvc.addIntegerColumn("星级","star",50);
+        tvc.addDoubleColumn("分数","score",50);
+        tvc.addIntegerColumn("评分人数","numOfScore",100);
+        tvc.addStringColumn("描述","description",500);
 
-        starColumn = new TableColumn<>("星级");
-        starColumn.setMinWidth(50);
-        starColumn.setMaxWidth(50);
-        starColumn.setCellValueFactory(new PropertyValueFactory<>("star"));
-
-        scoreColumn = new TableColumn<>("分数");
-        scoreColumn.setMinWidth(50);
-        scoreColumn.setMaxWidth(50);
-        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
-
-        numOfScoreColumn = new TableColumn<>("评分人数");
-        numOfScoreColumn.setMinWidth(100);
-        numOfScoreColumn.setMaxWidth(100);
-        numOfScoreColumn.setCellValueFactory(new PropertyValueFactory<>("numOfScore"));
-
-        descriptionColumn = new TableColumn<>("描述");
-        descriptionColumn.setMinWidth(500);
-        descriptionColumn.setMaxWidth(500);
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-
-        tableView = new TableView<>();
+        tableView = tvc.getTableView();
         tableView.setMaxSize(800,800);
         tableView.setItems(getList());
-        tableView.getColumns().addAll(nameColumn,starColumn,scoreColumn,numOfScoreColumn,descriptionColumn);
 
         enterHotelButton = new Button("进入选中酒店");
         enterHotelButton.setMinWidth(800);
