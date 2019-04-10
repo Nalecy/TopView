@@ -3,11 +3,9 @@ package com.Nalecy.www.view;
 import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
-import com.Nalecy.www.util.RootGetter;
 import com.Nalecy.www.view.alert.ConfirmAlert;
 import com.Nalecy.www.view.alert.PromptAlert;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +18,7 @@ import javafx.stage.Window;
 
 public class LoginView{
     private static LoginView instance;
+    private LoginView(){}
     public static LoginView getInstance(){
         if(instance == null){
             instance = new LoginView();
@@ -29,30 +28,21 @@ public class LoginView{
     //布局要素
     private Stage window;
     private Scene scene;
-    @FXML
     private GridPane grid;
 
-    @FXML
     private Button loginButton;
-    @FXML
     private Button registerButton;
-    @FXML
     private Button exitButton;
 
-    @FXML
     private Label dateLabel;
-    @FXML
     private Label userLabel;
-    @FXML
     private Label passwordLabel;
-    @FXML
     private TextField userText;
-    @FXML
     private PasswordField passwordText;
 
     public void display() {
         init();
-       // setButtonAction();
+        setButtonAction();
         window.show();
     }
 
@@ -69,9 +59,35 @@ public class LoginView{
 
 
     private void init(){
-        dateLabel.setText("当前时间："+ DateService.getInstance().getCurrentDate());
+        loginButton = new Button("登录");
+        registerButton = new Button("注册");
+        exitButton = new Button("退出");
 
-        scene = new Scene(RootGetter.getFxmlRoot("LoginView.fxml"));
+        dateLabel = new Label("当前时间："+ DateService.getInstance().getCurrentDate());
+        userLabel = new Label("用户名：");
+        passwordLabel = new Label("密码：");
+
+        userText = new TextField();
+        userText.setPromptText("请输入用户名");
+        passwordText = new PasswordField();
+
+        GridPane.setConstraints(dateLabel,1,0);
+        GridPane.setConstraints(userLabel,0,1);
+        GridPane.setConstraints(userText,1,1);
+        GridPane.setConstraints(passwordLabel,0,2);
+        GridPane.setConstraints(passwordText,1,2);
+        GridPane.setConstraints(loginButton,0,3);
+        GridPane.setConstraints(registerButton,1,3);
+        GridPane.setConstraints(exitButton,2,3);
+
+        grid = new GridPane();
+        grid.setPadding(new Insets(20,20,20,20));
+        grid.setVgap(10);
+        grid.setHgap(10);
+        grid.getChildren().addAll(dateLabel,loginButton,registerButton,exitButton,userLabel,passwordLabel,userText,passwordText);
+
+        scene = new Scene(grid);
+
         window = new Stage();
         window.setScene(scene);
         window.setResizable(false);
