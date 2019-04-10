@@ -1,9 +1,7 @@
 package com.Nalecy.www.service;
 
-import com.Nalecy.www.po.Administrator;
-import com.Nalecy.www.po.Customer;
-import com.Nalecy.www.po.HotelAdmin;
-import com.Nalecy.www.po.Person;
+import com.Nalecy.www.dao.UserDao;
+import com.Nalecy.www.po.*;
 
 public class PersonService {
     private static PersonService ourInstance;
@@ -14,7 +12,7 @@ public class PersonService {
     private PersonService(){
     }
     public String getPassword(String userName){
-        return "123456";
+        return UserDao.getPassword(userName);
     }
     public Person searchPerson(Integer personId){
         return new Customer("123","123456","12345678","445281",1);

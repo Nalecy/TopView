@@ -7,7 +7,10 @@ import com.Nalecy.www.util.RootGetter;
 import com.Nalecy.www.view.alert.ConfirmAlert;
 import com.Nalecy.www.view.alert.PromptAlert;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +21,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class LoginView{
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginView implements Initializable {
     private static LoginView instance;
     public static LoginView getInstance(){
         if(instance == null){
@@ -56,21 +63,21 @@ public class LoginView{
         window.show();
     }
 
-    private void setButtonAction() {
-        loginButton.setOnAction(e -> {
-            login();
-        });
-        registerButton.setOnAction(e ->{
-            RegisterView.getInstance().display();
-            window.close();
-        });
-        exitButton.setOnAction(e -> window.close());
+    @FXML
+    public void loginButton(){
+        login();
+    }
+    @FXML
+    public void registerButton(){
+        RegisterView.getInstance().display();
+        window.close();
     }
 
-
+    @FXML
+    public void exitButton(ActionEvent event){
+        System.out.println(window);
+    }
     private void init(){
-        dateLabel.setText("当前时间："+ DateService.getInstance().getCurrentDate());
-
         scene = new Scene(RootGetter.getFxmlRoot("LoginView.fxml"));
         window = new Stage();
         window.setScene(scene);
@@ -121,4 +128,19 @@ public class LoginView{
 
     }
 
+    private void setButtonAction() {
+        /*loginButton.setOnAction(e -> {
+            login();
+        });
+        registerButton.setOnAction(e ->{
+            RegisterView.getInstance().display();
+            window.close();
+        });
+        exitButton.setOnAction(e -> window.close());*/
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        dateLabel.setText("当前时间："+ DateService.getInstance().getCurrentDate());
+    }
 }

@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Runner extends Application {
+    private Stage stage;
    /* private static Runner ourInstance = new Runner();
 
     public static Runner getInstance() {
@@ -20,10 +21,18 @@ public class Runner extends Application {
         launch(args);
     }
 
-    public void start(Stage a) {
+    @Override
+    public void start(Stage primaryStage) {
         LoginView.getInstance().display();
         //showMenu(new LoginMenu());
+
+
     }
+
+
+
+
+
     private void showMenu(Menu m){
         m.show();
     }

@@ -16,12 +16,12 @@
     <padding>
         <Insets topRightBottomLeft="20"/>
     </padding>
-    <Label fx:id="dateLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-    <Label fx:id="userLabel" text="用户名：" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label fx:id="dateLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <Label fx:id="userLabel" text="用户名：" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <TextField fx:id="userText" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="请输入用户名"/>
-    <Label fx:id="passwordLabel" text="密码：" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label fx:id="passwordLabel" text="密码：" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
     <PasswordField fx:id="passwordText" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <Button fx:id="loginButton" text="登录" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <Button fx:id="registerButton" text="注册" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <Button fx:id="exitButton" text="退出" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <Button fx:id="loginButton" text="登录" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#loginButton"/>
+    <Button fx:id="registerButton" text="注册" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#registerButton"/>
+    <Button fx:id="exitButton" text="退出" GridPane.columnIndex="2" GridPane.rowIndex="3" onAction="#exitButton"/>
 </GridPane>
