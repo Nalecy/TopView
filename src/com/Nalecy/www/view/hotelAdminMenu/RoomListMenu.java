@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class RoomListMenu extends Menu {
     @Override
     public void show() {
-        LinkedHashMap<Integer, Room> roomList = HotelService.getInstance().getRoomList();
+        /*LinkedHashMap<Integer, Room> roomList = HotelService.getInstance().getRoomList();
         while (true) {
             System.out.println("该酒店有下列房间,您想要:(输入0返回)");
             for (Integer key : roomList.keySet()) {
@@ -25,7 +25,7 @@ public class RoomListMenu extends Menu {
             else if(choice.equals("2"))deleteRoom(roomList);
             else if(choice.equals("3")) modifyRoom(roomList);
             else System.out.println("请检查输入");
-        }
+        }*/
 
     }
 

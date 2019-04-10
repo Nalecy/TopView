@@ -41,10 +41,10 @@ public class RoomMenu extends Menu {
 
     private void reserve(String dateChoice, String timeChoice) {
 
-        if(RoomService.getInstance().reserve(dateChoice)){
+        /*if(RoomService.getInstance().reserve(dateChoice)){
             System.out.println("预定成功");
         }else {
             System.out.println("不好意思，该时间段已被预约了");
-        }
+        }*/
     }
 }
