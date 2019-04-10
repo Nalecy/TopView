@@ -62,7 +62,7 @@ public class RegisterView {
 
         backButton.setOnAction(e -> {
             window.close();
-            LoginView.getInstance().display();
+            //LoginView.getInstance().display();
         });
 
         resButton.setOnAction(e -> {
