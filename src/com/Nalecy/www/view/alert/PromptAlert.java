@@ -25,9 +25,12 @@ public final class PromptAlert {
         window.showAndWait();
 
     }
+
+
     private static void init(String title, String message){
         yesButton = new Button("确定");
         messageLabel = new Label(message);
+        messageLabel.setWrapText(true);
 
         yesButton.setMinWidth(40);
 
@@ -35,9 +38,13 @@ public final class PromptAlert {
         vBox.setPadding(new Insets(10,10,10,10));
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
+        vBox.setMaxWidth(250);
+        vBox.setMinWidth(250);
+        vBox.setMinHeight(100);
         vBox.getChildren().addAll(messageLabel,yesButton);
 
-        scene = new Scene(vBox,250,100);
+
+        scene = new Scene(vBox);
         window = new Stage();
         window.setTitle(title);
         window.initModality(Modality.APPLICATION_MODAL);
