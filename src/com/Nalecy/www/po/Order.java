@@ -17,13 +17,14 @@ public class Order {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("用户名："+userName+"，预约时间："+date+"预定时间段：");
-        if(roomPeriod.equals(RoomPeriod.MORRNING))sb.append("早上");
+        if(roomPeriod.equals(RoomPeriod.MORNING))sb.append("早上");
         else if(roomPeriod.equals(RoomPeriod.AFTERNOON))sb.append("下午");
         else if(roomPeriod.equals(RoomPeriod.NIGHT))sb.append("晚上");
         return sb.toString();
     }
 
-    public Order(String userName, Date date, Integer roomPeriod, Integer hotelID, Integer roomID) {
+    public Order(Integer id,String userName, Date date, Integer roomPeriod, Integer hotelID, Integer roomID) {
+        this.id = id;
         this.userName = userName;
         this.date = date;
         this.roomPeriod = roomPeriod;

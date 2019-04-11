@@ -9,14 +9,9 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 public class DatabaseUtil {
-    private static DatabaseUtil ourInstance = new DatabaseUtil();
-    public static DatabaseUtil getInstance() {
-        return ourInstance;
-    }
-    private DatabaseUtil() {
-    }
+    private DatabaseUtil(){}
 
-    public LinkedList<String> getOneRowData(String tableName, String dataName, String dataValue){
+    public static LinkedList<String> getOneRowData(String tableName, String dataName, String dataValue){
         LinkedList<String> list = new LinkedList<>();
         ResultSet rs = null;
         Connection conn = ConnectionPool.getInstance().getConnection();
@@ -38,7 +33,7 @@ public class DatabaseUtil {
         return list;
     }
 
-    public LinkedList<String> getOneColumnData(String tableName,String columnName){
+    public static LinkedList<String> getOneColumnData(String tableName,String columnName){
         LinkedList<String> list = new LinkedList<>();
         Connection conn = ConnectionPool.getInstance().getConnection();
         String sql = "select "+columnName+" from "+tableName;
@@ -54,7 +49,7 @@ public class DatabaseUtil {
         if(0 == list.size())return null;
         else return list;
     }
-    public LinkedList<String> getOneColumnData(String tableName,String columnName, String signKey, String signValue){
+    public static LinkedList<String> getOneColumnData(String tableName,String columnName, String signKey, String signValue){
         LinkedList<String> list = new LinkedList<>();
         Connection conn = ConnectionPool.getInstance().getConnection();
         String sql = "select "+columnName+" from "+tableName+" where "+signKey+" = ?";
@@ -72,7 +67,7 @@ public class DatabaseUtil {
         if(0 == list.size())return null;
         else return list;
     }
-    public int addOneRowData(String tableName, String...value){
+    public static int addOneRowData(String tableName, String...value){
         Integer number = 0;
         StringBuilder sql = new StringBuilder();
         Connection conn = ConnectionPool.getInstance().getConnection();
@@ -95,7 +90,7 @@ public class DatabaseUtil {
         return number;
     }
 
-    public int deleteOneRowData(String tableName,String oneOfNames,String oneOfValue) {  //传入表名
+    public static int deleteOneRowData(String tableName,String oneOfNames,String oneOfValue) {  //传入表名
         Connection conn = ConnectionPool.getInstance().getConnection();
         Integer number = 0;
         String sql = "delete from "+tableName+" where "+oneOfNames+" = ?";
@@ -109,7 +104,7 @@ public class DatabaseUtil {
         ConnectionPool.getInstance().returnConn(conn);
         return number;
     }
-    public int updateRowsData(String tableName, String signKey, String signValue,LinkedHashMap<String,String> keyValueMap){
+    public static int updateRowsData(String tableName, String signKey, String signValue,LinkedHashMap<String,String> keyValueMap){
         Integer number = 0;
         StringBuilder sql = new StringBuilder();
         String[] keyArray = new String[keyValueMap.size()];

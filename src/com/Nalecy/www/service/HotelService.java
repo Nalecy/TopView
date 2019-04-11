@@ -45,7 +45,8 @@ public class HotelService {
     public Hotel getCurrentHotel() { return currentHotel; }
     public void setCurrentHotel(Hotel currentHotel) { this.currentHotel = currentHotel; }
 
-    public Hotel getHotelById(Integer hotelID) {
+    public Hotel getHotel(Integer hotelID) {
         return new Hotel(1,"A",4,1.1,1,"6666");
     }
+    public Hotel getHotel(String name){return new Hotel(1,"A",4,1.1,1,"6666");}
 }

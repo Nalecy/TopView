@@ -1,10 +1,10 @@
 package com.Nalecy.www.constantClass;
 
 public interface  RoomPeriod {
-    Integer MORRNING = 1;
-    Integer AFTERNOON = 2;
-    Integer NIGHT = 3;
-    Integer ONE_DAY_LATER = 1;
-    Integer TWO_DAY_LATER = 2;
-    Integer THREE_DAY_LATER = 3;
+    int MORNING = 1;
+    int AFTERNOON = 2;
+    int NIGHT = 3;
+    int ONE_DAY_LATER = 1;
+    int TWO_DAY_LATER = 2;
+    int THREE_DAY_LATER = 3;
 }

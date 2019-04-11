@@ -5,6 +5,7 @@ public class Customer extends Person{
 
     public Customer() {
         permission = 1;
+        balance = 0;
     }
 
     public Customer(String userName, String password, String telephone, String idNumber, Integer balance) {

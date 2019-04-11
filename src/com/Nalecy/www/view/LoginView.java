@@ -127,8 +127,8 @@ public class LoginView{
                 window.close();
                 break;
             case 2:
+                HotelAdminView.getInstance().display();
                 window.close();
-                PromptAlert.display("酒管菜单","进入酒管菜单");
                 break;
             case 3:
                 PromptAlert.display("超管菜单","进入超管菜单");

@@ -17,7 +17,7 @@ public class OrderMenu extends Menu {
 
     @Override
     public void show() {
-        ArrayList<Order> orderList = OrderService.getInstance().getCompleteOrder();
+        /*ArrayList<Order> orderList = OrderService.getInstance().getCompleteOrder();
         LinkedHashMap<Integer, Order> orderMap = OrderService.getInstance().getIncompleteOrder();
         while(true) {
             System.out.println("您的订单：");
@@ -41,6 +41,6 @@ public class OrderMenu extends Menu {
             if(Pattern.matches("^\\d+$",index)&&orderMap.keySet().contains(Integer.parseInt(index))){
                 OrderService.getInstance().cancelOrder(orderMap.get(Integer.parseInt(index)));
             }else System.out.println("请检查输入");
-        }
+        }*/
     }
 }

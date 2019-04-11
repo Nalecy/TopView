@@ -132,7 +132,7 @@ public class RoomListView{
             case "大后天": date = RoomPeriod.THREE_DAY_LATER;break;
         }
         switch (timeValue){
-            case "上午": time = RoomPeriod.MORRNING;break;
+            case "上午": time = RoomPeriod.MORNING;break;
             case "下午": time = RoomPeriod.AFTERNOON;break;
             case "晚上": time = RoomPeriod.NIGHT;break;
         }
