@@ -19,10 +19,18 @@ public class PersonService {
         return UserDao.getUser(userName).getPassword();
     }
     public Person searchPerson(Integer personId){
-        return new HotelAdmin("123","123456","12345678","445281",1);
+        Person person = null;
+        if((person = CustomerDao.searchCustomer(personId)) != null)return person;
+        if((person = HotelAdminDao.searchHotelAdmin(personId)) != null)return person;
+        if((person = AdministratorDao.searchAdministrator(personId)) != null)return person;
+        return null;
     }
     public Person searchPerson(String userName){
-        return new HotelAdmin("123","123456","12345678","445281",1);
+        Person person ;
+        if((person = CustomerDao.searchCustomer(userName)) != null)return person;
+        if((person = HotelAdminDao.searchHotelAdmin(userName)) != null)return person;
+        if((person = AdministratorDao.searchAdministrator(userName)) != null)return person;
+        return null;
     }
     public Integer getPersonID(String userName){
         return UserDao.getUser(userName).getId();
