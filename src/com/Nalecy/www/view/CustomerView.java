@@ -1,5 +1,6 @@
 package com.Nalecy.www.view;
 
+import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.customerSubView.HotelListView;
 import com.Nalecy.www.view.customerSubView.OrderListView;
 import com.Nalecy.www.view.customerSubView.PsnlInfoView;
@@ -10,15 +11,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class CustomerView {
-    private static CustomerView instance;
+public class CustomerView extends View{
+    /*private static CustomerView instance;
     private CustomerView(){}
     public static CustomerView getInstance(){
         if(instance == null){
             instance = new CustomerView();
         }
         return instance;
-    }
+    }*/
 
     private Stage window;
     private Scene scene;
@@ -29,27 +30,32 @@ public class CustomerView {
     private Button psnlInfoButton;
     private Button backButton;
 
+    @Override
     public void display(){
         init();
         setButtonAction();
         window.show();
     }
+
+    @Override
+    public void close() {
+        window.close();
+    }
+
     private void setButtonAction(){
         hotelListButton.setOnAction( e -> {
-            HotelListView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this, new HotelListView());
         });
         orderListButton.setOnAction( e -> {
-            OrderListView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this, new OrderListView());
         });
         psnlInfoButton.setOnAction( e -> {
-            PsnlInfoView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this, new PsnlInfoView());
+
         });
         backButton.setOnAction( e -> {
-            LoginView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this, new LoginView());
+
         });
 
     }
