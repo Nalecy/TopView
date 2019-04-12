@@ -11,11 +11,11 @@ import com.Nalecy.www.view.hotelAdminMenu.RoomListMenu;
 
 import java.util.regex.Pattern;
 
-public class HotelAdminMenu extends Menu {
+public class HotelAdminMenu extends Menu {//废弃
     private HotelAdmin user = (HotelAdmin) PersonService.getInstance().searchPerson(HotelService.getInstance().getCurrentUser());
     @Override
     public void show() {
-        HotelService.getInstance().setCurrentHotel(HotelService.getInstance().getHotelById(user.getHotelID()));
+        HotelService.getInstance().setCurrentHotel(HotelService.getInstance().getHotel(user.getHotelID()));
         while (true) {
             printMenu();
             String choice = in.next();
@@ -38,7 +38,7 @@ public class HotelAdminMenu extends Menu {
     private void printMenu() {
         System.out.println("\t\t\t今天是"+ DateService.getInstance().getCurrentDate());
         System.out.println("您好,用户名为"+ user.getUserName()+"的酒店管理员。");
-        System.out.println("您是"+HotelService.getInstance().getHotelById(user.getHotelID()).getName()+"酒店的管理员");
+        System.out.println("您是"+HotelService.getInstance().getHotel(user.getHotelID()).getName()+"酒店的管理员");
         System.out.println("您想要：");
         System.out.println("1、查看本酒店信息");
         System.out.println("2、管理本酒店房间");

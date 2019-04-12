@@ -9,7 +9,7 @@ import com.Nalecy.www.view.customerMenu.PsnlInfoMenu;
 
 import java.util.regex.Pattern;
 
-public class CustomerMenu extends Menu {
+public class CustomerMenu extends Menu {//废弃
     @Override
     public void show() {
         while (true) {

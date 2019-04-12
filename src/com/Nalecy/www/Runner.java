@@ -1,5 +1,6 @@
 package com.Nalecy.www;
 
+import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.LoginMenu;
 import com.Nalecy.www.view.LoginView;
 import com.Nalecy.www.view.Menu;
@@ -21,7 +22,8 @@ public class Runner extends Application {
     }
 
     public void start(Stage a) {
-        LoginView.getInstance().display();
+        ViewManger.getInstance().switchView(null,new LoginView());
+        // LoginView.getInstance().display();
         //showMenu(new LoginMenu());
     }
     private void showMenu(Menu m){
