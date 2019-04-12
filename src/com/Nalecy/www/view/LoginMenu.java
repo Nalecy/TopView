@@ -11,7 +11,7 @@ import com.Nalecy.www.util.ProGetter;
 
 import java.util.regex.Pattern;
 
-public class LoginMenu extends Menu{
+public class LoginMenu extends Menu{//废弃
 
     private String userName = null;
     private String password = null;

@@ -6,12 +6,13 @@ import com.Nalecy.www.view.Menu;
 import com.Nalecy.www.view.customerMenu.submenu.HotelMenu;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HotelListMenu  extends Menu {
+public class HotelListMenu  extends Menu {//废弃
 
     @Override
     public void show() {
-        ArrayList<Hotel> hotelList;
+        List<Hotel> hotelList;
         Hotel hotel;
         hotelList = HotelService.getInstance().getHotelList();
         while (true) {

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.regex.Pattern;
 
-public class OrderMenu extends Menu {
+public class OrderMenu extends Menu {//废弃
 
     @Override
     public void show() {
