@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.regex.Pattern;
 
-public class HotelMenu extends Menu {
+public class HotelMenu extends Menu {//废弃
     @Override
     public void show() {
         /*LinkedHashMap<Integer, Room> roomList = HotelService.getInstance().getRoomList();

@@ -8,7 +8,7 @@ import com.Nalecy.www.view.Menu;
 
 import java.util.regex.Pattern;
 
-public class PsnlInfoMenu extends Menu {
+public class PsnlInfoMenu extends Menu {//废弃
     private HotelAdmin customer;
 
     public PsnlInfoMenu(){

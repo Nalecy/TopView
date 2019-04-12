@@ -9,7 +9,7 @@ import com.Nalecy.www.view.hotelAdminMenu.submenu.RoomMenu;
 import java.util.LinkedHashMap;
 import java.util.regex.Pattern;
 
-public class RoomListMenu extends Menu {
+public class RoomListMenu extends Menu {//废弃
     @Override
     public void show() {
         /*LinkedHashMap<Integer, Room> roomList = HotelService.getInstance().getRoomList();

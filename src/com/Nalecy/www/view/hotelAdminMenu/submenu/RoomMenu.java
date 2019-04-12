@@ -7,8 +7,8 @@ import com.Nalecy.www.view.Menu;
 
 import java.util.regex.Pattern;
 
-public class RoomMenu extends Menu {
-    private Room room;
+public class RoomMenu extends Menu {//废弃
+    private Room room;//废弃
 
     public RoomMenu(){
         room =  RoomService.getInstance().getCurrentRoom();
