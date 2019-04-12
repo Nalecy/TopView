@@ -17,7 +17,7 @@ public class CustomerDao {
     public static Customer searchCustomer(String userName) {
         Customer customer = new Customer();
         LinkedList<String> list = DatabaseUtil.getOneRowData("customer", "userName", userName);
-        if (list == null) return null;
+        if (list == null|| list.size() == 0) return null;
         setInfo(customer, list);
         return customer;
     }
@@ -25,7 +25,7 @@ public class CustomerDao {
     public static Customer searchCustomer(Integer id) {
         Customer customer = new Customer();
         LinkedList<String> list = DatabaseUtil.getOneRowData("customer", "id", String.valueOf(id));
-        if (list == null) return null;
+        if (list == null|| list.size() == 0) return null;
         setInfo(customer, list);
         return customer;
     }

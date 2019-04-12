@@ -17,7 +17,7 @@ public class AdministratorDao {
     public static Administrator searchAdministrator(String userName) {
         Administrator administrator = new Administrator();
         LinkedList<String> list = DatabaseUtil.getOneRowData("administrator", "userName", userName);
-        if (list == null) return null;
+        if (list == null||list.size() == 0) return null;
         setInfo(administrator,list);
         return administrator;
     }
@@ -25,7 +25,7 @@ public class AdministratorDao {
     public static Administrator searchAdministrator(Integer id) {
         Administrator administrator = new Administrator();
         LinkedList<String> list = DatabaseUtil.getOneRowData("administrator", "id", String.valueOf(id));
-        if (list == null) return null;
+        if (list == null|| list.size() == 0) return null;
         setInfo(administrator,list);
         return administrator;
     }
