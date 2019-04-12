@@ -4,6 +4,7 @@ import com.Nalecy.www.po.HotelAdmin;
 import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.alert.PromptAlert;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,16 +15,19 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class HotelAdminView {
-    private static HotelAdminView instance;
+public class HotelAdminView extends View{
+    /*private static HotelAdminView instance;
     private HotelAdminView(){}
     public static HotelAdminView getInstance(){
         if(instance == null){
             instance = new HotelAdminView();
         }
         return instance;
+    }*/
+    private HotelAdmin user;
+    public HotelAdminView(){
+        user = (HotelAdmin) PersonService.getInstance().searchPerson(HotelService.getInstance().getCurrentUser());
     }
-    private HotelAdmin user = (HotelAdmin) PersonService.getInstance().searchPerson(HotelService.getInstance().getCurrentUser());
 
 
     private Stage stage;
@@ -49,6 +53,11 @@ public class HotelAdminView {
         stage.show();
     }
 
+    @Override
+    public void close() {
+        stage.close();
+    }
+
     private void setButtonAction() {
         infoButton.setOnAction(e -> {
             PromptAlert.display("酒店信息",HotelService.getInstance().getCurrentHotel().toString());
@@ -66,8 +75,8 @@ public class HotelAdminView {
 
         });
         backButton.setOnAction(e -> {
-            LoginView.getInstance().display();
-            stage.close();
+            ViewManger.getInstance().switchView(this, new LoginView());
+
         });
     }
 

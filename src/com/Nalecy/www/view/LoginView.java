@@ -3,6 +3,7 @@ package com.Nalecy.www.view;
 import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.alert.ConfirmAlert;
 import com.Nalecy.www.view.alert.PromptAlert;
 import javafx.application.Application;
@@ -16,15 +17,15 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class LoginView{
-    private static LoginView instance;
+public class LoginView extends View{
+    /*private static LoginView instance;
     private LoginView(){}
     public static LoginView getInstance(){
         if(instance == null){
             instance = new LoginView();
         }
         return instance;
-    }
+    }*/
     //布局要素
     private Stage window;
     private Scene scene;
@@ -40,10 +41,15 @@ public class LoginView{
     private TextField userText;
     private PasswordField passwordText;
 
+    @Override
     public void display() {
         init();
         setButtonAction();
         window.show();
+    }
+    @Override
+    public void close(){
+        window.close();
     }
 
     private void setButtonAction() {
@@ -51,8 +57,7 @@ public class LoginView{
             login();
         });
         registerButton.setOnAction(e ->{
-            RegisterView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this,new RegisterView());
         });
         exitButton.setOnAction(e -> window.close());
     }
@@ -123,12 +128,12 @@ public class LoginView{
         Integer p = PersonService.getInstance().searchPerson(PersonService.getInstance().getPersonID(userName)).getPermission();
         switch (p) {
             case 1:
-                CustomerView.getInstance().display();
-                window.close();
+                ViewManger.getInstance().switchView(this, new CustomerView());
+
                 break;
             case 2:
-                HotelAdminView.getInstance().display();
-                window.close();
+                ViewManger.getInstance().switchView(this, new HotelAdminView());
+
                 break;
             case 3:
                 PromptAlert.display("超管菜单","进入超管菜单");

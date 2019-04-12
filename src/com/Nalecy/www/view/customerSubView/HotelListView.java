@@ -4,7 +4,9 @@ import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.po.User;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.util.TableViewCreater;
+import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.CustomerView;
+import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.alert.PromptAlert;
 import com.Nalecy.www.view.customerSubView.sub.RoomListView;
 import javafx.collections.FXCollections;
@@ -20,17 +22,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class HotelListView {
-    private static HotelListView instance;
+public class HotelListView extends View {
+    /*private static HotelListView instance;
     private HotelListView(){}
     public static HotelListView getInstance(){
         if(instance == null){
             instance = new HotelListView();
         }
         return instance;
-    }
+    }*/
 
     private Stage window;
     private Scene scene;
@@ -43,10 +46,16 @@ public class HotelListView {
     private Button enterHotelButton;
     private Button backButton;
 
+    @Override
     public void display(){
         init();
         serButtonAction();
         window.show();
+    }
+
+    @Override
+    public void close() {
+        window.close();
     }
 
     private void serButtonAction() {
@@ -57,12 +66,11 @@ public class HotelListView {
                 return;
             }
             HotelService.getInstance().setCurrentHotel(hotel);
-            RoomListView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this, new RoomListView());
+
         });
         backButton.setOnAction(e -> {
-            CustomerView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this,new CustomerView());
         });
     }
 
@@ -99,7 +107,7 @@ public class HotelListView {
     }
     private ObservableList<Hotel> getList(){
         ObservableList<Hotel> hotels = FXCollections.observableArrayList();
-        ArrayList<Hotel> hotelList = HotelService.getInstance().getHotelList();
+        List<Hotel> hotelList = HotelService.getInstance().getHotelList();
 
         for (Hotel hotel : hotelList) {
             hotels.add(hotel);

@@ -6,7 +6,9 @@ import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.forTableView.OrderT;
 import com.Nalecy.www.service.OrderService;
 import com.Nalecy.www.util.TableViewCreater;
+import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.CustomerView;
+import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.alert.PromptAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,15 +26,15 @@ import javafx.stage.Stage;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class OrderListView {
-    private static OrderListView instance;
+public class OrderListView extends View {
+    /*private static OrderListView instance;
     private OrderListView(){}
     public static OrderListView getInstance(){
         if(instance == null){
             instance = new OrderListView();
         }
         return instance;
-    }
+    }*/
     private Stage window;
     private Scene scene;
     private VBox vBox;
@@ -48,16 +50,21 @@ public class OrderListView {
     private Button cancelOrderButton;
     private Button backButton;
 
+    @Override
     public void display(){
         init();
         setButtonAction();
         window.show();
     }
 
+    @Override
+    public void close() {
+        window.close();
+    }
+
     private void setButtonAction() {
         backButton.setOnAction(e -> {
-            CustomerView.getInstance().display();
-            window.close();
+            ViewManger.getInstance().switchView(this,new CustomerView());
         });
         cancelOrderButton.setOnAction(e -> {
             cancelOrder();

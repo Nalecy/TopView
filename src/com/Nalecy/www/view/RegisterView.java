@@ -4,6 +4,7 @@ import com.Nalecy.www.po.*;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ProGetter;
+import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.alert.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,8 +18,8 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterView {
-    private static RegisterView instance;
+public class RegisterView extends View{
+    /*private static RegisterView instance;
 
     private RegisterView() {
     }
@@ -28,7 +29,7 @@ public class RegisterView {
             instance = new RegisterView();
         }
         return instance;
-    }
+    }*/
 
     //布局要素
     private Stage window;
@@ -58,11 +59,17 @@ public class RegisterView {
     private Button resButton;
     private Button backButton;
 
+    @Override
     public void display() {
         init();
         setButtonAction();
         window.show();
 
+    }
+
+    @Override
+    public void close() {
+        window.close();
     }
 
     private void setButtonAction() {
@@ -82,28 +89,30 @@ public class RegisterView {
         });
 
         backButton.setOnAction(e -> {
-            window.close();
-            LoginView.getInstance().display();
+            ViewManger.getInstance().switchView(this,new LoginView());
         });
 
         resButton.setOnAction(e -> {
             boolean success = false;
-            if (customerRegBut.isSelected()) {
+            if (customerRegBut.isSelected()) {  //选择的是顾客
                 success = save();
-            } else if (HAdminRegBut.isSelected()) {
+            } else if (HAdminRegBut.isSelected()) {//选择的是酒管
                 if (checkPermission("HotelAdmin", resNumberText.getText())) {
-                    success = save();                                                     //添加保存代码
+                    success = save();
                 } else {
                     PromptAlert.display("错误", "注册码错误！");
                 }
-            } else if (AdministratorRegBut.isSelected()) {
+            } else if (AdministratorRegBut.isSelected()) {//选择的是超管
                 if (checkPermission("Administrator", resNumberText.getText())) {
-                    success = save();                                                     //添加保存代码
+                    success = save();
                 } else {
                     PromptAlert.display("错误", "注册码错误！");
                 }
             }
-            if(success)PromptAlert.display("成功","注册成功");
+            if(success){
+                PromptAlert.display("成功","注册成功");
+                ViewManger.getInstance().switchView(this,new LoginView());
+            }
             else PromptAlert.display("错误","注册失败");
             clearText();
         });

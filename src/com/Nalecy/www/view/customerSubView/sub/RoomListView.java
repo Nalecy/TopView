@@ -6,6 +6,8 @@ import com.Nalecy.www.po.Room;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
 import com.Nalecy.www.util.TableViewCreater;
+import com.Nalecy.www.util.ViewManger;
+import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.alert.PromptAlert;
 import com.Nalecy.www.view.customerSubView.HotelListView;
 import javafx.collections.FXCollections;
@@ -18,16 +20,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RoomListView{
-    private static RoomListView instance;
+public class RoomListView extends View {
+    /*private static RoomListView instance;
     private RoomListView(){}
     public static RoomListView getInstance(){
         if(instance == null){
             instance = new RoomListView();
         }
         return instance;
-    }
+    }*/
 
     private Stage stage;
     private Scene scene;
@@ -52,13 +55,17 @@ public class RoomListView{
         stage.show();
     }
 
+    @Override
+    public void close() {
+        stage.close();
+    }
+
     private void setButtonAction() {
         reserveButton.setOnAction(e -> {
            reserve();
         });
         backButton.setOnAction(e -> {
-            HotelListView.getInstance().display();
-            stage.close();
+            ViewManger.getInstance().switchView(this, new HotelListView());
         });
     }
 
@@ -115,7 +122,7 @@ public class RoomListView{
     }
     private ObservableList<Room> getRoomList(){
         ObservableList<Room> roomList = FXCollections.observableArrayList();
-        ArrayList<Room> al = HotelService.getInstance().getRoomList();
+        List<Room> al = RoomService.getInstance().getRoomList(HotelService.getInstance().getCurrentHotel().getId());
         roomList.addAll(al);
         return roomList;
     }
