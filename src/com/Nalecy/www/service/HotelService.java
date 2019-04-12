@@ -1,7 +1,10 @@
 package com.Nalecy.www.service;
 
+import com.Nalecy.www.dao.HotelDao;
+import com.Nalecy.www.dao.RoomDao;
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.po.Room;
+import com.Nalecy.www.util.DatabaseUtil;
 
 import java.util.*;
 
@@ -18,23 +21,17 @@ public class HotelService {
     private HotelService() {
     }
 
-    public ArrayList<Hotel> getHotelList() {
-        ArrayList<Hotel> hotelList = new ArrayList<>();
-        Hotel hotel = new Hotel(1,"A",4,1.1,1,"6666");
-        Hotel hotel2 = new Hotel(2,"B",5,2.2,2,"7777");
-        hotelList.add(hotel);
-        hotelList.add(hotel2);
+    public List<Hotel> getHotelList() {
+        List<Hotel> hotelList;
+        hotelList = HotelDao.getHotelList();
         return hotelList;
     }
 
-    public ArrayList< Room> getRoomList() { //测试
-        ArrayList< Room> roomList = new ArrayList<>();
-        Room room = new Room(1,"中通",1,1,1,1,1);
-        Room room2 = new Room(2,"圆通",2,2,2,2,2);
-        roomList.add(room);
-        roomList.add(room2);
-        return roomList;
+    public void addHotel(Hotel hotel){
+
     }
+
+
 
     public void setCurrentUser(String userName){
         currentUser = userName;
@@ -46,7 +43,13 @@ public class HotelService {
     public void setCurrentHotel(Hotel currentHotel) { this.currentHotel = currentHotel; }
 
     public Hotel getHotel(Integer hotelID) {
-        return new Hotel(1,"A",4,1.1,1,"6666");
+        Hotel hotel;
+        hotel = HotelDao.getHotel(hotelID);
+        return hotel;
     }
-    public Hotel getHotel(String name){return new Hotel(1,"A",4,1.1,1,"6666");}
+    public Hotel getHotel(String name){
+        Hotel hotel;
+        hotel = HotelDao.getHotel(name);
+        return hotel;
+    }
 }
