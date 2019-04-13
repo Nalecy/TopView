@@ -1,18 +1,15 @@
-package com.Nalecy.www.view.customerMenu.submenu;
+package com.Nalecy.www.discardMenu.customerMenu.submenu;
 
 import com.Nalecy.www.service.DateService;
-import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
-import com.Nalecy.www.view.Menu;
+import com.Nalecy.www.discardMenu.Menu;
 
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.regex.Pattern;
 
 public class RoomMenu extends Menu {//废弃
     @Override
     public void show() {
-        DateService ds = DateService.getInstance();
+        /*DateService ds = DateService.getInstance();
         System.out.println("下列为该房间的信息：");
         System.out.println(RoomService.getInstance().getCurrentRoom());
         System.out.println("你想要预定的时间是：");
@@ -34,7 +31,7 @@ public class RoomMenu extends Menu {//废弃
             if (Pattern.matches("^[123]{1}$", timeChoice)) {
                 reserve(dateChoice,timeChoice);
             } else System.out.println("请检查输入");
-        } else System.out.println("请检查输入");
+        } else System.out.println("请检查输入");*/
 
 
     }

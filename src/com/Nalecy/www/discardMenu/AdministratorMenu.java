@@ -1,4 +1,4 @@
-package com.Nalecy.www.view;
+package com.Nalecy.www.discardMenu;
 
 import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;

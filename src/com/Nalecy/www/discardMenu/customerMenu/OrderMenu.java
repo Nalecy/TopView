@@ -1,17 +1,6 @@
-package com.Nalecy.www.view.customerMenu;
+package com.Nalecy.www.discardMenu.customerMenu;
 
-import com.Nalecy.www.po.Hotel;
-import com.Nalecy.www.po.Order;
-import com.Nalecy.www.po.Room;
-import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.OrderService;
-import com.Nalecy.www.service.RoomService;
-import com.Nalecy.www.view.Menu;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.regex.Pattern;
+import com.Nalecy.www.discardMenu.Menu;
 
 public class OrderMenu extends Menu {//废弃
 

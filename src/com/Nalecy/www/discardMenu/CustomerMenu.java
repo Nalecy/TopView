@@ -1,11 +1,11 @@
-package com.Nalecy.www.view;
+package com.Nalecy.www.discardMenu;
 
 import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
-import com.Nalecy.www.view.customerMenu.HotelListMenu;
-import com.Nalecy.www.view.customerMenu.OrderMenu;
-import com.Nalecy.www.view.customerMenu.PsnlInfoMenu;
+import com.Nalecy.www.discardMenu.customerMenu.HotelListMenu;
+import com.Nalecy.www.discardMenu.customerMenu.OrderMenu;
+import com.Nalecy.www.discardMenu.customerMenu.PsnlInfoMenu;
 
 import java.util.regex.Pattern;
 

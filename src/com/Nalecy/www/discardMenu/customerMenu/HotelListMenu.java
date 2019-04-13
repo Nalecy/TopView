@@ -1,11 +1,10 @@
-package com.Nalecy.www.view.customerMenu;
+package com.Nalecy.www.discardMenu.customerMenu;
 
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.view.Menu;
-import com.Nalecy.www.view.customerMenu.submenu.HotelMenu;
+import com.Nalecy.www.discardMenu.Menu;
+import com.Nalecy.www.discardMenu.customerMenu.submenu.HotelMenu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HotelListMenu  extends Menu {//废弃

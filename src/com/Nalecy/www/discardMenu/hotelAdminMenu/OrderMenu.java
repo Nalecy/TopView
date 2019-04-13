@@ -1,6 +1,6 @@
-package com.Nalecy.www.view.hotelAdminMenu;
+package com.Nalecy.www.discardMenu.hotelAdminMenu;
 
-import com.Nalecy.www.view.Menu;
+import com.Nalecy.www.discardMenu.Menu;
 
 public class OrderMenu extends Menu {//废弃
     @Override

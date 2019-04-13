@@ -1,10 +1,10 @@
-package com.Nalecy.www.view.hotelAdminMenu;
+package com.Nalecy.www.discardMenu.hotelAdminMenu;
 
 import com.Nalecy.www.po.Room;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
-import com.Nalecy.www.view.Menu;
-import com.Nalecy.www.view.hotelAdminMenu.submenu.RoomMenu;
+import com.Nalecy.www.discardMenu.Menu;
+import com.Nalecy.www.discardMenu.hotelAdminMenu.submenu.RoomMenu;
 
 import java.util.LinkedHashMap;
 import java.util.regex.Pattern;

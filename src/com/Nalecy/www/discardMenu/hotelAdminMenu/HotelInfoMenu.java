@@ -1,10 +1,10 @@
-package com.Nalecy.www.view.hotelAdminMenu;
+package com.Nalecy.www.discardMenu.hotelAdminMenu;
 
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.po.HotelAdmin;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
-import com.Nalecy.www.view.Menu;
+import com.Nalecy.www.discardMenu.Menu;
 
 public class HotelInfoMenu extends Menu {//废弃
     @Override
