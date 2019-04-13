@@ -44,17 +44,17 @@ public class CustomerView extends View{
 
     private void setButtonAction(){
         hotelListButton.setOnAction( e -> {
-            ViewManger.getInstance().switchView(this, new HotelListView());
+            ViewManger.switchView(this, new HotelListView());
         });
         orderListButton.setOnAction( e -> {
-            ViewManger.getInstance().switchView(this, new OrderListView());
+            ViewManger.switchView(this, new OrderListView());
         });
         psnlInfoButton.setOnAction( e -> {
-            ViewManger.getInstance().switchView(this, new PsnlInfoView());
+            ViewManger.switchView(this, new PsnlInfoView());
 
         });
         backButton.setOnAction( e -> {
-            ViewManger.getInstance().switchView(this, new LoginView());
+            ViewManger.switchView(this, new LoginView());
 
         });
 

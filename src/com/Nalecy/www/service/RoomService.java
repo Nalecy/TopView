@@ -1,8 +1,12 @@
 package com.Nalecy.www.service;
 
+import com.Nalecy.www.dao.OrderDao;
 import com.Nalecy.www.dao.RoomDao;
+import com.Nalecy.www.po.Hotel;
+import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.Room;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +35,23 @@ public class RoomService {
     public Room getCurrentRoom() { return currentRoom; }
     public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
 
-    public boolean reserve(Integer dateChoice,Integer timeChoice) {
-        return true;        //若预定成功返回true，否则返回false
+    public boolean reserve(Date date, Integer timeChoice) {
+        List<Order> allOrders = OrderService.getInstance().getIncompleteOrder();
+        for (Order order : allOrders) {
+            Date orderDay = order.getDate();
+            if (order.getRoomID().equals(currentRoom.getId()))          //查询是否有人预定过该房间
+                if(orderDay.getTime()+8*3600*1000==date.getTime())
+                    if(order.getRoomPeriod().equals(timeChoice))
+                        return false;
+        }
+        Order order = new Order();
+        order.setUserName(HotelService.getInstance().getCurrentUser());
+        order.setRoomID(currentRoom.getId());
+        order.setRoomPeriod(timeChoice);
+        order.setDate(date);
+        order.setHotelID(currentRoom.getHotelID());
+        OrderDao.addOrder(order);
+        return true;
     }
 
     public Room getRoomById(Integer roomID) {

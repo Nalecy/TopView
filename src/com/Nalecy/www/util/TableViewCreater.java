@@ -7,6 +7,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Date;
 import java.util.LinkedList;
 
+/**
+ * @
+ * @param <T>
+ */
 public class TableViewCreater<T> {
     private TableView<T> tableView;
     public TableViewCreater(){

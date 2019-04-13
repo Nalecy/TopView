@@ -9,17 +9,16 @@ import com.Nalecy.www.util.DatabaseUtil;
 import java.util.*;
 
 public class HotelService {
-    private String currentUser = null;
-    private Hotel currentHotel = null;
     private static HotelService ourInstance;
     public static HotelService getInstance() {
         if(ourInstance == null)ourInstance = new HotelService();
         return ourInstance;
     }
-
-
     private HotelService() {
     }
+
+    private String currentUser = null;
+    private Hotel currentHotel = null;
 
     public List<Hotel> getHotelList() {
         List<Hotel> hotelList;

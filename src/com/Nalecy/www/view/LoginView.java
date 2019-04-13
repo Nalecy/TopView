@@ -4,9 +4,8 @@ import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ViewManger;
-import com.Nalecy.www.view.alert.ConfirmAlert;
-import com.Nalecy.www.view.alert.PromptAlert;
-import javafx.application.Application;
+import com.Nalecy.www.view.popupUtil.ConfirmAlert;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +14,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class LoginView extends View{
     /*private static LoginView instance;
@@ -57,7 +55,7 @@ public class LoginView extends View{
             login();
         });
         registerButton.setOnAction(e ->{
-            ViewManger.getInstance().switchView(this,new RegisterView());
+            ViewManger.switchView(this,new RegisterView());
         });
         exitButton.setOnAction(e -> window.close());
     }
@@ -128,11 +126,11 @@ public class LoginView extends View{
         Integer p = PersonService.getInstance().searchPerson(PersonService.getInstance().getPersonID(userName)).getPermission();
         switch (p) {
             case 1:
-                ViewManger.getInstance().switchView(this, new CustomerView());
+                ViewManger.switchView(this, new CustomerView());
 
                 break;
             case 2:
-                ViewManger.getInstance().switchView(this, new HotelAdminView());
+                ViewManger.switchView(this, new HotelAdminView());
 
                 break;
             case 3:

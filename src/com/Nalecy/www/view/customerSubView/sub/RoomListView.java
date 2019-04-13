@@ -3,12 +3,13 @@ package com.Nalecy.www.view.customerSubView.sub;
 
 import com.Nalecy.www.constantClass.RoomPeriod;
 import com.Nalecy.www.po.Room;
+import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
-import com.Nalecy.www.view.alert.PromptAlert;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import com.Nalecy.www.view.customerSubView.HotelListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,19 +20,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RoomListView extends View {
-    /*private static RoomListView instance;
-    private RoomListView(){}
-    public static RoomListView getInstance(){
-        if(instance == null){
-            instance = new RoomListView();
-        }
-        return instance;
-    }*/
-
     private Stage stage;
     private Scene scene;
     private HBox hBox;
@@ -65,7 +56,7 @@ public class RoomListView extends View {
            reserve();
         });
         backButton.setOnAction(e -> {
-            ViewManger.getInstance().switchView(this, new HotelListView());
+            ViewManger.switchView(this, new HotelListView());
         });
     }
 
@@ -132,9 +123,12 @@ public class RoomListView extends View {
         String dateValue = dateChoiceBox.getValue();
         String timeValue = timeChoiceBox.getValue();
         Room room = roomListTable.getSelectionModel().getSelectedItem();
-
+        if (room == null){
+            PromptAlert.display("错误","未选择房间");
+            return;
+        }
         switch (dateValue) {
-            case "明天": date = RoomPeriod.ONE_DAY_LATER;break;
+            case "明天": date = RoomPeriod.ONE_DAY_LATER;break;  //根据选修设定是几天后
             case "后天": date = RoomPeriod.TWO_DAY_LATER;break;
             case "大后天": date = RoomPeriod.THREE_DAY_LATER;break;
         }
@@ -144,7 +138,7 @@ public class RoomListView extends View {
             case "晚上": time = RoomPeriod.NIGHT;break;
         }
         RoomService.getInstance().setCurrentRoom(room);
-        if( RoomService.getInstance().reserve(date,time) ) PromptAlert.display("提示","预定成功");
-        else PromptAlert.display("错误","预定失败");
+        if( RoomService.getInstance().reserve(DateService.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
+        else PromptAlert.display("错误","预定失败,可能该时段已经被预定了");
     }
 }

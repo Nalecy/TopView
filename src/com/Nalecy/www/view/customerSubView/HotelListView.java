@@ -1,13 +1,12 @@
 package com.Nalecy.www.view.customerSubView;
 
 import com.Nalecy.www.po.Hotel;
-import com.Nalecy.www.po.User;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.CustomerView;
 import com.Nalecy.www.view.View;
-import com.Nalecy.www.view.alert.PromptAlert;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import com.Nalecy.www.view.customerSubView.sub.RoomListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,13 +14,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -66,11 +62,11 @@ public class HotelListView extends View {
                 return;
             }
             HotelService.getInstance().setCurrentHotel(hotel);
-            ViewManger.getInstance().switchView(this, new RoomListView());
+            ViewManger.switchView(this, new RoomListView());
 
         });
         backButton.setOnAction(e -> {
-            ViewManger.getInstance().switchView(this,new CustomerView());
+            ViewManger.switchView(this,new CustomerView());
         });
     }
 

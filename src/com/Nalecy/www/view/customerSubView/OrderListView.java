@@ -1,15 +1,15 @@
 
 package com.Nalecy.www.view.customerSubView;
 
-import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.forTableView.OrderT;
+import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.OrderService;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.CustomerView;
 import com.Nalecy.www.view.View;
-import com.Nalecy.www.view.alert.PromptAlert;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -17,14 +17,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
 
 public class OrderListView extends View {
     /*private static OrderListView instance;
@@ -64,7 +62,7 @@ public class OrderListView extends View {
 
     private void setButtonAction() {
         backButton.setOnAction(e -> {
-            ViewManger.getInstance().switchView(this,new CustomerView());
+            ViewManger.switchView(this,new CustomerView());
         });
         cancelOrderButton.setOnAction(e -> {
             cancelOrder();
@@ -73,12 +71,13 @@ public class OrderListView extends View {
     }
 
     private void cancelOrder() {
-        Order order = unfinTableView.getSelectionModel().getSelectedItem().getOrder();
-        if(order == null){
-            PromptAlert.display("错误","未选择未完成订单");
-        }else {
+        try {
+            Order order = unfinTableView.getSelectionModel().getSelectedItem().getOrder();
             OrderService.getInstance().cancelOrder(order);
+        }catch (NullPointerException e){
+            PromptAlert.display("错误","请检查是否选择");
         }
+
 
     }
 
@@ -128,18 +127,18 @@ public class OrderListView extends View {
         window.setTitle("查看订单");
     }
 
-    private ObservableList<OrderT> getUFOrderList() {
+    private ObservableList<OrderT> getUFOrderList() {       //获取unfinished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        ArrayList<Order> orderList = OrderService.getInstance().getIncompleteOrder();
+        List<Order> orderList = OrderService.getInstance().getIncompleteOrder(HotelService.getInstance().getCurrentUser());         //用当前已登录用户名来获取订单
         for (Order order : orderList) {
             orders.add(new OrderT(order));
         }
         return orders;
     }
 
-    private ObservableList<OrderT> getFOrderList() {
+    private ObservableList<OrderT> getFOrderList() {        //获取finished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        ArrayList<Order> orderList = OrderService.getInstance().getCompleteOrder();
+        List<Order> orderList = OrderService.getInstance().getCompleteOrder(HotelService.getInstance().getCurrentUser());   //用当前已登录用户名来获取订单
         for (Order order : orderList) {
             orders.add(new OrderT(order));
         }

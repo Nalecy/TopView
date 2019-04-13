@@ -5,9 +5,7 @@ import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ViewManger;
-import com.Nalecy.www.view.alert.PromptAlert;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -75,7 +73,7 @@ public class HotelAdminView extends View{
 
         });
         backButton.setOnAction(e -> {
-            ViewManger.getInstance().switchView(this, new LoginView());
+            ViewManger.switchView(this, new LoginView());
 
         });
     }

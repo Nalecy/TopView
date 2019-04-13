@@ -1,14 +1,15 @@
 package com.Nalecy.www.service;
 
+import com.Nalecy.www.dao.OrderDao;
 import com.Nalecy.www.po.Order;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class OrderService {
     private static OrderService ourInstance;
-
     public static OrderService getInstance() {
         if(ourInstance == null)ourInstance = new OrderService();
         return ourInstance;
@@ -16,15 +17,45 @@ public class OrderService {
     private OrderService() {
     }
 
-    public ArrayList<Order> getCompleteOrder() {
-        ArrayList<Order> orders = new ArrayList<>();
-        orders.add(new Order(1,"1",new Date(0),1,1,1));
+    public List<Order> getCompleteOrder() {
+        List<Order> allOrders = OrderDao.getOrderList();
+        if(allOrders == null)return null;
+        List<Order> orders = new ArrayList<>();
+        Date today = DateService.getInstance().getCurrentDate();
+        for (Order order : allOrders) {
+            if(order.getDate().getTime() <= today.getTime())
+                orders.add(order);
+        }
+        return orders;
+    }
+    public List<Order> getCompleteOrder(String userName) {
+        List<Order> allCompleteOrders = getCompleteOrder();
+        List<Order> orders = new ArrayList<>();
+        for (Order order : allCompleteOrders) {
+            if(order.getUserName().equals(userName))
+                orders.add(order);
+        }
+        return orders;
+    }
+    public List<Order> getIncompleteOrder(String userName) {
+        List<Order> allIncompleteOrders = getIncompleteOrder();
+        List<Order> orders = new ArrayList<>();
+        for (Order order : allIncompleteOrders) {
+            if(order.getUserName().equals(userName))
+                orders.add(order);
+        }
         return orders;
     }
 
-    public ArrayList<Order> getIncompleteOrder() {
-        ArrayList<Order> orders = new ArrayList<>();
-        orders.add(new Order(2,"1",new Date(0),1,1,1));
+    public List<Order> getIncompleteOrder() {
+        List<Order> allOrders = OrderDao.getOrderList();
+        if(allOrders == null)return null;
+        List<Order> orders = new ArrayList<>();
+        Date today = DateService.getInstance().getCurrentDate();
+        for (Order order : allOrders) {
+            if(order.getDate().getTime() > today.getTime())
+                orders.add(order);
+        }
         return orders;
     }
 

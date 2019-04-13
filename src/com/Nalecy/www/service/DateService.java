@@ -37,13 +37,18 @@ public class DateService {
     }
     public void incrDate(){
         currentDate.setTime(currentDate.getTime() + 3600*1000*24);
+        //保存至数据库
     }
 
     public void initCalendar(){
         calendar.setTime(currentDate);
     }
 
-    public void addDay(Integer i) {
-        calendar.add(Calendar.DAY_OF_MONTH,i);
+    public Date getOneDay(Integer numAfterToday) {
+        long time = numAfterToday*3600*1000* 24;
+        Date date = new Date(currentDate.getTime()+ time);
+        return date;
     }
+
+
 }

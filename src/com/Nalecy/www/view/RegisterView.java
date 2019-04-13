@@ -5,18 +5,13 @@ import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ProGetter;
 import com.Nalecy.www.util.ViewManger;
-import com.Nalecy.www.view.alert.PromptAlert;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RegisterView extends View{
     /*private static RegisterView instance;
@@ -89,7 +84,7 @@ public class RegisterView extends View{
         });
 
         backButton.setOnAction(e -> {
-            ViewManger.getInstance().switchView(this,new LoginView());
+            ViewManger.switchView(this,new LoginView());
         });
 
         resButton.setOnAction(e -> {
@@ -111,7 +106,7 @@ public class RegisterView extends View{
             }
             if(success){
                 PromptAlert.display("成功","注册成功");
-                ViewManger.getInstance().switchView(this,new LoginView());
+                ViewManger.switchView(this,new LoginView());
             }
             else PromptAlert.display("错误","注册失败");
             clearText();
