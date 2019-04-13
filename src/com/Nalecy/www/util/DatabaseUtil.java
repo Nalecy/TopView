@@ -28,8 +28,9 @@ public class DatabaseUtil {
             }catch (SQLException ignored){}
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            ConnectionPool.getInstance().returnConn(conn);
         }
-        ConnectionPool.getInstance().returnConn(conn);
         return list;
     }
 
@@ -44,8 +45,9 @@ public class DatabaseUtil {
             }
         }catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            ConnectionPool.getInstance().returnConn(conn);
         }
-        ConnectionPool.getInstance().returnConn(conn);
         if(0 == list.size())return null;
         else return list;
     }
@@ -62,12 +64,13 @@ public class DatabaseUtil {
             }
         }catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            ConnectionPool.getInstance().returnConn(conn);
         }
-        ConnectionPool.getInstance().returnConn(conn);
         if(0 == list.size())return null;
         else return list;
     }
-    public static int addOneRowData(String tableName, String...value){
+    public static int addOneRowData(String tableName, String...value){      //返回修改的行数
         Integer number = 0;
         StringBuilder sql = new StringBuilder();
         Connection conn = ConnectionPool.getInstance().getConnection();
@@ -85,8 +88,9 @@ public class DatabaseUtil {
             number = pstmt.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            ConnectionPool.getInstance().returnConn(conn);
         }
-        ConnectionPool.getInstance().returnConn(conn);
         return number;
     }
 
@@ -100,8 +104,9 @@ public class DatabaseUtil {
             number = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            ConnectionPool.getInstance().returnConn(conn);
         }
-        ConnectionPool.getInstance().returnConn(conn);
         return number;
     }
     public static int updateRowsData(String tableName, String signKey, String signValue,LinkedHashMap<String,String> keyValueMap){
@@ -125,8 +130,9 @@ public class DatabaseUtil {
             number = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            ConnectionPool.getInstance().returnConn(conn);
         }
-        ConnectionPool.getInstance().returnConn(conn);
         return number;
     }
 
