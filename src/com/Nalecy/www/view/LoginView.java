@@ -6,6 +6,8 @@ import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.popupUtil.ConfirmAlert;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -61,6 +63,15 @@ public class LoginView extends View{
 
         registerButton.setOnAction(e ->{
             ViewManger.switchView(this,new RegisterView());
+        });
+        userText.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(PersonService.getInstance().hasLogin(userText.getText())){
+                    String password = PersonService.getInstance().getPassword(userText.getText());
+                    passwordText.setText(password);
+                }
+            }
         });
     }
 
