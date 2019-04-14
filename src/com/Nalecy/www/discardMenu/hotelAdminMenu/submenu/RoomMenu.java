@@ -22,11 +22,11 @@ public class RoomMenu extends Menu {//废弃
             String c = in.next();
             if(c.equals("0"))break;
             else if(c.equals("1")){
-                if(RoomService.getInstance().saveRoomInfo(room)){
+                /*if(RoomService.getInstance().saveRoomInfo(room)){
                     System.out.println("保存成功");break;
                 }else {
                     System.out.println("保存失败");break;
-                }
+                }*/
             }
             if(Pattern.matches("^[2-4]{1}",c)){
                 System.out.println("你要将其改为");

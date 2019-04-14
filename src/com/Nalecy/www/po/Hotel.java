@@ -47,7 +47,6 @@ public class Hotel {
         new DecimalFormat("#.00").format(s);
         return s;
     }
-
     public void setScore(Double score) {
         this.score = score;
     }

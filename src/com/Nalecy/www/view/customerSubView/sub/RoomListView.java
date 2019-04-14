@@ -69,9 +69,9 @@ public class RoomListView extends View {
         tvc.addIntegerColumn("面积/米","area",100);
         tvc.addIntegerColumn("床宽","bedWidth",100);
         tvc.addIntegerColumn("价格","price",100);
-
         roomListTable = tvc.getTableView();
         roomListTable.setItems(getRoomList());
+
 
         label = new Label("房间列表：");
         leftVBox = new VBox();

@@ -51,13 +51,17 @@ public class LoginView extends View{
     }
 
     private void setButtonAction() {
+
         loginButton.setOnAction(e -> {
             login();
         });
+
+        exitButton.setOnAction(e -> window.close());
+
+
         registerButton.setOnAction(e ->{
             ViewManger.switchView(this,new RegisterView());
         });
-        exitButton.setOnAction(e -> window.close());
     }
 
 

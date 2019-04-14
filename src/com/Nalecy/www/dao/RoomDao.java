@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RoomDao {
     public static void addRoom(Room room) {
-        DatabaseUtil.addOneRowData("room", null, room.getName(), String.valueOf(room.getType()), String.valueOf(room.getArea()), String.valueOf(room.getBedWidth()), String.valueOf(room.getHotelID()),String.valueOf(room.getPrice()));
+        DatabaseUtil.addOneRowData("room", null, room.getName(), String.valueOf(room.getType()), String.valueOf(room.getArea()), String.valueOf(room.getBedWidth()), String.valueOf(room.getHotelID()), String.valueOf(room.getPrice()));
     }
 
     public static Room getRoom(String roomName) {
@@ -50,8 +50,8 @@ public class RoomDao {
         room.setPrice(Integer.valueOf(roomInfo.get(6)));
     }
 
-    public static void deleteRoom(String roomName) {
-        DatabaseUtil.deleteOneRowData("room", "name", roomName);
+    public static void deleteRoom(Integer roomId) {
+        DatabaseUtil.deleteOneRowData("room", "id", String.valueOf(roomId));
     }
 
     public static void updateRoom(Room room) {
