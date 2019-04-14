@@ -59,15 +59,17 @@ public class RoomService {
     }
 
     public boolean saveRoomInfo(Room room) {
+        RoomDao.updateRoom(room);
         return true;
     }
 
     public boolean addRoom(Room room) {
-
+        room.setHotelID(HotelService.getInstance().getCurrentHotel().getId());
+        RoomDao.addRoom(room);
         return true;
     }
 
     public void deleteRoom(Integer id) {
-
+        RoomDao.deleteRoom(id);
     }
 }

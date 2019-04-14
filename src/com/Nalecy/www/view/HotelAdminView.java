@@ -5,6 +5,7 @@ import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ViewManger;
+import com.Nalecy.www.view.hadminSubView.RoomMangerView;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -61,7 +62,7 @@ public class HotelAdminView extends View{
             PromptAlert.display("酒店信息",HotelService.getInstance().getCurrentHotel().toString());
         });
         roomButton.setOnAction(e -> {
-
+            ViewManger.switchView(this,new RoomMangerView());
         });
         orderButton.setOnAction(e -> {
 
