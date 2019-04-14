@@ -6,6 +6,7 @@ import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.hadminSubView.RoomMangerView;
+import com.Nalecy.www.view.popupUtil.InfoEditPopup;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class HotelAdminView extends View{
     /*private static HotelAdminView instance;
@@ -71,12 +74,26 @@ public class HotelAdminView extends View{
 
         });
         psnlInfoButton.setOnAction(e -> {
-
+            modifyInfo();
         });
         backButton.setOnAction(e -> {
             ViewManger.switchView(this, new LoginView());
 
         });
+    }
+    private void modifyInfo() {
+        InfoEditPopup editPopup = new InfoEditPopup();
+        HotelAdmin hotelAdmin = (HotelAdmin) PersonService.getInstance().searchPerson(HotelService.getInstance().getCurrentUser());//先获取当前登录用户的用户名再获取对应顾客对象
+        editPopup.setInfoNameList("密码","身份证号码","电话");
+        editPopup.setInfoValueList(hotelAdmin.getPassword(),hotelAdmin.getIdNumber(),hotelAdmin.getTelephone());
+        List<String> infoList = editPopup.display("个人信息修改");  //启动窗口并准备获取其返回值
+        if(infoList != null) {
+            //将返回的值列表分别赋值
+            hotelAdmin.setPassword(infoList.get(0));
+            hotelAdmin.setIdNumber(infoList.get(1));
+            hotelAdmin.setTelephone(infoList.get(2));
+            PersonService.getInstance().updatePeron(hotelAdmin);       //保存信息
+        }
     }
 
     private void init(){

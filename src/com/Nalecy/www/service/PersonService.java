@@ -61,7 +61,7 @@ public class PersonService {
         else return false;
     }
 
-    public boolean savePersonInfo(Person person) {
+    public boolean addPerson(Person person) {
         User user = new User();
         Integer id;
         user.setUserName(person.getUserName());
@@ -72,6 +72,16 @@ public class PersonService {
         if (person.getPermission() == 1) CustomerDao.addCustomer(person);
         else if (person.getPermission() == 2) HotelAdminDao.addHotelAdmin(person);
         else if (person.getPermission() == 3) AdministratorDao.addAdministrator(person);
+        return true;
+    }
+    public boolean updatePeron(Person person) {
+        Integer id;
+        UserDao.updatePassword(person.getUserName(),person.getPassword());
+        id = UserDao.getUser(person.getUserName()).getId();
+        person.setId(id);
+        if (person.getPermission() == 1) CustomerDao.updateCustomer((Customer) person);
+        else if (person.getPermission() == 2) HotelAdminDao.updateHotelAdmin((HotelAdmin) person);
+        else if (person.getPermission() == 3) AdministratorDao.updateAdministrator((Administrator) person);
         return true;
     }
 }

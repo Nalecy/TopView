@@ -16,7 +16,6 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class InfoEditPopup {
-    private boolean aBoolean; //用于返回是否确定
 
     private List<String> returnedDataList = null;
     private List<String> infoNameList = null;
@@ -40,10 +39,20 @@ public class InfoEditPopup {
     public List<String> display() {
         init();
         setButtonAction();
-
         stage.showAndWait();
         return returnedDataList;
     }
+    public List<String> display(String title) {
+        init();
+        setButtonAction();
+        stage.setTitle(title);
+        stage.showAndWait();
+        return returnedDataList;
+    }
+    public void close(){
+
+    }
+
 
     private void setButtonAction() {
         cancelButton.setOnAction(e -> {

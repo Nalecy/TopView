@@ -141,7 +141,7 @@ public class RegisterView extends View{
         person.setPassword(passwordText.getText());
         person.setIdNumber(idNumberText.getText());
         person.setTelephone(phoneText.getText());
-        PersonService.getInstance().savePersonInfo(person);
+        PersonService.getInstance().addPerson(person);
         return true;
     }
 
