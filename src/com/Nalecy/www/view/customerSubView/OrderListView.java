@@ -77,8 +77,6 @@ public class OrderListView extends View {
         }catch (NullPointerException e){
             PromptAlert.display("错误","请检查是否选择");
         }
-
-
     }
 
     private void init(){

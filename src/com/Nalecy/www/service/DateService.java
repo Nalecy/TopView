@@ -17,7 +17,7 @@ public class DateService {
 
     private DateService() {
         //获取数据库时间
-        currentDate = new Date(0);
+        currentDate = new Date(3600*24*1000);
         calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
     }
