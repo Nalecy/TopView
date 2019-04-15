@@ -5,6 +5,7 @@ import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ViewManger;
+import com.Nalecy.www.view.hadminSubView.OrderMangerView;
 import com.Nalecy.www.view.hadminSubView.RoomMangerView;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
@@ -68,7 +69,7 @@ public class HotelAdminView extends View{
             ViewManger.switchView(this,new RoomMangerView());
         });
         orderButton.setOnAction(e -> {
-
+            ViewManger.switchView(this,new OrderMangerView());
         });
         cancelLoginButton.setOnAction(e -> {
 
@@ -92,7 +93,7 @@ public class HotelAdminView extends View{
             hotelAdmin.setPassword(infoList.get(0));
             hotelAdmin.setIdNumber(infoList.get(1));
             hotelAdmin.setTelephone(infoList.get(2));
-            PersonService.getInstance().updatePeron(hotelAdmin);       //保存信息
+            PersonService.getInstance().updatePeron(hotelAdmin);       //保存信息·
         }
     }
 
