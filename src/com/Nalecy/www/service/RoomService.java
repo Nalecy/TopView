@@ -5,6 +5,7 @@ import com.Nalecy.www.dao.RoomDao;
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.Room;
+import com.Nalecy.www.util.NoMoneyException;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class RoomService {
         order.setRoomPeriod(timeChoice);
         order.setDate(date);
         order.setHotelID(currentRoom.getHotelID());
-        OrderDao.addOrder(order);
+        if(!OrderWithBalService.getInstance().addOrder(order))throw new NoMoneyException();
         return true;
     }
 

@@ -14,7 +14,7 @@ public class OrderService {
         if(ourInstance == null)ourInstance = new OrderService();
         return ourInstance;
     }
-    private OrderService() {
+    OrderService() {
     }
 
     public List<Order> getCompleteOrder() {
@@ -62,5 +62,10 @@ public class OrderService {
 
     public void cancelOrder(Order order) {
 
+    }
+
+    public boolean addOrder(Order order) {
+        OrderDao.addOrder(order);
+        return true;
     }
 }

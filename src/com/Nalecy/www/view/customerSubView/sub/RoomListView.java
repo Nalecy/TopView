@@ -6,6 +6,7 @@ import com.Nalecy.www.po.Room;
 import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
+import com.Nalecy.www.util.NoMoneyException;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
@@ -138,7 +139,11 @@ public class RoomListView extends View {
             case "晚上": time = RoomPeriod.NIGHT;break;
         }
         RoomService.getInstance().setCurrentRoom(room);
-        if( RoomService.getInstance().reserve(DateService.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
-        else PromptAlert.display("错误","预定失败,可能该时段已经被预定了");
+        try{
+            if( RoomService.getInstance().reserve(DateService.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
+            else PromptAlert.display("错误","预定失败,可能该时段已经被预定了");
+        }catch (NoMoneyException e){
+            PromptAlert.display("错误","余额不足");
+        }
     }
 }
