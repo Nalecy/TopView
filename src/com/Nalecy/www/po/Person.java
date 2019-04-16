@@ -1,6 +1,6 @@
 package com.Nalecy.www.po;
 
-public abstract class Person implements Cloneable{
+public abstract class Person{
      Integer id;
      String userName;
      String password;
@@ -8,12 +8,7 @@ public abstract class Person implements Cloneable{
      String telephone;
      String idNumber;
 
-    public Person(String userName, String password, String telephone, String idNumber) {
-        this.userName = userName;
-        this.password = password;
-        this.telephone = telephone;
-        this.idNumber = idNumber;
-    }
+
 
     public Person() {
     }

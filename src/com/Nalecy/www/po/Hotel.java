@@ -11,6 +11,10 @@ public class Hotel {
     private String description;
 
     public Hotel() {
+        name = "";
+        score = 0.0;
+        numOfScore = 0;
+        description = "";
     }
 
     public Hotel(Integer id, String name, Integer star, Double score, Integer numOfScore, String description) {

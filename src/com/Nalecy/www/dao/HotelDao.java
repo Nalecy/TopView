@@ -48,8 +48,8 @@ public class HotelDao {
         hotel.setDescription(userInfo.get(5));
     }
 
-    public static void deleteHotel(String hotelName) {
-        DatabaseUtil.deleteOneRowData("hotel", "name", hotelName);
+    public static void deleteHotel(Integer hotelId) {
+        DatabaseUtil.deleteOneRowData("hotel", "id", String.valueOf(hotelId));
     }
 
     public static void updateHotel(Hotel hotel) {
