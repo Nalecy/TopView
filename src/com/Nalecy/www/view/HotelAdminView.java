@@ -72,14 +72,13 @@ public class HotelAdminView extends View{
             ViewManger.switchView(this,new OrderMangerView());
         });
         cancelLoginButton.setOnAction(e -> {
-
+            PersonService.getInstance().cancelLogin(HotelService.getInstance().getCurrentUser());
         });
         psnlInfoButton.setOnAction(e -> {
             modifyInfo();
         });
         backButton.setOnAction(e -> {
             ViewManger.switchView(this, new LoginView());
-
         });
     }
     private void modifyInfo() {

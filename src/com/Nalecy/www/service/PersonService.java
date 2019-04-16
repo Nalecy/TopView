@@ -21,7 +21,9 @@ public class PersonService {
     }
 
     public String getPassword(String userName) {
-        return UserDao.getUser(userName).getPassword();
+        User user = UserDao.getUser(userName);
+        if(user == null)return null;
+        return user.getPassword();
     }
 
     public Person searchPerson(Integer personId) {

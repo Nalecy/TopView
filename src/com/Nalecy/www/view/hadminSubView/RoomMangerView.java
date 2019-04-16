@@ -79,8 +79,7 @@ public class RoomMangerView extends View {
     }
 
     private void deleteRoom() {
-        ObservableList<Room> allRoom, selectRoom;
-        allRoom = roomTableView.getItems();
+        ObservableList<Room> selectRoom;
         selectRoom = roomTableView.getSelectionModel().getSelectedItems();
         for (Room room : selectRoom) {
             RoomService.getInstance().deleteRoom(room.getId());

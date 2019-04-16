@@ -27,10 +27,14 @@ public class HotelService {
     }
 
     public void addHotel(Hotel hotel){
-
+        HotelDao.addHotel(hotel);
     }
-
-
+    public void deleteHotel(Integer id) {
+        HotelDao.deleteHotel(id);
+    }
+    public void updateHotel(Hotel hotel){
+        HotelDao.updateHotel(hotel);
+    }
 
     public void setCurrentUser(String userName){
         currentUser = userName;

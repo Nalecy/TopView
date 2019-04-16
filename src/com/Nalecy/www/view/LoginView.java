@@ -64,13 +64,10 @@ public class LoginView extends View{
         registerButton.setOnAction(e ->{
             ViewManger.switchView(this,new RegisterView());
         });
-        userText.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(PersonService.getInstance().hasLogin(userText.getText())){
-                    String password = PersonService.getInstance().getPassword(userText.getText());
-                    passwordText.setText(password);
-                }
+        userText.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(PersonService.getInstance().hasLogin(userText.getText())){
+                String password = PersonService.getInstance().getPassword(userText.getText());
+                passwordText.setText(password);
             }
         });
     }
@@ -149,7 +146,7 @@ public class LoginView extends View{
 
                 break;
             case 3:
-                PromptAlert.display("超管菜单","进入超管菜单");
+                ViewManger.switchView(this,new AdministratorView());
                 break;
         }
 
