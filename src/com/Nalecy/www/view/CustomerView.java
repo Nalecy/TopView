@@ -1,23 +1,20 @@
 package com.Nalecy.www.view;
 
-import com.Nalecy.www.dao.UserDao;
 import com.Nalecy.www.po.Customer;
-import com.Nalecy.www.po.User;
+import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.LabelsCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.customerSubView.HotelListView;
 import com.Nalecy.www.view.customerSubView.OrderListView;
-import com.Nalecy.www.view.customerSubView.PsnlInfoView;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CustomerView extends View{
@@ -32,8 +29,10 @@ public class CustomerView extends View{
 
     private Stage window;
     private Scene scene;
+    private VBox tipLabelVbox;
     private VBox vBox;
 
+    private LabelsCreater tipLabel;
     private Button hotelListButton;
     private Button orderListButton;
     private Button psnlInfoButton;
@@ -41,9 +40,19 @@ public class CustomerView extends View{
 
     @Override
     public void display(){
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
+        else {
+            refreshData();
+        }
         window.show();
+    }
+
+    private void refreshData() {
+        tipLabel.setLine(2,"您的余额："+  ((Customer)PersonService.getInstance().searchPerson( HotelService.getInstance().getCurrentUser())).getBalance() +"元");
     }
 
     @Override
@@ -51,18 +60,23 @@ public class CustomerView extends View{
         window.close();
     }
 
+    @Override
+    public void hide() {
+        window.hide();
+    }
+
     private void setButtonAction(){
         hotelListButton.setOnAction( e -> {
-            ViewManger.switchView(this, new HotelListView());
+            ViewManger.switchView(new HotelListView());
         });
         orderListButton.setOnAction( e -> {
-            ViewManger.switchView(this, new OrderListView());
+            ViewManger.switchView( new OrderListView());
         });
         psnlInfoButton.setOnAction( e -> {
             modifyInfo();
         });
         backButton.setOnAction( e -> {
-            ViewManger.switchView(this, new LoginView());
+            ViewManger.back();
         });
 
     }
@@ -83,6 +97,15 @@ public class CustomerView extends View{
     }
 
     private void init(){
+        String userName = HotelService.getInstance().getCurrentUser();
+        Customer customer = (Customer) PersonService.getInstance().searchPerson(userName);
+
+        tipLabel = new LabelsCreater();
+        tipLabel.addLine("今天是"+ DateService.getInstance().getCurrentDate());
+        tipLabel.addLine("您好,用户名为"+ userName +"的顾客。");
+        tipLabel.addLine("您的余额："+ customer.getBalance() +"元");
+        tipLabelVbox = tipLabel.getVBox();
+
         hotelListButton = new Button("查看酒店");
         orderListButton = new Button("查看订单");
         psnlInfoButton = new Button("修改个人信息");
@@ -94,7 +117,7 @@ public class CustomerView extends View{
         backButton.setMinWidth(300);
 
         vBox = new VBox();
-        vBox.getChildren().addAll(hotelListButton,orderListButton,psnlInfoButton,backButton);
+        vBox.getChildren().addAll(tipLabelVbox,hotelListButton,orderListButton,psnlInfoButton,backButton);
         vBox.setSpacing(20);
         vBox.setPadding(new Insets(50,200,50,200));
 

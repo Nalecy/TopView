@@ -49,8 +49,11 @@ public class OrderMangerView extends View {
 
     @Override
     public void display(){
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         window.show();
     }
 
@@ -59,9 +62,14 @@ public class OrderMangerView extends View {
         window.close();
     }
 
+    @Override
+    public void hide() {
+        window.hide();
+    }
+
     private void setButtonAction() {
         backButton.setOnAction(e -> {
-            ViewManger.switchView(this,new CustomerView());
+            ViewManger.back();
         });
         cancelOrderButton.setOnAction(e -> {
             cancelOrder();

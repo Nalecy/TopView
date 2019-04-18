@@ -50,9 +50,12 @@ public class HotelAdminView extends View{
     private Button backButton;
 
     public void display(){
-        HotelService.getInstance().setCurrentHotel(HotelService.getInstance().getHotel(user.getHotelID()));
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            HotelService.getInstance().setCurrentHotel(HotelService.getInstance().getHotel(user.getHotelID()));
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         stage.show();
     }
 
@@ -61,15 +64,20 @@ public class HotelAdminView extends View{
         stage.close();
     }
 
+    @Override
+    public void hide() {
+        stage.hide();
+    }
+
     private void setButtonAction() {
         infoButton.setOnAction(e -> {
             PromptAlert.display("酒店信息",HotelService.getInstance().getCurrentHotel().toString());
         });
         roomButton.setOnAction(e -> {
-            ViewManger.switchView(this,new RoomMangerView());
+            ViewManger.switchView(new RoomMangerView());
         });
         orderButton.setOnAction(e -> {
-            ViewManger.switchView(this,new OrderMangerView());
+            ViewManger.switchView(new OrderMangerView());
         });
         cancelLoginButton.setOnAction(e -> {
             PersonService.getInstance().cancelLogin(HotelService.getInstance().getCurrentUser());
@@ -78,7 +86,7 @@ public class HotelAdminView extends View{
             modifyInfo();
         });
         backButton.setOnAction(e -> {
-            ViewManger.switchView(this, new LoginView());
+            ViewManger.back();
         });
     }
     private void modifyInfo() {

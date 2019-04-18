@@ -37,14 +37,17 @@ public class RoomMangerView extends View {
 
     @Override
     public void display() {
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         window.show();
     }
 
     private void setButtonAction() {
         backButton.setOnAction(e -> {
-            ViewManger.switchView(this, new HotelAdminView());
+            ViewManger.back();
         });
         addButton.setOnAction(e -> {
             addRoom();
@@ -142,5 +145,10 @@ public class RoomMangerView extends View {
     @Override
     public void close() {
         window.close();
+    }
+
+    @Override
+    public void hide() {
+        window.hide();
     }
 }

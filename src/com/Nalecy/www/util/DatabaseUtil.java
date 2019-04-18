@@ -11,21 +11,21 @@ import java.util.LinkedList;
 public class DatabaseUtil {
     private DatabaseUtil(){}
 
-    public static LinkedList<String> getOneRowData(String tableName, String dataName, String dataValue){
+    public static LinkedList<String> getOneRowData(String tableName, String sighName, String sighValue){
         LinkedList<String> list = new LinkedList<>();
         ResultSet rs = null;
         Connection conn = ConnectionPool.getInstance().getConnection();
-        String sql = "select * from "+tableName+" where "+dataName+" = ?";
+        String sql = "select * from "+tableName+" where "+sighName+" = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, dataValue);
+            pstmt.setString(1, sighValue);
             rs = pstmt.executeQuery();
             try {
                 while (rs.next()) {
                     for (int i = 1;;i++)
                         list.add(rs.getString(i));
                 }
-            }catch (SQLException ignored){}
+            }catch (SQLException ignored){}//当出现异常即说明数据读取完毕
         }catch (Exception e){
             e.printStackTrace();
         }finally {

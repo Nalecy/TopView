@@ -44,8 +44,11 @@ public class HotelListView extends View {
 
     @Override
     public void display(){
-        init();
-        serButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         window.show();
     }
 
@@ -54,7 +57,12 @@ public class HotelListView extends View {
         window.close();
     }
 
-    private void serButtonAction() {
+    @Override
+    public void hide() {
+        window.hide();
+    }
+
+    private void setButtonAction() {
         enterHotelButton.setOnAction(e -> {
             Hotel hotel = tableView.getSelectionModel().getSelectedItem();
             if(hotel == null) {
@@ -62,11 +70,11 @@ public class HotelListView extends View {
                 return;
             }
             HotelService.getInstance().setCurrentHotel(hotel);
-            ViewManger.switchView(this, new RoomListView());
+            ViewManger.switchView( new RoomListView());
 
         });
         backButton.setOnAction(e -> {
-            ViewManger.switchView(this,new CustomerView());
+            ViewManger.back();
         });
     }
 

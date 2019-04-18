@@ -34,14 +34,17 @@ public class AdministratorView extends View{
     private Button backButton;
     @Override
     public void display() {
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         stage.show();
     }
 
     private void setButtonAction() {
         hotelManagerButton.setOnAction(e->{
-            ViewManger.switchView(this,new HotelManagerView());
+            ViewManger.switchView(new HotelManagerView());
         });
         addDateButton.setOnAction(e->{
             DateService.getInstance().initCalendar();
@@ -53,7 +56,7 @@ public class AdministratorView extends View{
             modifyInfo();
         });
         backButton.setOnAction(e->{
-            ViewManger.switchView(this,new LoginView());
+            ViewManger.switchView(new LoginView());
         });
     }
 
@@ -101,5 +104,10 @@ public class AdministratorView extends View{
     @Override
     public void close() {
         stage.close();
+    }
+
+    @Override
+    public void hide() {
+        stage.hide();
     }
 }

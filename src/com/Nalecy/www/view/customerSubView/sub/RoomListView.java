@@ -52,12 +52,17 @@ public class RoomListView extends View {
         stage.close();
     }
 
+    @Override
+    public void hide() {
+        stage.hide();
+    }
+
     private void setButtonAction() {
         reserveButton.setOnAction(e -> {
            reserve();
         });
         backButton.setOnAction(e -> {
-            ViewManger.switchView(this, new HotelListView());
+            ViewManger.back();
         });
     }
 

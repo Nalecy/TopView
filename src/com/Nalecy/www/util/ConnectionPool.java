@@ -7,12 +7,12 @@ import java.util.LinkedList;
 
 public class ConnectionPool {
     private static ConnectionPool ourInstance = new ConnectionPool();
-    private static String url;
-    private static String user;
-    private static String password;
-    private static Integer maxConn;
-    private static Integer minConn;
-    private static LinkedList<Connection> connPool;
+    private String url;
+    private String user;
+    private String password;
+    private Integer maxConn;
+    private Integer minConn;
+    private LinkedList<Connection> connPool;
 
     public static ConnectionPool getInstance() {
         return ourInstance;

@@ -60,9 +60,14 @@ public class OrderListView extends View {
         window.close();
     }
 
+    @Override
+    public void hide() {
+        window.hide();
+    }
+
     private void setButtonAction() {
         backButton.setOnAction(e -> {
-            ViewManger.switchView(this,new CustomerView());
+            ViewManger.back();
         });
         cancelOrderButton.setOnAction(e -> {
             cancelOrder();

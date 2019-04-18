@@ -43,13 +43,21 @@ public class LoginView extends View{
 
     @Override
     public void display() {
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         window.show();
     }
     @Override
     public void close(){
         window.close();
+    }
+
+    @Override
+    public void hide() {
+        window.hide();
     }
 
     private void setButtonAction() {
@@ -62,7 +70,7 @@ public class LoginView extends View{
 
 
         registerButton.setOnAction(e ->{
-            ViewManger.switchView(this,new RegisterView());
+            ViewManger.switchView(new RegisterView());
         });
         userText.textProperty().addListener((observable, oldValue, newValue) -> {
             if(PersonService.getInstance().hasLogin(userText.getText())){
@@ -138,15 +146,15 @@ public class LoginView extends View{
         Integer p = PersonService.getInstance().searchPerson(PersonService.getInstance().getPersonID(userName)).getPermission();
         switch (p) {
             case 1:
-                ViewManger.switchView(this, new CustomerView());
+                ViewManger.switchView(new CustomerView());
 
                 break;
             case 2:
-                ViewManger.switchView(this, new HotelAdminView());
+                ViewManger.switchView( new HotelAdminView());
 
                 break;
             case 3:
-                ViewManger.switchView(this,new AdministratorView());
+                ViewManger.switchView(new AdministratorView());
                 break;
         }
 

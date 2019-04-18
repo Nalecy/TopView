@@ -14,17 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class RegisterView extends View{
-    /*private static RegisterView instance;
-
-    private RegisterView() {
-    }
-
-    public static RegisterView getInstance() {
-        if (instance == null) {
-            instance = new RegisterView();
-        }
-        return instance;
-    }*/
 
     //布局要素
     private Stage window;
@@ -56,15 +45,22 @@ public class RegisterView extends View{
 
     @Override
     public void display() {
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         window.show();
-
     }
 
     @Override
     public void close() {
         window.close();
+    }
+
+    @Override
+    public void hide() {
+        window.hide();
     }
 
     private void setButtonAction() {
@@ -84,7 +80,7 @@ public class RegisterView extends View{
         });
 
         backButton.setOnAction(e -> {
-            ViewManger.switchView(this,new LoginView());
+            ViewManger.back();
         });
 
         resButton.setOnAction(e -> {
@@ -106,7 +102,7 @@ public class RegisterView extends View{
             }
             if(success){
                 PromptAlert.display("成功","注册成功");
-                ViewManger.switchView(this,new LoginView());
+                ViewManger.back();
             }
             else PromptAlert.display("错误","注册失败");
             clearText();
