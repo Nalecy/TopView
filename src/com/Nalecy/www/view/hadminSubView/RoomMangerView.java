@@ -5,7 +5,6 @@ import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
-import com.Nalecy.www.view.HotelAdminView;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
 import javafx.collections.FXCollections;
@@ -15,13 +14,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RoomMangerView extends View {

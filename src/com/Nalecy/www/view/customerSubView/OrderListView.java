@@ -7,7 +7,6 @@ import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.OrderService;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
-import com.Nalecy.www.view.CustomerView;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.collections.FXCollections;
@@ -25,14 +24,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class OrderListView extends View {
-    /*private static OrderListView instance;
-    private OrderListView(){}
-    public static OrderListView getInstance(){
-        if(instance == null){
-            instance = new OrderListView();
-        }
-        return instance;
-    }*/
+
     private Stage window;
     private Scene scene;
     private VBox vBox;

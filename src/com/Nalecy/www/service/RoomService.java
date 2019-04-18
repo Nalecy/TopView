@@ -41,7 +41,7 @@ public class RoomService {
         for (Order order : allOrders) {
             Date orderDay = order.getDate();
             if (order.getRoomID().equals(currentRoom.getId()))          //查询是否有人预定过该房间
-                if(orderDay.getTime()+8*3600*1000==date.getTime())
+                if(orderDay.getTime()==date.getTime())
                     if(order.getRoomPeriod().equals(timeChoice))
                         return false;
         }

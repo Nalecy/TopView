@@ -1,7 +1,7 @@
 package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.HotelAdmin;
-import com.Nalecy.www.service.DateService;
+import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ViewManger;
@@ -19,14 +19,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class HotelAdminView extends View{
-    /*private static HotelAdminView instance;
-    private HotelAdminView(){}
-    public static HotelAdminView getInstance(){
-        if(instance == null){
-            instance = new HotelAdminView();
-        }
-        return instance;
-    }*/
+
     private HotelAdmin user;
     public HotelAdminView(){
         user = (HotelAdmin) PersonService.getInstance().searchPerson(HotelService.getInstance().getCurrentUser());
@@ -105,7 +98,7 @@ public class HotelAdminView extends View{
     }
 
     private void init(){
-        dateLabel = new Label("今天是"+ DateService.getInstance().getCurrentDate());
+        dateLabel = new Label("今天是"+ DateUtil.getInstance().getCurrentDate());
         tipLabel1 = new Label("您好,用户名为"+ HotelService.getInstance().getCurrentUser()+"的酒店管理员。");
         tipLabel2 = new Label("您是"+HotelService.getInstance().getHotel(user.getHotelID()).getName()+"酒店的管理员");
         tipLabel3 = new Label("您可以：");

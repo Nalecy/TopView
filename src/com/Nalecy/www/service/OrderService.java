@@ -2,10 +2,10 @@ package com.Nalecy.www.service;
 
 import com.Nalecy.www.dao.OrderDao;
 import com.Nalecy.www.po.Order;
+import com.Nalecy.www.util.DateUtil;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class OrderService {
@@ -21,7 +21,7 @@ public class OrderService {
         List<Order> allOrders = OrderDao.getOrderList();
         if(allOrders == null)return null;
         List<Order> orders = new ArrayList<>();
-        Date today = DateService.getInstance().getCurrentDate();
+        Date today = DateUtil.getInstance().getCurrentDate();
         for (Order order : allOrders) {
             if(order.getDate().getTime() <= today.getTime())
                 orders.add(order);
@@ -52,7 +52,7 @@ public class OrderService {
         List<Order> allOrders = OrderDao.getOrderList();
         if(allOrders == null)return null;
         List<Order> orders = new ArrayList<>();
-        Date today = DateService.getInstance().getCurrentDate();
+        Date today = DateUtil.getInstance().getCurrentDate();
         for (Order order : allOrders) {
             if(order.getDate().getTime() > today.getTime())
                 orders.add(order);
@@ -61,7 +61,6 @@ public class OrderService {
     }
 
     public void cancelOrder(Order order) {
-
     }
 
     public boolean addOrder(Order order) {

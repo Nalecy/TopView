@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class DatabaseUtil {
     private DatabaseUtil(){}
@@ -109,7 +110,7 @@ public class DatabaseUtil {
         }
         return number;
     }
-    public static int updateRowsData(String tableName, String signKey, String signValue,LinkedHashMap<String,String> keyValueMap){
+    public static int updateRowsData(String tableName, String signKey, String signValue, Map<String,String> keyValueMap){
         Integer number = 0;
         StringBuilder sql = new StringBuilder();
         String[] keyArray = new String[keyValueMap.size()];

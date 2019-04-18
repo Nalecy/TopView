@@ -3,15 +3,14 @@ package com.Nalecy.www.view.customerSubView.sub;
 
 import com.Nalecy.www.constantClass.RoomPeriod;
 import com.Nalecy.www.po.Room;
-import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
+import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.util.NoMoneyException;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
-import com.Nalecy.www.view.customerSubView.HotelListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -37,9 +36,6 @@ public class RoomListView extends View {
     private ChoiceBox<String> timeChoiceBox;
     private Button reserveButton;
     private Button backButton;
-
-    //private Button infoButton
-   // private Button
 
     public void display(){
         init();
@@ -145,7 +141,7 @@ public class RoomListView extends View {
         }
         RoomService.getInstance().setCurrentRoom(room);
         try{
-            if( RoomService.getInstance().reserve(DateService.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
+            if( RoomService.getInstance().reserve(DateUtil.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
             else PromptAlert.display("错误","预定失败,可能该时段已经被预定了");
         }catch (NoMoneyException e){
             PromptAlert.display("错误","余额不足");

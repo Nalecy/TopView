@@ -4,7 +4,6 @@ import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
-import com.Nalecy.www.view.AdministratorView;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
 import com.Nalecy.www.view.popupUtil.PromptAlert;

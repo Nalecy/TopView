@@ -1,9 +1,9 @@
 package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.Customer;
-import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.util.LabelsCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.customerSubView.HotelListView;
@@ -18,14 +18,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class CustomerView extends View{
-    /*private static CustomerView instance;
-    private CustomerView(){}
-    public static CustomerView getInstance(){
-        if(instance == null){
-            instance = new CustomerView();
-        }
-        return instance;
-    }*/
+
 
     private Stage window;
     private Scene scene;
@@ -101,7 +94,7 @@ public class CustomerView extends View{
         Customer customer = (Customer) PersonService.getInstance().searchPerson(userName);
 
         tipLabel = new LabelsCreater();
-        tipLabel.addLine("今天是"+ DateService.getInstance().getCurrentDate());
+        tipLabel.addLine("今天是"+ DateUtil.getInstance().getCurrentDate());
         tipLabel.addLine("您好,用户名为"+ userName +"的顾客。");
         tipLabel.addLine("您的余额："+ customer.getBalance() +"元");
         tipLabelVbox = tipLabel.getVBox();

@@ -1,13 +1,12 @@
 package com.Nalecy.www.view;
 
-import com.Nalecy.www.service.DateService;
+
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.popupUtil.ConfirmAlert;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,14 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class LoginView extends View{
-    /*private static LoginView instance;
-    private LoginView(){}
-    public static LoginView getInstance(){
-        if(instance == null){
-            instance = new LoginView();
-        }
-        return instance;
-    }*/
+
     //布局要素
     private Stage window;
     private Scene scene;
@@ -48,6 +40,7 @@ public class LoginView extends View{
             setButtonAction();
             hasInit = true;
         }
+        dateLabel.setText("当前时间："+ DateUtil.getInstance().getCurrentDate());
         window.show();
     }
     @Override
@@ -72,6 +65,7 @@ public class LoginView extends View{
         registerButton.setOnAction(e ->{
             ViewManger.switchView(new RegisterView());
         });
+        //设置自动获取用户名字符串并匹配监听器(若保存密码自动输入)
         userText.textProperty().addListener((observable, oldValue, newValue) -> {
             if(PersonService.getInstance().hasLogin(userText.getText())){
                 String password = PersonService.getInstance().getPassword(userText.getText());
@@ -86,7 +80,7 @@ public class LoginView extends View{
         registerButton = new Button("注册");
         exitButton = new Button("退出");
 
-        dateLabel = new Label("当前时间："+ DateService.getInstance().getCurrentDate());
+        dateLabel = new Label("当前时间："+ DateUtil.getInstance().getCurrentDate());
         userLabel = new Label("用户名：");
         passwordLabel = new Label("密码：");
 

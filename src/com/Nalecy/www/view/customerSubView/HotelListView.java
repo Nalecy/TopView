@@ -22,14 +22,6 @@ import java.util.List;
 
 
 public class HotelListView extends View {
-    /*private static HotelListView instance;
-    private HotelListView(){}
-    public static HotelListView getInstance(){
-        if(instance == null){
-            instance = new HotelListView();
-        }
-        return instance;
-    }*/
 
     private Stage window;
     private Scene scene;
