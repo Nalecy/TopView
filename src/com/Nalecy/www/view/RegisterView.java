@@ -4,6 +4,7 @@ import com.Nalecy.www.po.*;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ProGetter;
+import com.Nalecy.www.util.RegexUtil;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
@@ -119,8 +120,19 @@ public class RegisterView extends View{
     }
 
     private boolean save() {
+        //正则判断
+        if(!RegexUtil.isUserName(userText.getText())){PromptAlert.display("错误","检查用户名输入");return false;}
+        if(!RegexUtil.isPassword(passwordText.getText())){PromptAlert.display("错误","检查密码输入");return false;}
+        if(!RegexUtil.isIdCard(idNumberText.getText())){PromptAlert.display("错误","检查身份证输入");return false;}
+        if(!RegexUtil.isTelephone(phoneText.getText())){PromptAlert.display("错误","检查手机号输入");return false;}
+        //判断用户名是否已存在
+        if(PersonService.getInstance().searchPerson(userText.getText()) != null){
+            PromptAlert.display("错误","用户名已存在");
+            return false;
+        }
+        //开始保存
         Person person;
-
+        //判断所选身份
         if (group.getSelectedToggle() == customerRegBut) {
             person = new Customer();
         }
@@ -133,6 +145,7 @@ public class RegisterView extends View{
         else {
             person = new Administrator();
         }
+        //注入信息
         person.setUserName(userText.getText());
         person.setPassword(passwordText.getText());
         person.setIdNumber(idNumberText.getText());
