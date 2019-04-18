@@ -1,17 +1,17 @@
 package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.Administrator;
-import com.Nalecy.www.service.DateService;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.util.LabelsCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.administratorSubView.HotelManagerView;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,10 +22,8 @@ public class AdministratorView extends View{
     private Scene scene;
     private VBox vBox;
 
-    private Label dateLabel;
-    private Label tipLabel1;
-    private Label tipLabel2;
-    private Label tipLabel3;
+    private LabelsCreater labelsCreater;
+    private VBox labelVBox ;
 
     private Button hotelManagerButton;
     private Button addDateButton;
@@ -47,7 +45,9 @@ public class AdministratorView extends View{
             ViewManger.switchView(new HotelManagerView());
         });
         addDateButton.setOnAction(e->{
-            DateService.getInstance().initCalendar();
+            DateUtil.getInstance().incrDate();
+            PromptAlert.display("成功","成功流逝");
+            labelsCreater.setLine(0,"今天是"+ DateUtil.getInstance().getCurrentDate());
         });
         cancelLoginButton.setOnAction(e->{
             PersonService.getInstance().cancelLogin(HotelService.getInstance().getCurrentUser());
@@ -76,9 +76,8 @@ public class AdministratorView extends View{
     }
 
     private void init(){
-        LabelsCreater labelsCreater = new LabelsCreater();
-        VBox labelVBox ;
-        labelsCreater.addLine("今天是"+ DateService.getInstance().getCurrentDate());
+        labelsCreater = new LabelsCreater();
+        labelsCreater.addLine("今天是"+ DateUtil.getInstance().getCurrentDate());
         labelsCreater.addLine("您好,用户名为"+ HotelService.getInstance().getCurrentUser()+"的超级管理员。");
         labelsCreater.addLine("您可以：");
         labelVBox = labelsCreater.getVBox();
