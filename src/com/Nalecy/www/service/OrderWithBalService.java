@@ -1,5 +1,7 @@
 package com.Nalecy.www.service;
 
+import com.Nalecy.www.dao.AccountDao;
+import com.Nalecy.www.po.Account;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.Order;
 
@@ -35,7 +37,19 @@ public class OrderWithBalService extends OrderService {
             customer.setBalance(customer.getBalance() - price);
             PersonService.getInstance().updatePeron(customer);
             super.addOrder(order);
+            addAccount(order);
             return true;
         }
+    }
+
+    private void addAccount(Order order) {
+        Account account = new Account();
+        account.setHotelId(order.getHotelID());
+        account.setCustomerId(PersonService.getInstance().searchPerson(order.getUserName()).getId());
+        account.setDate(order.getDate());
+        account.setBalance(RoomService.getInstance().getRoomById(order.getRoomID()).getPrice());
+        account.setRoomId(order.getRoomID());
+        account.setRoomPeriod(order.getRoomPeriod());
+        AccountDao.addAccount(account);
     }
 }
