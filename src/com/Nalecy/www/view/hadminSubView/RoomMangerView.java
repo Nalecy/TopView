@@ -3,10 +3,12 @@ package com.Nalecy.www.view.hadminSubView;
 import com.Nalecy.www.po.Room;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.RoomService;
+import com.Nalecy.www.util.RegexUtil;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
+import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -68,6 +70,12 @@ public class RoomMangerView extends View {
         modifyPopup.setInfoNameList("房间名称", "房间类型", "面积", "床宽", "价格");
         modifyPopup.setInfoValueList(room.getName(),String.valueOf(room.getType()),String.valueOf(room.getArea()),String.valueOf(room.getBedWidth()),String.valueOf(room.getPrice()));
         if ((infoList = modifyPopup.display()) != null) {
+            //正则判断
+            if(!RegexUtil.isZh(infoList.get(0))){ PromptAlert.display("错误","检查房间名称输入");return;}
+            if(!RegexUtil.isOneToThree(infoList.get(1))){PromptAlert.display("错误","检查房间类型输入");return;}
+            if(!RegexUtil.isNumber(infoList.get(2))){PromptAlert.display("错误","检查面积输入");return;}
+            if(!RegexUtil.isNumber(infoList.get(3))){PromptAlert.display("错误","检查床宽输入");return;}
+            if(!RegexUtil.isNumber(infoList.get(4))){PromptAlert.display("错误","检查价格输入");return;}
             room.setName(infoList.get(0));
             room.setType(Integer.valueOf(infoList.get(1)));
             room.setArea(Integer.valueOf(infoList.get(2)));

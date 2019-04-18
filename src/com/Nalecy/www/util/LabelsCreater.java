@@ -5,9 +5,11 @@ import javafx.scene.layout.VBox;
 
 public class LabelsCreater {
     private VBox vBox;
+    private Integer size;
     public LabelsCreater(){
         vBox = new VBox();
         vBox.setSpacing(10);
+        size = 0;
     }
     public VBox getVBox(){
         return vBox;
@@ -23,4 +25,7 @@ public class LabelsCreater {
         vBox.getChildren().remove(index.intValue());
     }
 
+    public Integer getSize() {
+        return size;
+    }
 }

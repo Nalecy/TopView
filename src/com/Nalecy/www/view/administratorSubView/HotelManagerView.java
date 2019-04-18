@@ -2,6 +2,7 @@ package com.Nalecy.www.view.administratorSubView;
 
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.util.RegexUtil;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
@@ -68,6 +69,11 @@ public class HotelManagerView extends View {
         InfoEditPopup addHotelPopup = new InfoEditPopup();
         addHotelPopup.setInfoNameList("酒店名称", "星级", "描述");
         if ((infoList = addHotelPopup.display()) != null) {
+            //正则判断
+            if(!RegexUtil.isZh(infoList.get(0))){ PromptAlert.display("错误","检查酒店名称输入");return;}
+            if(!RegexUtil.isOneToFive(infoList.get(1))){PromptAlert.display("错误","检查星级输入");return;}
+            if(!RegexUtil.isZh(infoList.get(2))){PromptAlert.display("错误","检查描述输入");return;}
+            //添加数据
             hotel.setName(infoList.get(0));
             hotel.setStar(Integer.valueOf(infoList.get(1)));
             hotel.setDescription(infoList.get(2));
@@ -94,6 +100,10 @@ public class HotelManagerView extends View {
         modifyPopup.setInfoNameList("酒店名称", "星级", "描述");
         modifyPopup.setInfoValueList(hotel.getName(),String.valueOf(hotel.getStar()),hotel.getDescription());
         if ((infoList = modifyPopup.display()) != null) {
+            //正则判断
+            if(!RegexUtil.isZh(infoList.get(0))){ PromptAlert.display("错误","检查酒店名称输入");return;}
+            if(!RegexUtil.isOneToFive(infoList.get(1))){PromptAlert.display("错误","检查星级输入");return;}
+            if(!RegexUtil.isZh(infoList.get(2))){PromptAlert.display("错误","检查描述输入");return;}
             hotel.setName(infoList.get(0));
             hotel.setStar(Integer.valueOf(infoList.get(1)));
             hotel.setDescription(infoList.get(2));

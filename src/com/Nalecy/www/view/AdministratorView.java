@@ -5,6 +5,7 @@ import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.util.LabelsCreater;
+import com.Nalecy.www.util.RegexUtil;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.administratorSubView.HotelManagerView;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
@@ -67,6 +68,11 @@ public class AdministratorView extends View{
         editPopup.setInfoValueList(administrator.getPassword(),administrator.getIdNumber(),administrator.getTelephone());
         List<String> infoList = editPopup.display("个人信息修改");  //启动窗口并准备获取其返回值
         if(infoList != null) {
+            //正则判断
+            if(!RegexUtil.isPassword(infoList.get(0))){PromptAlert.display("错误","检查密码输入");return;}
+            if(!RegexUtil.isIdCard(infoList.get(1))){PromptAlert.display("错误","检查身份证输入");return;}
+            if(!RegexUtil.isTelephone(infoList.get(2))){PromptAlert.display("错误","检查手机号输入");return;}
+
             //将返回的值列表分别赋值
             administrator.setPassword(infoList.get(0));
             administrator.setIdNumber(infoList.get(1));
