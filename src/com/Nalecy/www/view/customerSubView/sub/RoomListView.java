@@ -4,11 +4,10 @@ package com.Nalecy.www.view.customerSubView.sub;
 import com.Nalecy.www.constantClass.RoomPeriod;
 import com.Nalecy.www.po.Room;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.service.Impl.RoomServiceImpl;
 import com.Nalecy.www.service.RoomService;
-import com.Nalecy.www.util.DateUtil;
-import com.Nalecy.www.util.NoMoneyException;
-import com.Nalecy.www.util.TableViewCreater;
-import com.Nalecy.www.util.ViewManger;
+import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.collections.FXCollections;
@@ -23,6 +22,10 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class RoomListView extends View {
+
+    private HotelService hotelService = ServiceFactory.getHotelService();
+    private RoomService roomService = ServiceFactory.getRoomService();
+
     private Stage stage;
     private Scene scene;
     private HBox hBox;
@@ -115,7 +118,7 @@ public class RoomListView extends View {
     }
     private ObservableList<Room> getRoomList(){
         ObservableList<Room> roomList = FXCollections.observableArrayList();
-        List<Room> al = RoomService.getInstance().getRoomList(HotelService.getInstance().getCurrentHotel().getId());
+        List<Room> al = roomService.getRoomList(hotelService.getCurrentHotel().getId());
         roomList.addAll(al);
         return roomList;
     }
@@ -139,9 +142,9 @@ public class RoomListView extends View {
             case "下午": time = RoomPeriod.AFTERNOON;break;
             case "晚上": time = RoomPeriod.NIGHT;break;
         }
-        RoomService.getInstance().setCurrentRoom(room);
+        roomService.setCurrentRoom(room);
         try{
-            if( RoomService.getInstance().reserve(DateUtil.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
+            if( roomService.reserveRoom(DateUtil.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
             else PromptAlert.display("错误","预定失败,可能该时段已经被预定了");
         }catch (NoMoneyException e){
             PromptAlert.display("错误","余额不足");

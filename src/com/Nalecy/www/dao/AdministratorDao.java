@@ -4,9 +4,7 @@ import com.Nalecy.www.po.Administrator;
 import com.Nalecy.www.po.Person;
 import com.Nalecy.www.util.DatabaseUtil;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class AdministratorDao {
     public static void addAdministrator(Person person) {
@@ -39,7 +37,7 @@ public class AdministratorDao {
     }
 
     public static void updateAdministrator(Administrator administrator) {
-        LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
+        Map<String, String> lhm = new HashMap<>();
         lhm.put("userName", administrator.getUserName());
         lhm.put("password", administrator.getPassword());
         lhm.put("idNumber", administrator.getIdNumber());

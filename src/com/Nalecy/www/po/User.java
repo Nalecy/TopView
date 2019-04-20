@@ -6,7 +6,11 @@ public class User {
     private String password;
     private Integer hasLogin;
 
-    public User(){}
+    public User(){
+        userName = "";
+        password = "";
+        hasLogin = 0;
+    }
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

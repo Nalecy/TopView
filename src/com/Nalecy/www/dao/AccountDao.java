@@ -32,7 +32,7 @@ public class AccountDao {
     }
 
     public static List<Account> getAccountList() {
-        LinkedList<String> idList = DatabaseUtil.getOneColumnData("account", "id");
+        List<String> idList = DatabaseUtil.getOneColumnData("account", "id");
         List<Account> accounts = new ArrayList<>();
         if (idList == null) return null;
         for (String id : idList) {

@@ -1,16 +1,20 @@
 package com.Nalecy.www.po;
 
 public abstract class Person{
-     Integer id;
-     String userName;
-     String password;
-     Integer permission;
-     String telephone;
-     String idNumber;
+     private Integer id;
+     private String userName;
+     private String password;
+     private String telephone;
+    private String idNumber;
+    Integer permission;
 
 
 
     public Person() {
+        userName = "";
+        password = "";
+        telephone = "";
+        idNumber = "";
     }
 
     public Integer getId() { return id; }

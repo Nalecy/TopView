@@ -2,9 +2,10 @@ package com.Nalecy.www.view.customerSubView;
 
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
-import com.Nalecy.www.view.CustomerView;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import com.Nalecy.www.view.customerSubView.sub.RoomListView;
@@ -22,6 +23,7 @@ import java.util.List;
 
 
 public class HotelListView extends View {
+    private HotelService hotelService = ServiceFactory.getHotelService();
 
     private Stage window;
     private Scene scene;
@@ -61,7 +63,7 @@ public class HotelListView extends View {
                 PromptAlert.display("错误","未选择酒店");
                 return;
             }
-            HotelService.getInstance().setCurrentHotel(hotel);
+            hotelService.setCurrentHotel(hotel);
             ViewManger.switchView( new RoomListView());
 
         });
@@ -103,7 +105,7 @@ public class HotelListView extends View {
     }
     private ObservableList<Hotel> getList(){
         ObservableList<Hotel> hotels = FXCollections.observableArrayList();
-        List<Hotel> hotelList = HotelService.getInstance().getHotelList();
+        List<Hotel> hotelList = hotelService.getHotelList();
 
         for (Hotel hotel : hotelList) {
             hotels.add(hotel);

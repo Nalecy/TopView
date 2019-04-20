@@ -2,8 +2,11 @@ package com.Nalecy.www.view.hadminSubView;
 
 import com.Nalecy.www.po.Room;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.service.Impl.RoomServiceImpl;
 import com.Nalecy.www.service.RoomService;
 import com.Nalecy.www.util.RegexUtil;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
@@ -23,6 +26,9 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class RoomMangerView extends View {
+    private HotelService hotelService = ServiceFactory.getHotelService();
+    private RoomService roomService = ServiceFactory.getRoomService();
+
     private Stage window;
     private Scene scene;
     private VBox vBox;
@@ -81,7 +87,7 @@ public class RoomMangerView extends View {
             room.setArea(Integer.valueOf(infoList.get(2)));
             room.setBedWidth(Integer.valueOf(infoList.get(3)));
             room.setPrice(Integer.valueOf(infoList.get(4)));
-            RoomService.getInstance().saveRoomInfo(room);
+            roomService.saveRoomInfo(room);
         }
     }
 
@@ -89,7 +95,7 @@ public class RoomMangerView extends View {
         ObservableList<Room> selectRoom;
         selectRoom = roomTableView.getSelectionModel().getSelectedItems();
         for (Room room : selectRoom) {
-            RoomService.getInstance().deleteRoom(room.getId());
+            roomService.deleteRoom(room.getId());
         }
     }
 
@@ -99,12 +105,20 @@ public class RoomMangerView extends View {
         InfoEditPopup addRoomPopup = new InfoEditPopup();
         addRoomPopup.setInfoNameList("房间名称", "房间类型", "面积", "床宽", "价格");
         if ((infoList = addRoomPopup.display()) != null) {
+            //正则判断
+            if(!RegexUtil.isZh(infoList.get(0))){ PromptAlert.display("错误","检查房间名称输入");return;}
+            if(!RegexUtil.isOneToThree(infoList.get(1))){PromptAlert.display("错误","检查房间类型输入");return;}
+            if(!RegexUtil.isNumber(infoList.get(2))){PromptAlert.display("错误","检查房间面积输入");return;}
+            if(!RegexUtil.isNumber(infoList.get(3))){PromptAlert.display("错误","检查床宽输入");return;}
+            if(!RegexUtil.isNumber(infoList.get(4))){PromptAlert.display("错误","检查价格输入");return;}
+
+
             room.setName(infoList.get(0));
             room.setType(Integer.valueOf(infoList.get(1)));
             room.setArea(Integer.valueOf(infoList.get(2)));
             room.setBedWidth(Integer.valueOf(infoList.get(3)));
             room.setPrice(Integer.valueOf(infoList.get(4)));
-            RoomService.getInstance().addRoom(room);
+            roomService.addRoom(room);
         }
     }
 
@@ -140,8 +154,9 @@ public class RoomMangerView extends View {
 
     private ObservableList<Room> getRoomList() {
         ObservableList<Room> roomList = FXCollections.observableArrayList();
-        List<Room> al = RoomService.getInstance().getRoomList(HotelService.getInstance().getCurrentHotel().getId());
-        roomList.addAll(al);
+        List<Room> list = roomService.getRoomList(hotelService.getCurrentHotel().getId());
+        if(list != null)
+            roomList.addAll(list);
         return roomList;
     }
 

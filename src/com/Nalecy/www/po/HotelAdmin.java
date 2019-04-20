@@ -3,6 +3,7 @@ package com.Nalecy.www.po;
 public class HotelAdmin extends Person{
     private Integer hotelID;
     public HotelAdmin(){
+        hotelID = 0;
         permission = 2;
     }
 

@@ -2,7 +2,9 @@ package com.Nalecy.www.view.administratorSubView;
 
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
 import com.Nalecy.www.util.RegexUtil;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
@@ -22,6 +24,8 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class HotelManagerView extends View {
+    private HotelService hotelService = ServiceFactory.getHotelService();
+
     private Stage window;
     private Scene scene;
     private VBox vBox;
@@ -77,7 +81,7 @@ public class HotelManagerView extends View {
             hotel.setName(infoList.get(0));
             hotel.setStar(Integer.valueOf(infoList.get(1)));
             hotel.setDescription(infoList.get(2));
-            HotelService.getInstance().addHotel(hotel);
+            hotelService.addHotel(hotel);
         }
     }
 
@@ -85,7 +89,7 @@ public class HotelManagerView extends View {
         ObservableList<Hotel> selectHotel;
         selectHotel = roomTableView.getSelectionModel().getSelectedItems();
         for (Hotel hotel : selectHotel) {
-            HotelService.getInstance().deleteHotel(hotel.getId());
+            hotelService.deleteHotel(hotel.getId());
         }
     }
 
@@ -104,10 +108,11 @@ public class HotelManagerView extends View {
             if(!RegexUtil.isZh(infoList.get(0))){ PromptAlert.display("错误","检查酒店名称输入");return;}
             if(!RegexUtil.isOneToFive(infoList.get(1))){PromptAlert.display("错误","检查星级输入");return;}
             if(!RegexUtil.isZh(infoList.get(2))){PromptAlert.display("错误","检查描述输入");return;}
+
             hotel.setName(infoList.get(0));
             hotel.setStar(Integer.valueOf(infoList.get(1)));
             hotel.setDescription(infoList.get(2));
-            HotelService.getInstance().updateHotel(hotel);
+            hotelService.updateHotel(hotel);
         }
     }
 
@@ -116,7 +121,7 @@ public class HotelManagerView extends View {
         tvc.addStringColumn("酒店名称", "name", 100);
         tvc.addIntegerColumn("星级", "star", 50);
         tvc.addIntegerColumn("评分", "score", 50);
-        tvc.addIntegerColumn("评分人数", "numOfScore", 50);
+        tvc.addIntegerColumn("评分人数", "numOfScore", 100);
         tvc.addIntegerColumn("描述", "description", 250);
         roomTableView = tvc.getTableView();
         roomTableView.setItems(getHotelList());
@@ -143,8 +148,9 @@ public class HotelManagerView extends View {
 
     private ObservableList<Hotel> getHotelList() {
         ObservableList<Hotel> roomList = FXCollections.observableArrayList();
-        List<Hotel> al = HotelService.getInstance().getHotelList();
-        roomList.addAll(al);
+        List<Hotel> list = hotelService.getHotelList();
+        if(list != null)
+            roomList.addAll(list);
         return roomList;
     }
 

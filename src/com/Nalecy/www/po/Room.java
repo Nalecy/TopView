@@ -13,6 +13,12 @@ public class Room {
     private Integer hotelID;
 
     public Room() {
+        name = "";
+        type = 0;
+        area = 0;
+        bedWidth = 0;
+        price = 0;
+        hotelID = 0;
     }
 
     public Room(Integer id, String name, Integer type, Integer area, Integer bedWidth, Integer price, Integer hotelID) {

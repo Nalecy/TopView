@@ -1,10 +1,13 @@
 package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.HotelAdmin;
-import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.PersonServiceImpl;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.DateUtil;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
 import com.Nalecy.www.util.RegexUtil;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.hadminSubView.OrderMangerView;
 import com.Nalecy.www.view.hadminSubView.RoomMangerView;
@@ -20,10 +23,12 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class HotelAdminView extends View{
+    private HotelService hotelService = ServiceFactory.getHotelService();
+    private PersonService personService = ServiceFactory.getPersonService();
 
     private HotelAdmin user;
     public HotelAdminView(){
-        user = (HotelAdmin) PersonService.getInstance().searchPerson(HotelService.getInstance().getCurrentUser());
+        user = (HotelAdmin) personService.searchPerson(hotelService.getCurrentUser());
     }
 
 
@@ -45,7 +50,7 @@ public class HotelAdminView extends View{
 
     public void display(){
         if(!hasInit) {
-            HotelService.getInstance().setCurrentHotel(HotelService.getInstance().getHotel(user.getHotelID()));
+            hotelService.setCurrentHotel(hotelService.getHotel(user.getHotelID()));
             init();
             setButtonAction();
             hasInit = true;
@@ -65,7 +70,7 @@ public class HotelAdminView extends View{
 
     private void setButtonAction() {
         infoButton.setOnAction(e -> {
-            PromptAlert.display("酒店信息",HotelService.getInstance().getCurrentHotel().toString());
+            PromptAlert.display("酒店信息", hotelService.getCurrentHotel().toString());
         });
         roomButton.setOnAction(e -> {
             ViewManger.switchView(new RoomMangerView());
@@ -74,7 +79,7 @@ public class HotelAdminView extends View{
             ViewManger.switchView(new OrderMangerView());
         });
         cancelLoginButton.setOnAction(e -> {
-            PersonService.getInstance().cancelLogin(HotelService.getInstance().getCurrentUser());
+            personService.cancelLogin(hotelService.getCurrentUser());
         });
         psnlInfoButton.setOnAction(e -> {
             modifyInfo();
@@ -85,7 +90,7 @@ public class HotelAdminView extends View{
     }
     private void modifyInfo() {
         InfoEditPopup editPopup = new InfoEditPopup();
-        HotelAdmin hotelAdmin = (HotelAdmin) PersonService.getInstance().searchPerson(HotelService.getInstance().getCurrentUser());//先获取当前登录用户的用户名再获取对应顾客对象
+        HotelAdmin hotelAdmin = (HotelAdmin) personService.searchPerson(hotelService.getCurrentUser());//先获取当前登录用户的用户名再获取对应顾客对象
         editPopup.setInfoNameList("密码","身份证号码","电话");
         editPopup.setInfoValueList(hotelAdmin.getPassword(),hotelAdmin.getIdNumber(),hotelAdmin.getTelephone());
         List<String> infoList = editPopup.display("个人信息修改");  //启动窗口并准备获取其返回值
@@ -98,14 +103,14 @@ public class HotelAdminView extends View{
             hotelAdmin.setPassword(infoList.get(0));
             hotelAdmin.setIdNumber(infoList.get(1));
             hotelAdmin.setTelephone(infoList.get(2));
-            PersonService.getInstance().updatePeron(hotelAdmin);       //保存信息·
+            personService.updatePeron(hotelAdmin);       //保存信息·
         }
     }
 
     private void init(){
         dateLabel = new Label("今天是"+ DateUtil.getInstance().getCurrentDate());
-        tipLabel1 = new Label("您好,用户名为"+ HotelService.getInstance().getCurrentUser()+"的酒店管理员。");
-        tipLabel2 = new Label("您是"+HotelService.getInstance().getHotel(user.getHotelID()).getName()+"酒店的管理员");
+        tipLabel1 = new Label("您好,用户名为"+ hotelService.getCurrentUser()+"的酒店管理员。");
+        tipLabel2 = new Label("您是"+ hotelService.getHotel(user.getHotelID()).getName()+"酒店的管理员");
         tipLabel3 = new Label("您可以：");
 
         infoButton = new Button("查看本酒店信息");

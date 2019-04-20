@@ -31,7 +31,7 @@ public class RoomDao {
     }
 
     public static List<Room> getRoomList() {
-        LinkedList<String> idList = DatabaseUtil.getOneColumnData("room", "id");
+        List<String> idList = DatabaseUtil.getOneColumnData("room", "id");
         List<Room> rooms = new ArrayList<>();
         if (idList == null) return null;
         for (String id : idList) {

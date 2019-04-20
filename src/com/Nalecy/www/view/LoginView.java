@@ -2,9 +2,12 @@ package com.Nalecy.www.view;
 
 
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.service.Impl.PersonServiceImpl;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.DateUtil;
 import com.Nalecy.www.util.RegexUtil;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.popupUtil.ConfirmAlert;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
@@ -18,6 +21,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class LoginView extends View {
+    private HotelService hotelService = ServiceFactory.getHotelService();
+    private PersonService personService = ServiceFactory.getPersonService();
 
     //布局要素
     private Stage window;
@@ -63,19 +68,17 @@ public class LoginView extends View {
 
         exitButton.setOnAction(e -> window.close());
 
-
         registerButton.setOnAction(e -> {
             ViewManger.switchView(new RegisterView());
         });
         //设置自动获取用户名字符串并匹配监听器(若保存密码自动输入)
         userText.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (PersonService.getInstance().hasLogin(userText.getText())) {
-                String password = PersonService.getInstance().getPassword(userText.getText());
+            if (personService.hasLogin(userText.getText())) {
+                String password = personService.getPassword(userText.getText());
                 passwordText.setText(password);
             }
         });
     }
-
 
     private void init() {
         loginButton = new Button("登录");
@@ -111,7 +114,6 @@ public class LoginView extends View {
         window.setScene(scene);
         window.setResizable(false);
         window.setTitle("登录页面");
-
     }
 
     private void login() {
@@ -126,25 +128,30 @@ public class LoginView extends View {
         }
 
         String userName = userText.getText();
-        String password = PersonService.getInstance().getPassword(userName);
+        String password = personService.getPassword(userName);
 
         if (password == null) {
             //若无法由用户名获取密码 即不存在该用户
             PromptAlert.display("错误", "用户名不存在");
             return;
         }
+
         password = passwordText.getText();
-        if (password.equals(PersonService.getInstance().getPassword(userName))) {           //如果密码正确 则是否保存
-            if (ConfirmAlert.display("保存", "确定保存密码？")) {
-                if (PersonService.getInstance().saveLogin(userName)) PromptAlert.display("恭喜", "保存成功");
-                else PromptAlert.display("错误", "保存失败");
+        boolean b = password.equals(personService.getPassword(userName));//进行密码是否正确判断
+        if (b) {//密码正确
+            if (!personService.hasLogin(userName)) {//未保存密码才需要进行
+                if (ConfirmAlert.display("保存", "确定保存密码？")) {
+                    if (personService.saveLogin(userName)) PromptAlert.display("恭喜", "保存成功");
+                    else PromptAlert.display("错误", "保存失败");
+                }
             }
         } else {
             PromptAlert.display("错误", "密码错误");
             return;
         }
-        HotelService.getInstance().setCurrentUser(userText.getText());
-        Integer p = PersonService.getInstance().searchPerson(PersonService.getInstance().getPersonID(userName)).getPermission();
+        //进行服务的某些初始化设置并开始进入对应菜单
+        hotelService.setCurrentUser(userText.getText());
+        Integer p = personService.searchPerson(personService.getPersonID(userName)).getPermission();
         switch (p) {
             case 1:
                 ViewManger.switchView(new CustomerView());

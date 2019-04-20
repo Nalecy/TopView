@@ -11,6 +11,15 @@ public class Account {
     private Integer roomId;
     private Integer roomPeriod;
 
+    public Account(){
+        hotelId = 0;
+        customerId = 0;
+        date = new Date(0);
+        balance = 0;
+        roomId = 0;
+        roomPeriod = 0;
+    }
+
     public Integer getHotelId() { return hotelId; }
     public void setHotelId(Integer hotelId) { this.hotelId = hotelId; }
     public Integer getCustomerId() { return customerId; }

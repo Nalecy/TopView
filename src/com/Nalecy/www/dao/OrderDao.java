@@ -11,7 +11,7 @@ import java.util.List;
 
 public class OrderDao {
     public static void addOrder(Order order) {
-    DatabaseUtil.addOneRowData("orderR", null, order.getUserName(), order.getDate().toString(), String.valueOf(order.getRoomPeriod()), String.valueOf(order.getHotelID()), String.valueOf(order.getRoomID()));
+    DatabaseUtil.addOneRowData("orderR", null, order.getUserName(), order.getDate().toString(), String.valueOf(order.getRoomPeriod()), String.valueOf(order.getHotelID()), String.valueOf(order.getRoomID()),String.valueOf(order.getBalance()));
 }
 
     public static Order getOrder(String userName) {
@@ -31,7 +31,7 @@ public class OrderDao {
     }
 
     public static List<Order> getOrderList() {
-        LinkedList<String> idList = DatabaseUtil.getOneColumnData("orderR", "id");
+        List<String> idList = DatabaseUtil.getOneColumnData("orderR", "id");
         List<Order> orders = new ArrayList<>();
         if (idList == null) return null;
         for (String id : idList) {
@@ -47,6 +47,7 @@ public class OrderDao {
         order.setRoomPeriod(Integer.valueOf(orderInfo.get(3)));
         order.setHotelID(Integer.valueOf(orderInfo.get(4)));
         order.setRoomID(Integer.valueOf(orderInfo.get(5)));
+        order.setBalance(Integer.valueOf(orderInfo.get(6)));
     }
 
     public static void deleteOrder(Integer id) {

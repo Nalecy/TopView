@@ -2,9 +2,12 @@ package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.*;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.service.Impl.PersonServiceImpl;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ProGetter;
 import com.Nalecy.www.util.RegexUtil;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
@@ -15,6 +18,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class RegisterView extends View{
+    private HotelService hotelService = ServiceFactory.getHotelService();
+    private PersonService personService = ServiceFactory.getPersonService();
 
     //布局要素
     private Stage window;
@@ -126,7 +131,7 @@ public class RegisterView extends View{
         if(!RegexUtil.isIdCard(idNumberText.getText())){PromptAlert.display("错误","检查身份证输入");return false;}
         if(!RegexUtil.isTelephone(phoneText.getText())){PromptAlert.display("错误","检查手机号输入");return false;}
         //判断用户名是否已存在
-        if(PersonService.getInstance().searchPerson(userText.getText()) != null){
+        if(personService.searchPerson(userText.getText()) != null){
             PromptAlert.display("错误","用户名已存在");
             return false;
         }
@@ -137,7 +142,7 @@ public class RegisterView extends View{
             person = new Customer();
         }
         else if (group.getSelectedToggle() == HAdminRegBut){
-            Hotel hotel = HotelService.getInstance().getHotel(hotelNameText.getText());
+            Hotel hotel = hotelService.getHotel(hotelNameText.getText());
             if (hotel == null)return false;
             person = new HotelAdmin();
             ((HotelAdmin) person).setHotelID(hotel.getId());
@@ -150,7 +155,7 @@ public class RegisterView extends View{
         person.setPassword(passwordText.getText());
         person.setIdNumber(idNumberText.getText());
         person.setTelephone(phoneText.getText());
-        PersonService.getInstance().addPerson(person);
+        personService.addPerson(person);
         return true;
     }
 

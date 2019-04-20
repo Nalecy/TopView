@@ -1,9 +1,10 @@
 package com.Nalecy.www.po.forTableView;
 
-import com.Nalecy.www.constantClass.RoomPeriod;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.RoomService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.service.Impl.RoomServiceImpl;
+import com.Nalecy.www.util.ServiceFactory;
 
 import static com.Nalecy.www.constantClass.RoomPeriod.*;
 
@@ -13,17 +14,16 @@ public class OrderT extends Order {
     private String roomTime;
     private String hotelName;
     private String roomName;
-
     public OrderT(Order order) {
-        super(order.getId(),order.getUserName(),order.getDate(),order.getRoomPeriod(),order.getHotelID(),order.getRoomID());
+        super(order.getId(),order.getUserName(),order.getDate(),order.getRoomPeriod(),order.getHotelID(),order.getRoomID(),order.getBalance());
         this.order = order;
         switch (order.getRoomPeriod()){
             case MORNING : roomTime = "早上";break;
             case AFTERNOON : roomTime = "下午";break;
             case NIGHT : roomTime = "晚上";break;
         }
-        hotelName = HotelService.getInstance().getHotel(order.getHotelID()).getName();
-        roomName = RoomService.getInstance().getRoomById(order.getRoomID()).getName();
+        hotelName = ServiceFactory.getHotelService().getHotel(order.getHotelID()).getName();
+        roomName = ServiceFactory.getRoomService().getRoomById(order.getRoomID()).getName();
     }
 
     public Order getOrder() { return order; }

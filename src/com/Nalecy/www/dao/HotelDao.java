@@ -30,7 +30,7 @@ public class HotelDao {
     }
 
     public static List<Hotel> getHotelList() {
-        LinkedList<String> idList = DatabaseUtil.getOneColumnData("hotel", "id");
+        List<String> idList = DatabaseUtil.getOneColumnData("hotel", "id");
         List<Hotel> hotels = new ArrayList<>();
         if (idList == null) return null;
         for (String s : idList) {

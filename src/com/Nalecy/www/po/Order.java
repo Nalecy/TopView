@@ -12,6 +12,26 @@ public class Order {
     private Integer roomPeriod;
     private Integer hotelID;
     private Integer roomID;
+    private Integer balance;
+
+    public Order(){
+        userName = "";
+        date = new Date(0);
+        roomPeriod = 0;
+        hotelID = 0;
+        roomID = 0;
+        balance = 0;
+    }
+
+    public Order(Integer id,String userName, Date date, Integer roomPeriod, Integer hotelID, Integer roomID,Integer balance) {
+        this.id = id;
+        this.userName = userName;
+        this.date = date;
+        this.roomPeriod = roomPeriod;
+        this.hotelID = hotelID;
+        this.roomID = roomID;
+        this.balance = balance;
+    }
 
     @Override
     public String toString() {
@@ -23,17 +43,6 @@ public class Order {
         return sb.toString();
     }
 
-    public Order(Integer id,String userName, Date date, Integer roomPeriod, Integer hotelID, Integer roomID) {
-        this.id = id;
-        this.userName = userName;
-        this.date = date;
-        this.roomPeriod = roomPeriod;
-        this.hotelID = hotelID;
-        this.roomID = roomID;
-    }
-
-    public Order() {
-    }
 
     public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
@@ -47,4 +56,6 @@ public class Order {
     public void setHotelID(Integer hotelID) { this.hotelID = hotelID; }
     public Integer getRoomID() { return roomID; }
     public void setRoomID(Integer roomID) { this.roomID = roomID; }
+    public Integer getBalance() { return balance; }
+    public void setBalance(Integer balance) { this.balance = balance; }
 }

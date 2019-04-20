@@ -3,7 +3,11 @@ package com.Nalecy.www.view.hadminSubView;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.forTableView.OrderT;
 import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.service.Impl.OrderServiceImpl;
 import com.Nalecy.www.service.OrderService;
+import com.Nalecy.www.service.RoomService;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
@@ -23,6 +27,8 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class OrderMangerView extends View {
+    private HotelService hotelService = ServiceFactory.getHotelService();
+    private OrderService orderService = ServiceFactory.getOrderService();
 
     private Stage window;
     private Scene scene;
@@ -72,7 +78,7 @@ public class OrderMangerView extends View {
     private void cancelOrder() {
         try {
             Order order = unfinTableView.getSelectionModel().getSelectedItem().getOrder();
-            OrderService.getInstance().cancelOrder(order);
+            orderService.cancelOrder(order);
         }catch (NullPointerException e){
             PromptAlert.display("错误","请检查是否选择");
         }
@@ -87,6 +93,7 @@ public class OrderMangerView extends View {
         tvc.addIntegerColumn("房间时段","roomTime",100);
         tvc.addStringColumn("酒店名字","hotelName",100);
         tvc.addStringColumn("房间名字","roomName",100);
+        tvc.addIntegerColumn("金额","balance",50);
         finTableView = tvc.getTableView();
         finTableView.setItems(getFOrderList());
 
@@ -97,6 +104,7 @@ public class OrderMangerView extends View {
         tvc.addIntegerColumn("房间时段","roomTime",100);
         tvc.addStringColumn("酒店名字","hotelName",100);
         tvc.addStringColumn("房间名字","roomName",100);
+        tvc.addIntegerColumn("金额","balance",50);
         unfinTableView = tvc.getTableView();
         unfinTableView.setItems(getUFOrderList());
 
@@ -126,18 +134,22 @@ public class OrderMangerView extends View {
 
     private ObservableList<OrderT> getUFOrderList() {       //获取unfinished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        List<Order> orderList = OrderService.getInstance().getIncompleteOrder( );         //用当前已登录用户名来获取订单
-        for (Order order : orderList) {
-            orders.add(new OrderT(order));
+        List<Order> orderList = orderService.getIncompleteOrder(hotelService.getCurrentHotel().getId());         //用当前已登录用户名来获取订单
+        if(orderList != null) {
+            for (Order order : orderList) {
+                orders.add(new OrderT(order));
+            }
         }
         return orders;
     }
 
     private ObservableList<OrderT> getFOrderList() {        //获取finished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        List<Order> orderList = OrderService.getInstance().getCompleteOrder(HotelService.getInstance().getCurrentUser());   //用当前已登录用户名来获取订单
-        for (Order order : orderList) {
-            orders.add(new OrderT(order));
+        List<Order> orderList = orderService.getCompleteOrder(hotelService.getCurrentHotel().getId());
+        if(orderList != null) {
+            for (Order order : orderList) {
+                orders.add(new OrderT(order));
+            }
         }
         return orders;
     }

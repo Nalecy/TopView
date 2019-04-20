@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class DatabaseUtil {
@@ -35,8 +36,8 @@ public class DatabaseUtil {
         return list;
     }
 
-    public static LinkedList<String> getOneColumnData(String tableName,String columnName){
-        LinkedList<String> list = new LinkedList<>();
+    public static List<String> getOneColumnData(String tableName,String columnName){
+        List<String> list = new LinkedList<>();
         Connection conn = ConnectionPool.getInstance().getConnection();
         String sql = "select "+columnName+" from "+tableName;
         try {
@@ -52,8 +53,8 @@ public class DatabaseUtil {
         if(0 == list.size())return null;
         else return list;
     }
-    public static LinkedList<String> getOneColumnData(String tableName,String columnName, String signKey, String signValue){
-        LinkedList<String> list = new LinkedList<>();
+    public static List<String> getOneColumnData(String tableName, String columnName, String signKey, String signValue){
+        List<String> list = new LinkedList<>();
         Connection conn = ConnectionPool.getInstance().getConnection();
         String sql = "select "+columnName+" from "+tableName+" where "+signKey+" = ?";
         try {
