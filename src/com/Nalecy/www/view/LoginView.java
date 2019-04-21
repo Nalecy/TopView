@@ -87,6 +87,7 @@ public class LoginView extends View {
         userText = new TextField();
         userText.setPromptText("请输入用户名");
         passwordText = new PasswordField();
+        passwordText.setPromptText("请输入密码");
 
         GridPane.setConstraints(dateLabel, 1, 0);
         GridPane.setConstraints(userLabel, 0, 1);

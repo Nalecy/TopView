@@ -180,6 +180,7 @@ public class RegisterView extends View{
         hotelNameText = new TextField();
 
         userText.setPromptText("允许5-12位字母数字");
+        passwordText.setPromptText("允许6-12位字母数字");
         phoneText.setPromptText("允许11位数字");
         idNumberText.setPromptText("允许18位数身份证");
         hotelNameText.setPromptText("仅允许汉字");
