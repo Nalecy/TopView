@@ -4,10 +4,7 @@ import com.Nalecy.www.dao.AccountDao;
 import com.Nalecy.www.po.Account;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.Order;
-import com.Nalecy.www.service.BalanceService;
-import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.PersonService;
-import com.Nalecy.www.service.RoomService;
+import com.Nalecy.www.service.*;
 import com.Nalecy.www.util.ServiceFactory;
 
 public class BalanceServiceImpl implements BalanceService {
@@ -15,6 +12,7 @@ public class BalanceServiceImpl implements BalanceService {
     private HotelService hotelService;
     private PersonService personService;
     private RoomService roomService;
+    private CurrentRecorder currentRecorder;
     private boolean hasInit = false;
 
     private void initService() {
@@ -22,6 +20,7 @@ public class BalanceServiceImpl implements BalanceService {
             hotelService = ServiceFactory.getHotelService();
             personService = ServiceFactory.getPersonService();
             roomService = ServiceFactory.getRoomService();
+            currentRecorder = ServiceFactory.getCurrentRecorder();
             hasInit = true;
         }
     }
@@ -48,7 +47,7 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public void recharge(Integer number) {
         initService();
-        Customer customer = (Customer) personService.searchPerson(hotelService.getCurrentUser());
+        Customer customer = (Customer) personService.searchPerson(currentRecorder.getCurrentUserName());
         customer.setBalance(customer.getBalance() + number);
         personService.updatePeron(customer);
     }
@@ -72,6 +71,7 @@ public class BalanceServiceImpl implements BalanceService {
         account.setDate(order.getDate());
         account.setBalance(order.getBalance());
         account.setRoomId(order.getRoomID());
+
         account.setRoomPeriod(order.getRoomPeriod());
         AccountDao.addAccount(account);
     }

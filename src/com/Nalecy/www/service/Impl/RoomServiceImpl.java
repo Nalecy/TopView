@@ -3,7 +3,7 @@ package com.Nalecy.www.service.Impl;
 import com.Nalecy.www.dao.RoomDao;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.Room;
-import com.Nalecy.www.service.HotelService;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.OrderService;
 import com.Nalecy.www.service.RoomService;
 import com.Nalecy.www.util.NoMoneyException;
@@ -14,20 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomServiceImpl implements RoomService {
-    private HotelService hotelService;
     private OrderService orderService;
+    private CurrentRecorder currentRecorder;
     private boolean hasInit = false;
 
     private void initService() {
         if (!hasInit) {
-            hotelService = ServiceFactory.getHotelService();
             orderService = ServiceFactory.getOrderService();
+            currentRecorder = ServiceFactory.getCurrentRecorder();
             hasInit = true;
         }
     }
 
-
-    private Room currentRoom = null;
 
     @Override
     public List< Room> getRoomList(Integer hotelId) {
@@ -43,12 +41,12 @@ public class RoomServiceImpl implements RoomService {
         return roomList;
     }
     @Override
-    public Room getCurrentRoom() { return currentRoom; }
-    @Override
-    public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
-    @Override
     public boolean reserveRoom(Date date, Integer timeChoice) {
+        //初始化服务
         initService();
+        //获取当前房间
+        Room currentRoom = getRoomById(currentRecorder.getCurrentRoomId());
+        //通过检查未完成订单检查是否已预订
         List<Order> allOrders = orderService.getIncompleteOrder();
         if(allOrders != null) {
             for (Order order : allOrders) {
@@ -57,8 +55,9 @@ public class RoomServiceImpl implements RoomService {
                     if (orderDay.getTime() == date.getTime()) if (order.getRoomPeriod().equals(timeChoice)) return false;
             }
         }
+        //组装订单
         Order order = new Order();
-        order.setUserName(hotelService.getCurrentUser());
+        order.setUserName(currentRecorder.getCurrentUserName());
         order.setRoomID(currentRoom.getId());
         order.setRoomPeriod(timeChoice);
         order.setDate(date);
@@ -79,7 +78,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public boolean addRoom(Room room) {
         initService();
-        room.setHotelID(hotelService.getCurrentHotel().getId());
+        room.setHotelID(currentRecorder.getCurrentHotelId());
         RoomDao.addRoom(room);
         return true;
     }

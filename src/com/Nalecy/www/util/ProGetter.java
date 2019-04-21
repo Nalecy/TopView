@@ -15,6 +15,9 @@ public class ProGetter {
         return ourInstance;
     }
 
+    /**
+     * 通过固定的路径加载文件
+     */
     private ProGetter() {
         pro = new Properties();
         String path = Runner.class.getResource("HotelSystem.properties").getPath();
@@ -24,6 +27,12 @@ public class ProGetter {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 通过key获取对应的值
+     * @param key
+     * @return String
+     */
     public String get(String key){
         return pro.getProperty(key);
     }

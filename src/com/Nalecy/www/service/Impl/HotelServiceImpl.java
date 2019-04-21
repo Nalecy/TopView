@@ -8,8 +8,6 @@ import java.util.*;
 
 public class HotelServiceImpl implements HotelService {
 
-    private String currentUser = null;
-    private Hotel currentHotel = null;
 
     @Override
     public List<Hotel> getHotelList() {
@@ -33,21 +31,6 @@ public class HotelServiceImpl implements HotelService {
         HotelDao.updateHotel(hotel);
     }
 
-    @Override
-    public void setCurrentUser(String userName){
-        currentUser = userName;
-    }
-
-    @Override
-    public String getCurrentUser() {
-        return currentUser;
-    }
-
-    @Override
-    public Hotel getCurrentHotel() { return currentHotel; }
-
-    @Override
-    public void setCurrentHotel(Hotel currentHotel) { this.currentHotel = currentHotel; }
 
     @Override
     public Hotel getHotel(Integer hotelID) {

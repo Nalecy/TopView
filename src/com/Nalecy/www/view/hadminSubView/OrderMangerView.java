@@ -2,11 +2,9 @@ package com.Nalecy.www.view.hadminSubView;
 
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.forTableView.OrderT;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
-import com.Nalecy.www.service.Impl.OrderServiceImpl;
 import com.Nalecy.www.service.OrderService;
-import com.Nalecy.www.service.RoomService;
 import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
@@ -29,6 +27,7 @@ import java.util.List;
 public class OrderMangerView extends View {
     private HotelService hotelService = ServiceFactory.getHotelService();
     private OrderService orderService = ServiceFactory.getOrderService();
+    private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 
     private Stage window;
     private Scene scene;
@@ -134,7 +133,7 @@ public class OrderMangerView extends View {
 
     private ObservableList<OrderT> getUFOrderList() {       //获取unfinished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        List<Order> orderList = orderService.getIncompleteOrder(hotelService.getCurrentHotel().getId());         //用当前已登录用户名来获取订单
+        List<Order> orderList = orderService.getIncompleteOrder(currentRecorder.getCurrentHotelId());         //用当前已进入的酒店id来获取订单
         if(orderList != null) {
             for (Order order : orderList) {
                 orders.add(new OrderT(order));
@@ -145,7 +144,7 @@ public class OrderMangerView extends View {
 
     private ObservableList<OrderT> getFOrderList() {        //获取finished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        List<Order> orderList = orderService.getCompleteOrder(hotelService.getCurrentHotel().getId());
+        List<Order> orderList = orderService.getCompleteOrder(currentRecorder.getCurrentHotelId());
         if(orderList != null) {
             for (Order order : orderList) {
                 orders.add(new OrderT(order));

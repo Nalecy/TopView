@@ -3,9 +3,7 @@ package com.Nalecy.www.view.customerSubView.sub;
 
 import com.Nalecy.www.constantClass.RoomPeriod;
 import com.Nalecy.www.po.Room;
-import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
-import com.Nalecy.www.service.Impl.RoomServiceImpl;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.RoomService;
 import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.View;
@@ -19,12 +17,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.sql.Date;
 import java.util.List;
 
 public class RoomListView extends View {
 
-    private HotelService hotelService = ServiceFactory.getHotelService();
     private RoomService roomService = ServiceFactory.getRoomService();
+    private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 
     private Stage stage;
     private Scene scene;
@@ -35,7 +34,7 @@ public class RoomListView extends View {
     private TableView<Room> roomListTable;
 
     private Label label;
-    private ChoiceBox<String> dateChoiceBox;
+    private ChoiceBox<Date> dateChoiceBox;
     private ChoiceBox<String> timeChoiceBox;
     private Button reserveButton;
     private Button backButton;
@@ -85,8 +84,8 @@ public class RoomListView extends View {
 
         //右边
         dateChoiceBox = new ChoiceBox<>();
-        dateChoiceBox.setItems(FXCollections.observableArrayList("明天","后天","大后天"));
-        dateChoiceBox.setValue("明天");
+        dateChoiceBox.setItems(FXCollections.observableArrayList(DateUtil.getCurrentDate(),DateUtil.getOneDay(1),DateUtil.getOneDay(2)));
+        dateChoiceBox.setValue(DateUtil.getCurrentDate());
         dateChoiceBox.setMinWidth(200);
 
         timeChoiceBox = new ChoiceBox<>();
@@ -94,11 +93,8 @@ public class RoomListView extends View {
         timeChoiceBox.setValue("上午");
         timeChoiceBox.setMinWidth(200);
 
-        reserveButton = new Button("预定");
-        reserveButton.setMinWidth(200);
-
-        backButton = new Button("返回");
-        backButton.setMinWidth(200);
+        reserveButton = ButtonCreater.getNewButton("预定",200);
+        backButton = ButtonCreater.getNewButton("返回",200);
 
         rightVBox = new VBox();
         rightVBox.getChildren().addAll(dateChoiceBox,timeChoiceBox,reserveButton,backButton);
@@ -118,33 +114,26 @@ public class RoomListView extends View {
     }
     private ObservableList<Room> getRoomList(){
         ObservableList<Room> roomList = FXCollections.observableArrayList();
-        List<Room> al = roomService.getRoomList(hotelService.getCurrentHotel().getId());
+        List<Room> al = roomService.getRoomList(currentRecorder.getCurrentHotelId());
         roomList.addAll(al);
         return roomList;
     }
     private void reserve(){
-        Integer date = null;
         Integer time = null;
-        String dateValue = dateChoiceBox.getValue();
         String timeValue = timeChoiceBox.getValue();
         Room room = roomListTable.getSelectionModel().getSelectedItem();
         if (room == null){
             PromptAlert.display("错误","未选择房间");
             return;
         }
-        switch (dateValue) {
-            case "明天": date = RoomPeriod.ONE_DAY_LATER;break;  //根据选修设定是几天后
-            case "后天": date = RoomPeriod.TWO_DAY_LATER;break;
-            case "大后天": date = RoomPeriod.THREE_DAY_LATER;break;
-        }
         switch (timeValue){
             case "上午": time = RoomPeriod.MORNING;break;
             case "下午": time = RoomPeriod.AFTERNOON;break;
             case "晚上": time = RoomPeriod.NIGHT;break;
         }
-        roomService.setCurrentRoom(room);
+        currentRecorder.setCurrentRoomId(room.getId());
         try{
-            if( roomService.reserveRoom(DateUtil.getInstance().getOneDay(date),time) ) PromptAlert.display("提示","预定成功");
+            if( roomService.reserveRoom(dateChoiceBox.getValue(),time) ) PromptAlert.display("提示","预定成功");
             else PromptAlert.display("错误","预定失败,可能该时段已经被预定了");
         }catch (NoMoneyException e){
             PromptAlert.display("错误","余额不足");

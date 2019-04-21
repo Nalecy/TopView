@@ -3,8 +3,10 @@ package com.Nalecy.www.view.customerSubView;
 
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.forTableView.OrderT;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.OrderService;
+import com.Nalecy.www.util.ButtonCreater;
 import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
@@ -25,8 +27,8 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class OrderListView extends View {
-    private HotelService hotelService = ServiceFactory.getHotelService();
     private OrderService orderService = ServiceFactory.getOrderService();
+    private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 
 
     private Stage window;
@@ -88,7 +90,7 @@ public class OrderListView extends View {
 
     private ObservableList<OrderT> getUFOrderList() {       //获取unfinished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        List<Order> orderList = orderService.getIncompleteOrder(hotelService.getCurrentUser());         //用当前已登录用户名来获取订单
+        List<Order> orderList = orderService.getIncompleteOrder(currentRecorder.getCurrentUserName());         //用当前已登录用户名来获取订单
         for (Order order : orderList) {
             orders.add(new OrderT(order));
         }
@@ -97,7 +99,7 @@ public class OrderListView extends View {
 
     private ObservableList<OrderT> getFOrderList() {        //获取finished订单列表
         ObservableList<OrderT> orders = FXCollections.observableArrayList();
-        List<Order> orderList = orderService.getCompleteOrder(hotelService.getCurrentUser());   //用当前已登录用户名来获取订单
+        List<Order> orderList = orderService.getCompleteOrder(currentRecorder.getCurrentUserName());   //用当前已登录用户名来获取订单
         for (Order order : orderList) {
             orders.add(new OrderT(order));
         }
@@ -128,13 +130,10 @@ public class OrderListView extends View {
         unfinTableView = tvc.getTableView();
         unfinTableView.setItems(getUFOrderList());
 
-        cancelOrderButton = new Button("取消订单");
-        cancelOrderButton.setMinWidth(100);
-
-        backButton = new Button("返回");
-        backButton.setMinWidth(100);
-
         tipLabel = new Label("您可以：");
+
+        cancelOrderButton = ButtonCreater.getNewButton("取消订单",100);
+        backButton = ButtonCreater.getNewButton("返回",100);
 
         hBox = new HBox();
         hBox.setSpacing(50);

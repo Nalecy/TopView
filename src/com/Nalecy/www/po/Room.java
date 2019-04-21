@@ -21,16 +21,6 @@ public class Room {
         hotelID = 0;
     }
 
-    public Room(Integer id, String name, Integer type, Integer area, Integer bedWidth, Integer price, Integer hotelID) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.area = area;
-        this.bedWidth = bedWidth;
-        this.price = price;
-        this.hotelID = hotelID;
-    }
-
     @Override
     public String toString() {
 

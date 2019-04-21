@@ -1,9 +1,8 @@
 package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.Administrator;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
-import com.Nalecy.www.service.Impl.PersonServiceImpl;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.administratorSubView.HotelManagerView;
@@ -18,8 +17,8 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class AdministratorView extends View{
-    private HotelService hotelService = ServiceFactory.getHotelService();
     private PersonService personService = ServiceFactory.getPersonService();
+    private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 
     private Stage stage;
     private Scene scene;
@@ -48,12 +47,12 @@ public class AdministratorView extends View{
             ViewManger.switchView(new HotelManagerView());
         });
         addDateButton.setOnAction(e->{
-            DateUtil.getInstance().incrDate();
+            DateUtil.incrDate();
             PromptAlert.display("成功","成功流逝");
-            labelsCreater.setLine(0,"今天是"+ DateUtil.getInstance().getCurrentDate());
+            labelsCreater.setLine(0,"今天是"+ DateUtil.getCurrentDate());
         });
         cancelLoginButton.setOnAction(e->{
-            personService.cancelLogin(hotelService.getCurrentUser());
+            personService.cancelLogin(currentRecorder.getCurrentUserName());
         });
         psnlInfoButton.setOnAction(e->{
             modifyInfo();
@@ -65,7 +64,7 @@ public class AdministratorView extends View{
 
     private void modifyInfo() {
         InfoEditPopup editPopup = new InfoEditPopup();
-        Administrator administrator = (Administrator) personService.searchPerson(hotelService.getCurrentUser());//先获取当前登录用户的用户名再获取对应顾客对象
+        Administrator administrator = (Administrator) personService.searchPerson(currentRecorder.getCurrentUserName());//先获取当前登录用户的用户名再获取对应顾客对象
         editPopup.setInfoNameList("密码","身份证号码","电话");
         editPopup.setInfoValueList(administrator.getPassword(),administrator.getIdNumber(),administrator.getTelephone());
         List<String> infoList = editPopup.display("个人信息修改");  //启动窗口并准备获取其返回值
@@ -85,16 +84,16 @@ public class AdministratorView extends View{
 
     private void init(){
         labelsCreater = new LabelsCreater();
-        labelsCreater.addLine("今天是"+ DateUtil.getInstance().getCurrentDate());
-        labelsCreater.addLine("您好,用户名为"+ hotelService.getCurrentUser()+"的超级管理员。");
+        labelsCreater.addLine("今天是"+ DateUtil.getCurrentDate());
+        labelsCreater.addLine("您好,用户名为"+ currentRecorder.getCurrentUserName()+"的超级管理员。");
         labelsCreater.addLine("您可以：");
         labelVBox = labelsCreater.getVBox();
 
-        hotelManagerButton = new Button("管理所有酒店");
-        addDateButton = new Button("时间流逝～（一天）");
-        cancelLoginButton = new Button("取消自动登录");
-        psnlInfoButton = new Button("修改个人信息");
-        backButton = new Button("返回");
+        hotelManagerButton = ButtonCreater.getNewButton("管理所有酒店");
+        addDateButton = ButtonCreater.getNewButton("时间流逝～（一天）");
+        cancelLoginButton = ButtonCreater.getNewButton("取消自动登录");
+        psnlInfoButton = ButtonCreater.getNewButton("修改个人信息");
+        backButton = ButtonCreater.getNewButton("返回");
 
         vBox = new VBox();
         vBox.getChildren().addAll(labelVBox,hotelManagerButton,addDateButton,cancelLoginButton,psnlInfoButton,backButton);

@@ -41,22 +41,4 @@ public class OrderWithBalServiceImpl extends OrderServiceImpl implements OrderSe
         }
     }
 
-/*
-//获取价格
-        Integer price = roomService.getRoomById(order.getRoomID()).getPrice();
-        //获取顾客
-        Customer customer = (Customer) personService.searchPerson(order.getUserName());
-        //获取折扣后价格
-        Integer dcPrice = discount.multiply(BigDecimal.valueOf(price)).intValue();
-        //确保余额充足
-        if (customer.getBalance() < dcPrice) return false;
-        else {
-            //扣款
-            customer.setBalance(customer.getBalance() - price);
-            personService.updatePeron(customer);
-            super.addOrder(order);
-            addAccount(order);
-            return true;
-        }
- */
 }

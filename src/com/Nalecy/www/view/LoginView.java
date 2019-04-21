@@ -1,14 +1,9 @@
 package com.Nalecy.www.view;
 
 
-import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
-import com.Nalecy.www.service.Impl.PersonServiceImpl;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.PersonService;
-import com.Nalecy.www.util.DateUtil;
-import com.Nalecy.www.util.RegexUtil;
-import com.Nalecy.www.util.ServiceFactory;
-import com.Nalecy.www.util.ViewManger;
+import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.popupUtil.ConfirmAlert;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
@@ -21,8 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class LoginView extends View {
-    private HotelService hotelService = ServiceFactory.getHotelService();
     private PersonService personService = ServiceFactory.getPersonService();
+    private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 
     //布局要素
     private Stage window;
@@ -46,7 +41,7 @@ public class LoginView extends View {
             setButtonAction();
             hasInit = true;
         }
-        dateLabel.setText("当前时间：" + DateUtil.getInstance().getCurrentDate());
+        dateLabel.setText("当前时间：" + DateUtil.getCurrentDate());
         window.show();
     }
 
@@ -81,11 +76,11 @@ public class LoginView extends View {
     }
 
     private void init() {
-        loginButton = new Button("登录");
-        registerButton = new Button("注册");
-        exitButton = new Button("退出");
+        loginButton = ButtonCreater.getNewButton("登录");
+        registerButton = ButtonCreater.getNewButton("注册");
+        exitButton = ButtonCreater.getNewButton("退出");
 
-        dateLabel = new Label("当前时间：" + DateUtil.getInstance().getCurrentDate());
+        dateLabel = new Label("当前时间：" + DateUtil.getCurrentDate());
         userLabel = new Label("用户名：");
         passwordLabel = new Label("密码：");
 
@@ -150,7 +145,7 @@ public class LoginView extends View {
             return;
         }
         //进行服务的某些初始化设置并开始进入对应菜单
-        hotelService.setCurrentUser(userText.getText());
+        currentRecorder.setCurrentUserName(userText.getText());
         Integer p = personService.searchPerson(personService.getPersonID(userName)).getPermission();
         switch (p) {
             case 1:

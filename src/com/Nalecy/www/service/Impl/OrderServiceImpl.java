@@ -16,7 +16,7 @@ public class OrderServiceImpl  implements OrderService {
         List<Order> allOrders = OrderDao.getOrderList();
         if (allOrders == null) return null;
         List<Order> orders = new ArrayList<>();
-        Date today = DateUtil.getInstance().getCurrentDate();
+        Date today = DateUtil.getCurrentDate();
         for (Order order : allOrders) {
             if (order.getDate().getTime() <= today.getTime()) orders.add(order);
         }
@@ -74,7 +74,7 @@ public class OrderServiceImpl  implements OrderService {
         List<Order> allOrders = OrderDao.getOrderList();
         if (allOrders == null) return null;
         List<Order> orders = new ArrayList<>();
-        Date today = DateUtil.getInstance().getCurrentDate();
+        Date today = DateUtil.getCurrentDate();
         for (Order order : allOrders) {
             if (order.getDate().getTime() > today.getTime()) orders.add(order);
         }

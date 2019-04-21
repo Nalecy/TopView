@@ -3,10 +3,7 @@ package com.Nalecy.www.view.administratorSubView;
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.Impl.HotelServiceImpl;
-import com.Nalecy.www.util.RegexUtil;
-import com.Nalecy.www.util.ServiceFactory;
-import com.Nalecy.www.util.TableViewCreater;
-import com.Nalecy.www.util.ViewManger;
+import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
@@ -126,10 +123,10 @@ public class HotelManagerView extends View {
         roomTableView = tvc.getTableView();
         roomTableView.setItems(getHotelList());
 
-        addButton = new Button("增加");
-        deleteButton = new Button("删除");
-        modifyButton = new Button("修改");
-        backButton = new Button("返回");
+        addButton = ButtonCreater.getNewButton("增加");
+        deleteButton = ButtonCreater.getNewButton("删除");
+        modifyButton = ButtonCreater.getNewButton("修改");
+        backButton = ButtonCreater.getNewButton("返回");
         buttonHBox = new HBox();
         buttonHBox.getChildren().addAll(backButton, addButton, deleteButton, modifyButton);
         buttonHBox.setSpacing(50);

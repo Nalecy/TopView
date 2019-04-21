@@ -1,8 +1,9 @@
 package com.Nalecy.www.view.customerSubView;
 
 import com.Nalecy.www.po.Hotel;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.util.ButtonCreater;
 import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
@@ -24,6 +25,7 @@ import java.util.List;
 
 public class HotelListView extends View {
     private HotelService hotelService = ServiceFactory.getHotelService();
+    private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 
     private Stage window;
     private Scene scene;
@@ -63,7 +65,7 @@ public class HotelListView extends View {
                 PromptAlert.display("错误","未选择酒店");
                 return;
             }
-            hotelService.setCurrentHotel(hotel);
+            currentRecorder.setCurrentHotelId(hotel.getId());
             ViewManger.switchView( new RoomListView());
 
         });
@@ -86,11 +88,8 @@ public class HotelListView extends View {
         tableView.setMaxSize(800,800);
         tableView.setItems(getList());
 
-        enterHotelButton = new Button("进入选中酒店");
-        enterHotelButton.setMinWidth(800);
-
-        backButton = new Button("返回");
-        backButton.setMinWidth(800);
+        enterHotelButton = ButtonCreater.getNewButton("进入选中酒店",800);
+        backButton = ButtonCreater.getNewButton("返回",800);
 
         vBox = new VBox();
         vBox.setSpacing(20);

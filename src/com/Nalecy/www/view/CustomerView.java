@@ -2,10 +2,7 @@ package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.service.BalanceService;
-import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.BalanceServiceImpl;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
-import com.Nalecy.www.service.Impl.PersonServiceImpl;
+import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.customerSubView.HotelListView;
@@ -21,9 +18,9 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class CustomerView extends View{
-    private HotelService hotelService = ServiceFactory.getHotelService();
     private BalanceService balanceService = ServiceFactory.getBalanceService();
     private PersonService personService = ServiceFactory.getPersonService();
+    private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 
     private Stage window;
     private Scene scene;
@@ -51,7 +48,7 @@ public class CustomerView extends View{
     }
 
     private void refreshData() {
-        tipLabel.setLine(2,"您的余额："+  ((Customer) personService.searchPerson( hotelService.getCurrentUser())).getBalance() +"元");
+        tipLabel.setLine(2,"您的余额："+  ((Customer) personService.searchPerson( currentRecorder.getCurrentUserName())).getBalance() +"元");
     }
 
     @Override
@@ -94,13 +91,16 @@ public class CustomerView extends View{
             return;
         }
         Integer balance = Integer.valueOf(rb.get(0));
+        if( balance <= 0){
+            throw new RuntimeException("充值金额不能为负数");
+        }
         balanceService.recharge(balance);
         PromptAlert.display("成功","充值成功");
     }
 
     private void modifyInfo() {
         InfoEditPopup editPopup = new InfoEditPopup();
-        Customer customer = (Customer) personService.searchPerson(hotelService.getCurrentUser());//先获取当前登录用户的用户名再获取对应顾客对象
+        Customer customer = (Customer) personService.searchPerson(currentRecorder.getCurrentUserName());//先获取当前登录用户的用户名再获取对应顾客对象
         editPopup.setInfoNameList("密码","身份证号码","电话");
         editPopup.setInfoValueList(customer.getPassword(),customer.getIdNumber(),customer.getTelephone());
         List<String> infoList = editPopup.display("个人信息修改");  //启动窗口并准备获取其返回值
@@ -118,26 +118,20 @@ public class CustomerView extends View{
     }
 
     private void init(){
-        String userName = hotelService.getCurrentUser();
+        String userName = currentRecorder.getCurrentUserName();
         Customer customer = (Customer) personService.searchPerson(userName);
 
         tipLabel = new LabelsCreater();
-        tipLabel.addLine("今天是"+ DateUtil.getInstance().getCurrentDate());
+        tipLabel.addLine("今天是"+ DateUtil.getCurrentDate());
         tipLabel.addLine("您好,用户名为"+ userName +"的顾客。");
         tipLabel.addLine("您的余额："+ customer.getBalance() +"元");
         tipLabelVbox = tipLabel.getVBox();
 
-        hotelListButton = new Button("查看酒店");
-        orderListButton = new Button("查看订单");
-        psnlInfoButton = new Button("修改个人信息");
-        rechargeButton = new Button("充值");
-        backButton = new Button("退出");
-
-        hotelListButton.setMinWidth(300);
-        orderListButton.setMinWidth(300);
-        psnlInfoButton.setMinWidth(300);
-        rechargeButton.setMinWidth(300);
-        backButton.setMinWidth(300);
+        hotelListButton = ButtonCreater.getNewButton("查看酒店",300);
+        orderListButton = ButtonCreater.getNewButton("查看订单",300);
+        psnlInfoButton = ButtonCreater.getNewButton("修改个人信息",300);
+        rechargeButton = ButtonCreater.getNewButton("充值",300);
+        backButton = ButtonCreater.getNewButton("退出",300);
 
         vBox = new VBox();
         vBox.getChildren().addAll(tipLabelVbox,hotelListButton,orderListButton,psnlInfoButton,rechargeButton,backButton);

@@ -1,6 +1,5 @@
 package com.Nalecy.www.view.popupUtil;
 
-import com.Nalecy.www.po.Room;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class InfoEditPopup {

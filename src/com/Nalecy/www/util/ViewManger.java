@@ -12,6 +12,7 @@ public class ViewManger {
     public static ViewManger getInstance(){
         return instance;
     }
+
     private static LinkedList<View> viewStack;
 
     public static void switchView(View newView){

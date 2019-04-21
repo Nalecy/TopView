@@ -2,13 +2,8 @@ package com.Nalecy.www.view;
 
 import com.Nalecy.www.po.*;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
-import com.Nalecy.www.service.Impl.PersonServiceImpl;
 import com.Nalecy.www.service.PersonService;
-import com.Nalecy.www.util.ProGetter;
-import com.Nalecy.www.util.RegexUtil;
-import com.Nalecy.www.util.ServiceFactory;
-import com.Nalecy.www.util.ViewManger;
+import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -115,6 +110,9 @@ public class RegisterView extends View{
         });
     }
 
+    /**
+     * 清除文本框内容
+     */
     private void clearText() {
         userText.clear();
         passwordText.clear();
@@ -181,10 +179,10 @@ public class RegisterView extends View{
         idNumberText = new TextField();
         hotelNameText = new TextField();
 
-        userText.setPromptText("请输入用户名");
-        phoneText.setPromptText("请输入电话");
-        idNumberText.setPromptText("请输入身份证");
-        hotelNameText.setPromptText("请输入酒店名字");
+        userText.setPromptText("允许5-12位字母数字");
+        phoneText.setPromptText("允许11位数字");
+        idNumberText.setPromptText("允许18位数身份证");
+        hotelNameText.setPromptText("仅允许汉字");
         resNumberText.setPromptText("请输入注册码");
 
         userText.setMinWidth(80);
@@ -194,8 +192,8 @@ public class RegisterView extends View{
         hotelNameText.setMinWidth(80);
         resNumberText.setMinWidth(80);
 
-        resButton = new Button("注册");
-        backButton = new Button("返回");
+        resButton = ButtonCreater.getNewButton("注册");
+        backButton = ButtonCreater.getNewButton("返回");
 
         toggleHBox = new HBox();
         toggleHBox.getChildren().addAll(customerRegBut, HAdminRegBut, AdministratorRegBut);
@@ -228,6 +226,12 @@ public class RegisterView extends View{
         window.setTitle("注册");
     }
 
+    /**+
+     * 检查注册码是否正确
+     * @param s
+     * @param input
+     * @return true/false
+     */
     private boolean checkPermission(String s, String input) {
         return ProGetter.getInstance().get(s).equals(input);
 
