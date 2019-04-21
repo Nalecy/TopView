@@ -127,6 +127,7 @@ public class OrderMangerView extends View {
 
         scene = new Scene(vBox);
         window = new Stage();
+        window.setResizable(false);
         window.setScene(scene);
         window.setTitle("查看订单");
     }

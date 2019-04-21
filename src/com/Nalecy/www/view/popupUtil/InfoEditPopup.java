@@ -91,6 +91,7 @@ public class InfoEditPopup {
         scene = new Scene(vBox);
         stage = new Stage();
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
     }
 

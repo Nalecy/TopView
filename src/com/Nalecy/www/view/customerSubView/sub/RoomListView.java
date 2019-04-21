@@ -109,6 +109,7 @@ public class RoomListView extends View {
 
         scene = new Scene(hBox);
         stage = new Stage();
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("酒店内部");
     }

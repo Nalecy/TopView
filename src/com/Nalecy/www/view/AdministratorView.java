@@ -101,6 +101,7 @@ public class AdministratorView extends View{
         vBox.setSpacing(20);
         scene = new Scene(vBox);
         stage = new Stage();
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("超级管理员菜单");
 

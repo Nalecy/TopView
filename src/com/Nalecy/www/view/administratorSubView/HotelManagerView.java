@@ -140,6 +140,7 @@ public class HotelManagerView extends View {
         scene = new Scene(vBox);
         window = new Stage();
         window.setScene(scene);
+        window.setResizable(false);
         window.setTitle("所有房间列表");
     }
 

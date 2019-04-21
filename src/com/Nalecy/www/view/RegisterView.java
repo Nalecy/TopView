@@ -223,6 +223,7 @@ public class RegisterView extends View{
 
         scene = new Scene(grid);
         window = new Stage();
+        window.setResizable(false);
         window.setScene(scene);
         window.setTitle("注册");
     }
