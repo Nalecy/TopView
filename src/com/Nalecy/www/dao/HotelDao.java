@@ -15,7 +15,7 @@ public class HotelDao {
 
     public static Hotel getHotel(String hotelName) {
         Hotel hotel = new Hotel();
-        LinkedList<String> userInfo = DatabaseUtil.getOneRowData("hotel", "name", hotelName);
+        List<String> userInfo = DatabaseUtil.getOneRowData("hotel", "name", hotelName);
         if (userInfo == null) return null;
         setInfo(hotel, userInfo);
         return hotel;
@@ -23,7 +23,7 @@ public class HotelDao {
 
     public static Hotel getHotel(Integer hotelId) {
         Hotel hotel = new Hotel();
-        LinkedList<String> userInfo = DatabaseUtil.getOneRowData("hotel", "id", String.valueOf(hotelId));
+        List<String> userInfo = DatabaseUtil.getOneRowData("hotel", "id", String.valueOf(hotelId));
         if (userInfo == null) return null;
         setInfo(hotel, userInfo);
         return hotel;

@@ -115,11 +115,11 @@ public class HotelManagerView extends View {
 
     private void init() {
         TableViewCreater<Hotel> tvc = new TableViewCreater<>();
-        tvc.addStringColumn("酒店名称", "name", 100);
-        tvc.addIntegerColumn("星级", "star", 50);
-        tvc.addIntegerColumn("评分", "score", 50);
-        tvc.addIntegerColumn("评分人数", "numOfScore", 100);
-        tvc.addIntegerColumn("描述", "description", 250);
+        tvc.addColumn("酒店名称", "name", 100);
+        tvc.addColumn("星级", "star", 50);
+        tvc.addColumn("评分", "score", 50);
+        tvc.addColumn("评分人数", "numOfScore", 100);
+        tvc.addColumn("描述", "description", 250);
         roomTableView = tvc.getTableView();
         roomTableView.setItems(getHotelList());
 

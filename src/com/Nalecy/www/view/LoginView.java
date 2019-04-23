@@ -36,11 +36,13 @@ public class LoginView extends View {
 
     @Override
     public void display() {
+        //判断是否初始化，若未初始化则完成初始化
         if (!hasInit) {
             init();
             setButtonAction();
             hasInit = true;
         }
+        //设置日期显示的时间
         dateLabel.setText("当前时间：" + DateUtil.getCurrentDate());
         window.show();
     }

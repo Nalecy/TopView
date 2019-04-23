@@ -121,11 +121,11 @@ public class RoomMangerView extends View {
 
     private void init() {
         TableViewCreater<Room> tvc = new TableViewCreater<>();
-        tvc.addStringColumn("房间名称", "name", 100);
-        tvc.addIntegerColumn("房间类型", "type", 100);
-        tvc.addIntegerColumn("面积/米", "area", 100);
-        tvc.addIntegerColumn("床宽", "bedWidth", 100);
-        tvc.addIntegerColumn("价格", "price", 100);
+        tvc.addColumn("房间名称", "name", 100);
+        tvc.addColumn("房间类型", "type", 100);
+        tvc.addColumn("面积/米", "area", 100);
+        tvc.addColumn("床宽", "bedWidth", 100);
+        tvc.addColumn("价格", "price", 100);
         roomTableView = tvc.getTableView();
         roomTableView.setItems(getRoomList());
 

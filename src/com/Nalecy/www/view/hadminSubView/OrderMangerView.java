@@ -87,23 +87,23 @@ public class OrderMangerView extends View {
         finOrderLabel = new Label("已完成订单：");
 
         TableViewCreater<OrderT> tvc = new TableViewCreater<>();
-        tvc.addStringColumn("用户名","userName",100);
-        tvc.addDateColumn("订单日期","date",100);
-        tvc.addIntegerColumn("房间时段","roomTime",100);
-        tvc.addStringColumn("酒店名字","hotelName",100);
-        tvc.addStringColumn("房间名字","roomName",100);
-        tvc.addIntegerColumn("金额","balance",50);
+        tvc.addColumn("用户名","userName",100);
+        tvc.addColumn("订单日期","date",100);
+        tvc.addColumn("房间时段","roomTime",100);
+        tvc.addColumn("酒店名字","hotelName",100);
+        tvc.addColumn("房间名字","roomName",100);
+        tvc.addColumn("金额","balance",50);
         finTableView = tvc.getTableView();
         finTableView.setItems(getFOrderList());
 
         unfinOrderLabel = new Label("未完成订单：");
         tvc = new TableViewCreater<>();
-        tvc.addStringColumn("用户名","userName",100);
-        tvc.addDateColumn("订单日期","date",100);
-        tvc.addIntegerColumn("房间时段","roomTime",100);
-        tvc.addStringColumn("酒店名字","hotelName",100);
-        tvc.addStringColumn("房间名字","roomName",100);
-        tvc.addIntegerColumn("金额","balance",50);
+        tvc.addColumn("用户名","userName",100);
+        tvc.addColumn("订单日期","date",100);
+        tvc.addColumn("房间时段","roomTime",100);
+        tvc.addColumn("酒店名字","hotelName",100);
+        tvc.addColumn("房间名字","roomName",100);
+        tvc.addColumn("金额","balance",50);
         unfinTableView = tvc.getTableView();
         unfinTableView.setItems(getUFOrderList());
 

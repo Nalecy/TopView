@@ -9,14 +9,6 @@ import java.util.List;
 
 public class UserDao {
 
-    public static boolean hasUser(String userName) {
-        List<String> userList = DatabaseUtil.getOneColumnData("user", "userName");
-        assert userList != null;
-        for (String s : userList) {
-            if (userName.equals(s)) return true;
-        }
-        return false;
-    }
 
     public static void addUser(User user) {
         DatabaseUtil.addOneRowData("user", null, user.getUserName(), user.getPassword(),"0");
@@ -24,7 +16,7 @@ public class UserDao {
 
     public static User getUser(String userName) {
         User user = new User();
-        LinkedList<String> userInfo = DatabaseUtil.getOneRowData("user", "userName", userName);
+        List<String> userInfo = DatabaseUtil.getOneRowData("user", "userName", userName);
         if (userInfo == null||userInfo.size() == 0) return null;
         user.setId(Integer.valueOf(userInfo.get(0)));
         user.setUserName(userInfo.get(1));

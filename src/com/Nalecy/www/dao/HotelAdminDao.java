@@ -17,7 +17,7 @@ public class HotelAdminDao {
 
     public static HotelAdmin searchHotelAdmin(String userName) {
         HotelAdmin hotelAdmin = new HotelAdmin ();
-        LinkedList<String> list = DatabaseUtil.getOneRowData("hotelAdmin", "userName", userName);
+        List<String> list = DatabaseUtil.getOneRowData("hotelAdmin", "userName", userName);
         if (list == null|| list.size() == 0) return null;
         setInfo(hotelAdmin, list);
         return hotelAdmin;
@@ -25,7 +25,7 @@ public class HotelAdminDao {
 
     public static HotelAdmin searchHotelAdmin(Integer id) {
         HotelAdmin hotelAdmin = new HotelAdmin();
-        LinkedList<String> list = DatabaseUtil.getOneRowData("hotelAdmin", "id", String.valueOf(id));
+        List<String> list = DatabaseUtil.getOneRowData("hotelAdmin", "id", String.valueOf(id));
         if (list == null||list.size() == 0) return null;
         setInfo(hotelAdmin, list);
         return hotelAdmin;

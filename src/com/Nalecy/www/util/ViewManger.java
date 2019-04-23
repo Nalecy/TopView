@@ -6,15 +6,12 @@ import java.util.LinkedList;
 
 public class ViewManger {
     private ViewManger (){
-        viewStack = new LinkedList<>();
-    }
-    private static ViewManger instance = new ViewManger();
-    public static ViewManger getInstance(){
-        return instance;
     }
 
     private static LinkedList<View> viewStack;
-
+    static {
+        viewStack = new LinkedList<>();
+    }
     public static void switchView(View newView){
         if(viewStack.size() != 0){
             viewStack.getFirst().hide();

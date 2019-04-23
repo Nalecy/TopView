@@ -6,7 +6,6 @@ import com.Nalecy.www.util.DatabaseUtil;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class AccountDao {
@@ -18,19 +17,11 @@ public class AccountDao {
 
     public static Account getAccount(Integer id) {
         Account account = new Account();
-        LinkedList<String> accountInfo = DatabaseUtil.getOneRowData("account", "id", String.valueOf(id));
+        List<String> accountInfo = DatabaseUtil.getOneRowData("account", "id", String.valueOf(id));
         if (accountInfo == null) return null;
         setInfo(account, accountInfo);
         return account;
     }
-    public static Account getAccountByOrder(Integer orderId) {
-        Account account = new Account();
-        LinkedList<String> accountInfo = DatabaseUtil.getOneRowData("account", "", String.valueOf(orderId));
-        if (accountInfo == null) return null;
-        setInfo(account, accountInfo);
-        return account;
-    }
-
     public static List<Account> getAccountList() {
         List<String> idList = DatabaseUtil.getOneColumnData("account", "id");
         List<Account> accounts = new ArrayList<>();

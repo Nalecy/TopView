@@ -45,4 +45,9 @@ public class HotelServiceImpl implements HotelService {
         hotel = HotelDao.getHotel(name);
         return hotel;
     }
+
+    @Override
+    public List<Hotel> fuzzySearchHotel(String name) {
+        return null;
+    }
 }

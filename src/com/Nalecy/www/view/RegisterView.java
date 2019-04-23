@@ -68,14 +68,17 @@ public class RegisterView extends View{
         HAdminRegBut.setSelected(true);
 
         customerRegBut.setOnAction(e -> {
+            //若选择了顾客，则禁用酒店名字栏和注册码一栏
             hotelNameText.setDisable(true);
             resNumberText.setDisable(true);
         });
         HAdminRegBut.setOnAction(e -> {
+            //若选择了酒管，则启用酒店名字栏和注册码一栏
             hotelNameText.setDisable(false);
             resNumberText.setDisable(false);
         });
         AdministratorRegBut.setOnAction(e -> {
+            //若选择了超管，则禁用酒店名字栏吗，启用注册码一栏
             hotelNameText.setDisable(true);
             resNumberText.setDisable(false);
         });

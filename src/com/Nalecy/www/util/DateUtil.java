@@ -18,16 +18,33 @@ public class DateUtil {
 
     private DateUtil() {
     }
+
+    /**
+     * 获取当前的年份
+     * @return Integer
+     */
     public static Integer getYear(){
         return calendar.get(Calendar.YEAR);
     }
+    /**
+     * 获取当前的月份
+     * @return Integer
+     */
     public static Integer getMonth(){
         return calendar.get(Calendar.MONTH) + 1;
     }
+    /**
+     * 获取当前的日
+     * @return Integer
+     */
     public static Integer getDay(){
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     * 获取当前的日期
+     * @return sql.Date
+     */
     public static Date getCurrentDate(){
         return currentDate;
     }
@@ -45,8 +62,8 @@ public class DateUtil {
 
     /**
      * 传入一个整数 n ，获取 n 天后的Date对象
-     * @param numAfterToday
-     * @return
+     * @param numAfterToday n
+     * @return sql.Date
      */
     public static Date getOneDay(Integer numAfterToday) {
         long time = numAfterToday*3600*1000* 24;

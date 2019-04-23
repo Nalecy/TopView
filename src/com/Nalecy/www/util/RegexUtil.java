@@ -2,6 +2,9 @@ package com.Nalecy.www.util;
 
 import java.util.regex.Pattern;
 
+/**
+ * 正则表达式匹配工具
+ */
 public class RegexUtil {
     public static boolean isTelephone(String string) {
         return Pattern.matches("^[0-9]{11}$", string);

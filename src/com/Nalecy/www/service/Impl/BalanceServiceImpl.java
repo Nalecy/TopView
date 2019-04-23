@@ -8,16 +8,15 @@ import com.Nalecy.www.service.*;
 import com.Nalecy.www.util.ServiceFactory;
 
 public class BalanceServiceImpl implements BalanceService {
-
-    private HotelService hotelService;
+    //定义需要引用的其他服务
     private PersonService personService;
     private RoomService roomService;
     private CurrentRecorder currentRecorder;
     private boolean hasInit = false;
 
     private void initService() {
+        //调用前初始化服务且确保只初始化一次
         if (!hasInit) {
-            hotelService = ServiceFactory.getHotelService();
             personService = ServiceFactory.getPersonService();
             roomService = ServiceFactory.getRoomService();
             currentRecorder = ServiceFactory.getCurrentRecorder();
@@ -47,7 +46,9 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public void recharge(Integer number) {
         initService();
+        //获取当前已登录的用户
         Customer customer = (Customer) personService.searchPerson(currentRecorder.getCurrentUserName());
+        //根据传入的金额充值 并更新数据库信息
         customer.setBalance(customer.getBalance() + number);
         personService.updatePeron(customer);
     }
@@ -66,13 +67,14 @@ public class BalanceServiceImpl implements BalanceService {
 
     private void addAccount(Order order) {
         Account account = new Account();
+        //组装账单
         account.setHotelId(order.getHotelID());
         account.setCustomerId(personService.searchPerson(order.getUserName()).getId());
         account.setDate(order.getDate());
         account.setBalance(order.getBalance());
         account.setRoomId(order.getRoomID());
-
         account.setRoomPeriod(order.getRoomPeriod());
+        //添加账单
         AccountDao.addAccount(account);
     }
 }

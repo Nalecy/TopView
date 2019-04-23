@@ -16,7 +16,7 @@ public class OrderDao {
 
     public static Order getOrder(String userName) {
         Order order = new Order();
-        LinkedList<String> orderInfo = DatabaseUtil.getOneRowData("orderR", "userName", userName);
+        List<String> orderInfo = DatabaseUtil.getOneRowData("orderR", "userName", userName);
         if (orderInfo == null) return null;
         setInfo(order, orderInfo);
         return order;
@@ -24,7 +24,7 @@ public class OrderDao {
 
     public static Order getOrder(Integer orderId) {
         Order order = new Order();
-        LinkedList<String> orderInfo = DatabaseUtil.getOneRowData("orderR", "id", String.valueOf(orderId));
+        List<String> orderInfo = DatabaseUtil.getOneRowData("orderR", "id", String.valueOf(orderId));
         if (orderInfo == null) return null;
         setInfo(order, orderInfo);
         return order;

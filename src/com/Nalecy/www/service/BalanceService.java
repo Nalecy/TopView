@@ -5,8 +5,7 @@ import com.Nalecy.www.po.Order;
 public interface BalanceService {
     /**
      * 根据输入的金额进行充值
-     *
-     * @param rechargeBalance
+     * @param rechargeBalance 充值金额
      */
     void recharge(Integer rechargeBalance);
 

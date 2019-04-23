@@ -30,8 +30,8 @@ public class ProGetter {
 
     /**
      * 通过key获取对应的值
-     * @param key
-     * @return String
+     * @param key 键名
+     * @return String 键值
      */
     public String get(String key){
         return pro.getProperty(key);

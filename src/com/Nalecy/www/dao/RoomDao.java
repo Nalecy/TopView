@@ -16,7 +16,7 @@ public class RoomDao {
 
     public static Room getRoom(String roomName) {
         Room room = new Room();
-        LinkedList<String> roomInfo = DatabaseUtil.getOneRowData("room", "name", roomName);
+        List<String> roomInfo = DatabaseUtil.getOneRowData("room", "name", roomName);
         if (roomInfo == null) return null;
         setInfo(room, roomInfo);
         return room;
@@ -24,7 +24,7 @@ public class RoomDao {
 
     public static Room getRoom(Integer roomId) {
         Room room = new Room();
-        LinkedList<String> roomInfo = DatabaseUtil.getOneRowData("room", "id", String.valueOf(roomId));
+        List<String> roomInfo = DatabaseUtil.getOneRowData("room", "id", String.valueOf(roomId));
         if (roomInfo == null) return null;
         setInfo(room, roomInfo);
         return room;
@@ -65,5 +65,6 @@ public class RoomDao {
 
         DatabaseUtil.updateRowsData("room", "id", String.valueOf(room.getId()), lhm);
     }
+
 
 }

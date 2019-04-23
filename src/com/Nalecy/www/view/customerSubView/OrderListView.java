@@ -43,6 +43,7 @@ public class OrderListView extends View {
     private TableView<OrderT> unfinTableView;
 
     private Label tipLabel;
+    private Button commentButton;
     private Button cancelOrderButton;
     private Button backButton;
 
@@ -67,10 +68,17 @@ public class OrderListView extends View {
         backButton.setOnAction(e -> {
             ViewManger.back();
         });
+        commentButton.setOnAction((e ->{
+            commentOrder();
+        }));
         cancelOrderButton.setOnAction(e -> {
             cancelOrder();
             refresh();
         });
+
+    }
+
+    private void commentOrder() {
 
     }
 
@@ -80,12 +88,12 @@ public class OrderListView extends View {
     }
 
     private void cancelOrder() {
-        try {
             Order order = unfinTableView.getSelectionModel().getSelectedItem().getOrder();
+            if(order == null){
+                PromptAlert.display("错误","请检查是否选择");
+                return;
+            }
             orderService.cancelOrder(order);
-        }catch (NullPointerException e){
-            PromptAlert.display("错误","请检查是否选择");
-        }
     }
 
     private ObservableList<OrderT> getUFOrderList() {       //获取unfinished订单列表
@@ -110,34 +118,35 @@ public class OrderListView extends View {
         finOrderLabel = new Label("已完成订单：");
 
         TableViewCreater<OrderT> tvc = new TableViewCreater<>();
-        tvc.addStringColumn("用户名","userName",100);
-        tvc.addDateColumn("订单日期","date",100);
-        tvc.addIntegerColumn("房间时段","roomTime",100);
-        tvc.addStringColumn("酒店名字","hotelName",100);
-        tvc.addStringColumn("房间名字","roomName",100);
-        tvc.addIntegerColumn("金额","balance",50);
+        tvc.addColumn("用户名","userName",100);
+        tvc.addColumn("订单日期","date",100);
+        tvc.addColumn("房间时段","roomTime",100);
+        tvc.addColumn("酒店名字","hotelName",100);
+        tvc.addColumn("房间名字","roomName",100);
+        tvc.addColumn("金额","balance",50);
         finTableView = tvc.getTableView();
         finTableView.setItems(getFOrderList());
 
         unfinOrderLabel = new Label("未完成订单：");
         tvc = new TableViewCreater<>();
-        tvc.addStringColumn("用户名","userName",100);
-        tvc.addDateColumn("订单日期","date",100);
-        tvc.addIntegerColumn("房间时段","roomTime",100);
-        tvc.addStringColumn("酒店名字","hotelName",100);
-        tvc.addStringColumn("房间名字","roomName",100);
-        tvc.addIntegerColumn("金额","balance",50);
+        tvc.addColumn("用户名","userName",100);
+        tvc.addColumn("订单日期","date",100);
+        tvc.addColumn("房间时段","roomTime",100);
+        tvc.addColumn("酒店名字","hotelName",100);
+        tvc.addColumn("房间名字","roomName",100);
+        tvc.addColumn("金额","balance",50);
         unfinTableView = tvc.getTableView();
         unfinTableView.setItems(getUFOrderList());
 
         tipLabel = new Label("您可以：");
 
-        cancelOrderButton = ButtonCreater.getNewButton("取消订单",100);
+        commentButton = ButtonCreater.getNewButton("评价已完成订单",150);
+        cancelOrderButton = ButtonCreater.getNewButton("取消未完成订单",150);
         backButton = ButtonCreater.getNewButton("返回",100);
 
         hBox = new HBox();
         hBox.setSpacing(50);
-        hBox.getChildren().addAll(tipLabel,cancelOrderButton,backButton);
+        hBox.getChildren().addAll(tipLabel,commentButton,cancelOrderButton,backButton);
 
         vBox = new VBox();
         vBox.setSpacing(10);

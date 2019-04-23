@@ -42,4 +42,11 @@ public interface HotelService {
      * @return Hotel
      */
     Hotel getHotel(String name);
+
+    /**
+     * 根据传入的字符串模糊查找酒店，返回查到的酒店列表
+     * @param name 酒店名字关键字
+     * @return List<Hotel>
+     */
+    List<Hotel> fuzzySearchHotel(String name);
 }
