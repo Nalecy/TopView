@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class OrderMangerView extends View {
-    private HotelService hotelService = ServiceFactory.getHotelService();
     private OrderService orderService = ServiceFactory.getOrderService();
     private CurrentRecorder currentRecorder = ServiceFactory.getCurrentRecorder();
 

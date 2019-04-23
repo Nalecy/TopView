@@ -20,6 +20,16 @@ public class Account {
         roomPeriod = 0;
     }
 
+    public Account(Integer id, Integer hotelId, Integer customerId, Date date, Integer balance, Integer roomId, Integer roomPeriod) {
+        this.id = id;
+        this.hotelId = hotelId;
+        this.customerId = customerId;
+        this.date = date;
+        this.balance = balance;
+        this.roomId = roomId;
+        this.roomPeriod = roomPeriod;
+    }
+
     public Integer getHotelId() { return hotelId; }
     public void setHotelId(Integer hotelId) { this.hotelId = hotelId; }
     public Integer getCustomerId() { return customerId; }

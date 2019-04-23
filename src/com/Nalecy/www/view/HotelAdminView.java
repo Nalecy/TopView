@@ -5,6 +5,7 @@ import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.HotelService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.*;
+import com.Nalecy.www.view.hadminSubView.AccountListView;
 import com.Nalecy.www.view.hadminSubView.OrderMangerView;
 import com.Nalecy.www.view.hadminSubView.RoomMangerView;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
@@ -39,6 +40,7 @@ public class HotelAdminView extends View{
     private Button infoButton;
     private Button roomButton;
     private Button orderButton;
+    private Button accountButton;
     private Button cancelLoginButton;
     private Button psnlInfoButton;
     private Button backButton;
@@ -72,6 +74,9 @@ public class HotelAdminView extends View{
         });
         orderButton.setOnAction(e -> {
             ViewManger.switchView(new OrderMangerView());
+        });
+        accountButton.setOnAction(e->{
+            ViewManger.switchView(new AccountListView());
         });
         cancelLoginButton.setOnAction(e -> {
             personService.cancelLogin(currentRecorder.getCurrentUserName());
@@ -113,6 +118,7 @@ public class HotelAdminView extends View{
         infoButton = ButtonCreater.getNewButton("查看本酒店信息",150);
         roomButton = ButtonCreater.getNewButton("管理本酒店房间",150);
         orderButton = ButtonCreater.getNewButton("管理本酒店订单",150);
+        accountButton = ButtonCreater.getNewButton("查看本酒店账单",150);
         cancelLoginButton = ButtonCreater.getNewButton("取消自动登录",150);
         psnlInfoButton = ButtonCreater.getNewButton("修改个人信息",150);
         backButton = ButtonCreater.getNewButton("退出至登录界面",150);
@@ -120,7 +126,7 @@ public class HotelAdminView extends View{
         vBox = new VBox();
         vBox.setPadding(new Insets(30));
         vBox.setSpacing(20);
-        vBox.getChildren().addAll(labelVBox,infoButton,roomButton,orderButton,cancelLoginButton,psnlInfoButton,backButton);
+        vBox.getChildren().addAll(labelVBox,infoButton,roomButton,orderButton,accountButton,cancelLoginButton,psnlInfoButton,backButton);
 
         scene = new Scene(vBox);
         stage = new Stage();

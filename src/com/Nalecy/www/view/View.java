@@ -1,6 +1,9 @@
 package com.Nalecy.www.view;
 
 public abstract class View {
+    /**
+     * 是否已初始化 false为否
+     */
     protected boolean hasInit = false;
     /**
      * 展示

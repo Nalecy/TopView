@@ -1,6 +1,9 @@
 package com.Nalecy.www.service;
 
+import com.Nalecy.www.po.Account;
 import com.Nalecy.www.po.Order;
+
+import java.util.List;
 
 public interface BalanceService {
     /**
@@ -23,4 +26,10 @@ public interface BalanceService {
      * @param order
      */
     void refund(Order order);
+
+    /**
+     * 获取账单列表
+     * @return
+     */
+    List<Account> getAccountList();
 }

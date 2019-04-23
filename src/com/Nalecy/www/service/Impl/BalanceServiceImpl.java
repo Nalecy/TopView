@@ -7,6 +7,10 @@ import com.Nalecy.www.po.Order;
 import com.Nalecy.www.service.*;
 import com.Nalecy.www.util.ServiceFactory;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class BalanceServiceImpl implements BalanceService {
     //定义需要引用的其他服务
     private PersonService personService;
@@ -65,6 +69,19 @@ public class BalanceServiceImpl implements BalanceService {
         personService.updatePeron(customer);
     }
 
+    @Override
+    public List<Account> getAccountList() {
+        initService();
+        List<Account> allList = AccountDao.getAccountList();
+        List<Account> accountList = new ArrayList<>();
+        if (allList != null) {
+            for (Account account : allList)
+                if (account.getHotelId().equals(currentRecorder.getCurrentHotelId()))
+                    accountList.add(account);
+        }
+
+        return accountList;
+    }
     private void addAccount(Order order) {
         Account account = new Account();
         //组装账单
