@@ -48,6 +48,6 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> fuzzySearchHotel(String name) {
-        return null;
+        return HotelDao.getHotelList(name);
     }
 }

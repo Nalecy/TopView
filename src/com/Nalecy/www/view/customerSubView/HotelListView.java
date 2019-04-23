@@ -86,7 +86,7 @@ public class HotelListView extends View {
                 if (hotels != null) {
                     hotels1.addAll(hotels);
                 }
-                tableView.setItems(null);
+                tableView.setItems(hotels1);
 
             }
         });

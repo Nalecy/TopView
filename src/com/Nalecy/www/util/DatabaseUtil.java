@@ -97,7 +97,7 @@ public class DatabaseUtil {
     public static List<String> getOneColumnData(String tableName, String columnName, String signKey, String signValue){
         List<String> list = new LinkedList<>();
         Connection conn = ConnectionPool.getInstance().getConnection();
-        String sql = "select "+columnName+" from "+tableName+" where "+signKey+" = ?";
+        String sql = "select "+columnName+" from "+tableName+" where "+signKey+" like ? ";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,signValue);
@@ -184,6 +184,7 @@ public class DatabaseUtil {
         String[] keyArray = new String[keyValueMap.size()];
         keyValueMap.keySet().toArray(keyArray);
         Connection conn = ConnectionPool.getInstance().getConnection();
+        //拼接sql语句
         sql.append("update ").append(tableName).append(" set ");
         for( int i = 0; i<keyArray.length; i++){
             if(i == 0) sql.append(keyArray[i]).append(" = ?");

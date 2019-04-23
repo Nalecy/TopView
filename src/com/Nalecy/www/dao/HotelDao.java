@@ -38,6 +38,15 @@ public class HotelDao {
         }
         return hotels;
     }
+    public static List<Hotel> getHotelList(String fuzzyHotelName){
+        List<String> idList = DatabaseUtil.getOneColumnData("hotel", "id","name","%"+fuzzyHotelName+"%");
+        List<Hotel> hotels = new ArrayList<>();
+        if (idList == null) return null;
+        for (String s : idList) {
+            hotels.add(getHotel(Integer.valueOf(s)));
+        }
+        return hotels;
+    }
 
     private static void setInfo(Hotel hotel, List<String> userInfo) {
         hotel.setId(Integer.valueOf(userInfo.get(0)));
