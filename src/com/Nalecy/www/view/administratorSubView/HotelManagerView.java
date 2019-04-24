@@ -2,7 +2,7 @@ package com.Nalecy.www.view.administratorSubView;
 
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.service.Impl.HotelServiceImpl;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.View;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;

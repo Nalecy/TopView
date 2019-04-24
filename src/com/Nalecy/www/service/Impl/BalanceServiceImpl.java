@@ -8,10 +8,14 @@ import com.Nalecy.www.service.*;
 import com.Nalecy.www.util.ServiceFactory;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
 public class BalanceServiceImpl implements BalanceService {
+    private static BalanceServiceImpl instance;
+    public static BalanceServiceImpl getInstance(){
+        if(instance == null)
+            instance = new BalanceServiceImpl();
+        return instance;
+    }
     //定义需要引用的其他服务
     private PersonService personService;
     private RoomService roomService;
@@ -48,7 +52,7 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public void recharge(Integer number) {
+    public void recharge(int number) {
         initService();
         //获取当前已登录的用户
         Customer customer = (Customer) personService.searchPerson(currentRecorder.getCurrentUserName());

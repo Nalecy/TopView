@@ -4,6 +4,7 @@ import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.service.BalanceService;
 import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.PersonService;
+import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.*;
 import com.Nalecy.www.view.customerSubView.HotelListView;
 import com.Nalecy.www.view.customerSubView.OrderListView;
@@ -90,7 +91,7 @@ public class CustomerView extends View{
             PromptAlert.display("错误","请输入正确的充值金额");
             return;
         }
-        Integer balance = Integer.valueOf(rb.get(0));
+        int balance = Integer.parseInt(rb.get(0));
         if( balance <= 0){
             throw new RuntimeException("充值金额不能为负数");
         }

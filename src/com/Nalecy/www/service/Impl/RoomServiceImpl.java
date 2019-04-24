@@ -14,6 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomServiceImpl implements RoomService {
+    private static RoomServiceImpl instance;
+    public static RoomServiceImpl getInstance(){
+        if(instance == null)
+            instance = new RoomServiceImpl();
+        return instance;
+    }
+
     private OrderService orderService;
     private CurrentRecorder currentRecorder;
     private boolean hasInit = false;

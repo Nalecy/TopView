@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderServiceImpl  implements OrderService {
+    private static OrderServiceImpl instance;
+    public static OrderServiceImpl getInstance(){
+        if(instance == null)
+            instance = new OrderServiceImpl();
+        return instance;
+    }
 
     @Override
     public List<Order> getCompleteOrder() {

@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
  * 正则表达式匹配工具
  */
 public class RegexUtil {
+    private RegexUtil(){
+        throw  new AssertionError("请勿实例化ServiceFactory");
+    }
     public static boolean isTelephone(String string) {
         return Pattern.matches("^[0-9]{11}$", string);
     }

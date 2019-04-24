@@ -18,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sun.plugin2.os.windows.OVERLAPPED;
 
 import java.util.List;
 

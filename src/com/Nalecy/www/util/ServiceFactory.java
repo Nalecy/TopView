@@ -4,34 +4,50 @@ import com.Nalecy.www.service.*;
 import com.Nalecy.www.service.Impl.*;
 
 public class ServiceFactory {
+    private ServiceFactory(){
+        throw  new AssertionError("请勿实例化ServiceFactory");
+    }
 
-    private static HotelService hotelService = new HotelServiceImpl();
+
+    /**
+     * @return 酒店服务类的实例
+     */
     public static HotelService getHotelService() {
-        return hotelService;
+        return HotelServiceImpl.getInstance();
     }
 
-    private static PersonService personService = new PersonServiceImpl();
+    /**
+     * @return 用户服务类的实例
+     */
     public static PersonService getPersonService() {
-        return personService;
+        return PersonServiceImpl.getInstance();
     }
 
-    private static RoomService roomService = new RoomServiceImpl();
+    /**
+     * @return 房间服务类的实例
+     */
     public static RoomService getRoomService() {
-        return roomService;
+        return RoomServiceImpl.getInstance();
     }
 
-    private static OrderService orderService = new OrderWithBalServiceImpl();
+    /**
+     * @return 订单服务类的实例
+     */
     public static OrderService getOrderService() {
-        return orderService;
+        return OrderWithBalServiceImpl.getInstance();
     }
 
-    private static BalanceService balanceService = new BalanceServiceImpl();
+    /**
+     * @return 资金服务类的实例
+     */
     public static BalanceService getBalanceService() {
-        return balanceService;
+        return BalanceServiceImpl.getInstance();
     }
 
-    private static CurrentRecorder currentRecorder = CurrentRecorderImpl.getInstance();
+    /**
+     * @return 状态记录类的实例
+     */
     public static CurrentRecorder getCurrentRecorder() {
-        return currentRecorder;
+        return CurrentRecorderImpl.getInstance();
     }
 }

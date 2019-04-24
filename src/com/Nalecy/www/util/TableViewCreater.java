@@ -4,8 +4,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.Date;
-import java.util.LinkedList;
 
 /**
  * 用于创建一个表

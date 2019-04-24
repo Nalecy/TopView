@@ -8,6 +8,12 @@ import com.Nalecy.www.po.*;
 import com.Nalecy.www.service.PersonService;
 
 public class PersonServiceImpl implements PersonService {
+    private static PersonServiceImpl instance;
+    public static PersonServiceImpl getInstance(){
+        if(instance == null)
+            instance = new PersonServiceImpl();
+        return instance;
+    }
 
     @Override
     public String getPassword(String userName) {

@@ -1,6 +1,6 @@
 package com.Nalecy.www.constantClass;
 
 public interface RoomType {
-    Integer NORMAL = 1;
-    Integer ADVANCED = 2;
+    int NORMAL = 1;
+    int ADVANCED = 2;
 }

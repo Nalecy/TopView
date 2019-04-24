@@ -7,6 +7,12 @@ import com.Nalecy.www.service.HotelService;
 import java.util.*;
 
 public class HotelServiceImpl implements HotelService {
+    private static HotelServiceImpl instance;
+    public static HotelServiceImpl getInstance(){
+        if(instance == null)
+            instance = new HotelServiceImpl();
+        return instance;
+    }
 
 
     @Override

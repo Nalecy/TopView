@@ -7,28 +7,28 @@ import java.util.List;
 public interface OrderService {
     /**
      * 获取所有的已完成订单
-     * @return
+     * @return List<Order>
      */
     List<Order> getCompleteOrder();
 
     /**
      * 通过用户名获取已完成订单
      * @param userName
-     * @return
+     * @return List<Order>
      */
     List<Order> getCompleteOrder(String userName);
 
     /**
      * 通过酒店ID获取已完成订单
      * @param hotelId
-     * @return
+     * @return List<Order>
      */
     List<Order> getCompleteOrder(Integer hotelId);
 
     /**
      * 获取所有的未完成订单
      * @param userName
-     * @return
+     * @return List<Order>
      */
     List<Order> getIncompleteOrder(String userName);
 

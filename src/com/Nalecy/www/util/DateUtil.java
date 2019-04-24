@@ -17,6 +17,7 @@ public class DateUtil {
     }
 
     private DateUtil() {
+        throw new AssertionError("请勿实例化DateUtil");
     }
 
     /**

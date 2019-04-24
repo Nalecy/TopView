@@ -17,14 +17,7 @@ public class Hotel {
         description = "";
     }
 
-    public Hotel(Integer id, String name, Integer star, Double score, Integer numOfScore, String description) {
-        this.id = id;
-        this.name = name;
-        this.star = star;
-        this.score = score;
-        this.numOfScore = numOfScore;
-        this.description = description;
-    }
+
 
     public void updateScore(Integer score){
         this.score = (this.score * numOfScore + score)/(++numOfScore);

@@ -3,8 +3,10 @@ package com.Nalecy.www.service.Impl;
 import com.Nalecy.www.service.CurrentRecorder;
 
 public class CurrentRecorderImpl implements CurrentRecorder {
-    private static CurrentRecorder instance = new CurrentRecorderImpl();
+    private static CurrentRecorder instance;
     public static CurrentRecorder getInstance(){
+        if(instance == null)
+        instance = new CurrentRecorderImpl();
         return instance;
     }
 
