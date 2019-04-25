@@ -30,23 +30,42 @@ public class ComponentCreater {
         button.setMaxWidth(width);
         return button;
     }
+    /**
+     * 传入字符串，返回已设置好的Label对象
+     * @param text 标签的文字
+     * @return Label
+     */
     public static Label newLabel(String text){
         return new Label(text);
     }
-
+    /**
+     * 传入字符串和宽度，返回已设置好的Label对象
+     * @param text 标签文本
+     * @param width 宽度
+     * @return Label
+     */
     public static Label newLabel(String text, int width){
         Label label = new Label(text);
         label.setMinWidth(width);
         label.setMaxWidth(width);
         return label;
     }
-
-    public static TextField newTextField(int width){
+    /**
+     * 传入字符串，返回已设置好的TextField对象
+     * @param promptText 提示文本
+     * @return TextField
+     */
+    public static TextField newTextField(String promptText){
         TextField textField = new TextField();
-        textField.setMinWidth(width);
-        textField.setMaxWidth(width);
+        textField.setPromptText(promptText);
         return textField;
     }
+    /**
+     * 传入字符串和宽度，返回已设置好的TextField对象
+     * @param promptText 提示文本
+     * @param width 宽度
+     * @return TextField
+     */
     public static TextField newTextField(String promptText, int width){
         TextField textField = new TextField();
         textField.setMinWidth(width);
@@ -54,6 +73,11 @@ public class ComponentCreater {
         textField.setPromptText(promptText);
         return textField;
     }
+    /**
+     * 传入字符串和宽度，返回已设置好的PasswordField对象
+     * @param promptText 提示文本
+     * @return PasswordField
+     */
     public static PasswordField newPasswordField(String promptText, int width){
         PasswordField passwordField = new PasswordField();
         passwordField.setMinWidth(width);
@@ -61,6 +85,15 @@ public class ComponentCreater {
         passwordField.setPromptText(promptText);
         return passwordField;
     }
-
+    /**
+     * 传入字符串，返回已设置好的PasswordField对象
+     * @param promptText 提示文本
+     * @return PasswordField
+     */
+    public static PasswordField newPasswordField(String promptText){
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText(promptText);
+        return passwordField;
+    }
 
 }

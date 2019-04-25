@@ -30,6 +30,7 @@ public class AccountListView extends View {
     private Label tipLabel;
     private TableView<AccountT> accountTable;
     private Button backButton;
+    private Label balanceLabel;
 
     @Override
     public void display() {
@@ -59,18 +60,28 @@ public class AccountListView extends View {
         accountTable = tvc.getTableView();
         accountTable.setItems(getAccountList());
 
+        balanceLabel = ComponentCreater.newLabel("总收入 ： "+getAllBalance()+"元");
+
         backButton = ComponentCreater.newButton("返回");
 
         vBox = new VBox();
         vBox.setSpacing(20);
         vBox.setPadding(new Insets(50));
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(tipLabel,accountTable,backButton);
+        vBox.getChildren().addAll(tipLabel,accountTable,balanceLabel,backButton);
 
         scene = new Scene(vBox);
         stage = new Stage();
         stage.setTitle("查看账单");
         stage.setScene(scene);
+    }
+
+    private Integer getAllBalance() {
+        Integer allBalance = 0;
+        for (AccountT accountT : getAccountList()) {
+            allBalance += accountT.getAccount().getBalance();
+        }
+        return allBalance;
     }
 
     private ObservableList<AccountT> getAccountList() {

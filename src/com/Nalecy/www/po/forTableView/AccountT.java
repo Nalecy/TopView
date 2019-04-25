@@ -14,6 +14,7 @@ public class AccountT extends Account {
     public AccountT(Account account){
         super(account.getId(),account.getHotelId(),account.getCustomerId(),account.getDate(),account.getBalance(),account.getRoomId(),account.getRoomPeriod());
         //获取适合展示的信息
+        this.account = account;
         customerUserName = ServiceFactory.getPersonService().searchPerson(getCustomerId()).getUserName();
         roomName = ServiceFactory.getRoomService().getRoomById(getRoomId()).getName();
         switch (account.getRoomPeriod()){

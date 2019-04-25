@@ -10,6 +10,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public final class PromptAlert {
+    //防止实例化
+    private PromptAlert(){
+        throw new RuntimeException("请勿实例化PromptAlert");
+    }
     private static Stage window;
     private static Scene scene;
     private static VBox vBox;

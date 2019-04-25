@@ -83,14 +83,12 @@ public class LoginView extends View {
         registerButton = ComponentCreater.newButton("注册");
         exitButton = ComponentCreater.newButton("退出");
 
-        dateLabel = new Label("当前时间：" + DateUtil.getCurrentDate());
-        userLabel = new Label("用户名：");
-        passwordLabel = new Label("密码：");
+        dateLabel = ComponentCreater.newLabel("当前时间：" + DateUtil.getCurrentDate());
+        userLabel = ComponentCreater.newLabel("用户名：");
+        passwordLabel = ComponentCreater.newLabel("密码：");
 
-        userText = new TextField();
-        userText.setPromptText("请输入用户名");
-        passwordText = new PasswordField();
-        passwordText.setPromptText("请输入密码");
+        userText = ComponentCreater.newTextField("请输入用户名");
+        passwordText =ComponentCreater.newPasswordField("请输入密码");
 
         GridPane.setConstraints(dateLabel, 1, 0);
         GridPane.setConstraints(userLabel, 0, 1);

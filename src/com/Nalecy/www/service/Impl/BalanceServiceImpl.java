@@ -66,10 +66,11 @@ public class BalanceServiceImpl implements BalanceService {
         initService();
         //获取用户
         Customer customer = (Customer) personService.searchPerson(order.getUserName());
-        //获取账单
+        //获取账单 并标记为退款
+        order.setBalance(-order.getBalance());
         addAccount(order);
         //通过账单金额退款
-        customer.setBalance(customer.getBalance() + order.getBalance());
+        customer.setBalance(customer.getBalance() - order.getBalance());
         personService.updatePeron(customer);
     }
 

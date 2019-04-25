@@ -69,6 +69,11 @@ public class RoomMangerView extends View {
 
     private void modifyRoom() {
         Room room = roomTableView.getSelectionModel().getSelectedItem();
+        //如果未选择房间
+        if(room == null){
+            PromptAlert.display("错误","未选择房间");
+            return;
+        }
         List<String> infoList;
         InfoEditPopup modifyPopup = new InfoEditPopup();
         modifyPopup.setInfoNameList("房间名称", "房间类型", "面积", "床宽", "价格");
@@ -92,6 +97,10 @@ public class RoomMangerView extends View {
     private void deleteRoom() {
         ObservableList<Room> selectRoom;
         selectRoom = roomTableView.getSelectionModel().getSelectedItems();
+        if(selectRoom.size() == 0){
+            PromptAlert.display("错误","未选择房间");
+            return;
+        }
         for (Room room : selectRoom) {
             roomService.deleteRoom(room.getId());
         }

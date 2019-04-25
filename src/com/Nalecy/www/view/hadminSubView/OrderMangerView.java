@@ -68,8 +68,12 @@ public class OrderMangerView extends View {
         });
         cancelOrderButton.setOnAction(e -> {
             cancelOrder();
+            refresh();
         });
 
+    }
+    private void refresh(){
+        unfinTableView.setItems(getUFOrderList());
     }
 
     private void cancelOrder() {

@@ -9,7 +9,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ *
+ */
 public final class ConfirmAlert {
+    //防止实例化
+    private ConfirmAlert(){
+        throw new RuntimeException("请勿实例化ConfirmAlert");
+    }
     private static Stage window;
     private static Scene scene;
     private static VBox vBox;
@@ -19,6 +26,7 @@ public final class ConfirmAlert {
     private static Button yesButton;
     private static Button noButton;
     private static boolean res = false;
+
     public static boolean display(String title, String message){
         init(title, message);
         yesButton.setOnAction(e ->{
