@@ -3,7 +3,7 @@ package com.Nalecy.www.view.hadminSubView;
 import com.Nalecy.www.po.Account;
 import com.Nalecy.www.po.forTableView.AccountT;
 import com.Nalecy.www.service.BalanceService;
-import com.Nalecy.www.util.ButtonCreater;
+import com.Nalecy.www.util.ComponentCreater;
 import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
@@ -59,7 +59,7 @@ public class AccountListView extends View {
         accountTable = tvc.getTableView();
         accountTable.setItems(getAccountList());
 
-        backButton = ButtonCreater.getNewButton("返回");
+        backButton = ComponentCreater.newButton("返回");
 
         vBox = new VBox();
         vBox.setSpacing(20);

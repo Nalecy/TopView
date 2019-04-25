@@ -3,6 +3,7 @@ package com.Nalecy.www.view;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.service.BalanceService;
 import com.Nalecy.www.service.CurrentRecorder;
+import com.Nalecy.www.service.DiscountService;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.*;
@@ -33,6 +34,7 @@ public class CustomerView extends View{
     private Button orderListButton;
     private Button psnlInfoButton;
     private Button rechargeButton;
+    private Button toBeVipButton;
     private Button backButton;
 
     @Override
@@ -75,6 +77,18 @@ public class CustomerView extends View{
         rechargeButton.setOnAction(e->{
             recharge();
             refreshData();
+        });
+        toBeVipButton.setOnAction(e->{
+            String userName = currentRecorder.getCurrentUserName();
+            if(DiscountService.getInstance().isVip(userName))
+                PromptAlert.display("提示","你本来就是VIP了");
+            else {
+                if(DiscountService.getInstance().toBeVip(userName)){
+                    PromptAlert.display("恭喜","您成为了VIP");
+                }else {
+                    PromptAlert.display("错误","成为VIP失败");
+                }
+            }
         });
         backButton.setOnAction( e -> {
             ViewManger.back();
@@ -128,14 +142,15 @@ public class CustomerView extends View{
         tipLabel.addLine("您的余额："+ customer.getBalance() +"元");
         tipLabelVbox = tipLabel.getVBox();
 
-        hotelListButton = ButtonCreater.getNewButton("查看酒店",300);
-        orderListButton = ButtonCreater.getNewButton("查看订单",300);
-        psnlInfoButton = ButtonCreater.getNewButton("修改个人信息",300);
-        rechargeButton = ButtonCreater.getNewButton("充值",300);
-        backButton = ButtonCreater.getNewButton("退出",300);
+        hotelListButton = ComponentCreater.newButton("查看酒店",300);
+        orderListButton = ComponentCreater.newButton("查看订单",300);
+        psnlInfoButton = ComponentCreater.newButton("修改个人信息",300);
+        rechargeButton = ComponentCreater.newButton("充值",300);
+        toBeVipButton = ComponentCreater.newButton("成为VIP",300);
+        backButton = ComponentCreater.newButton("退出",300);
 
         vBox = new VBox();
-        vBox.getChildren().addAll(tipLabelVbox,hotelListButton,orderListButton,psnlInfoButton,rechargeButton,backButton);
+        vBox.getChildren().addAll(tipLabelVbox,hotelListButton,orderListButton,psnlInfoButton,rechargeButton,toBeVipButton,backButton);
         vBox.setSpacing(20);
         vBox.setPadding(new Insets(50,200,50,200));
 

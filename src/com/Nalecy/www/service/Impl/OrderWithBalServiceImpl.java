@@ -2,6 +2,8 @@ package com.Nalecy.www.service.Impl;
 
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.service.BalanceService;
+import com.Nalecy.www.service.CurrentRecorder;
+import com.Nalecy.www.service.DiscountService;
 import com.Nalecy.www.service.OrderService;
 import com.Nalecy.www.util.ServiceFactory;
 
@@ -36,6 +38,7 @@ public class OrderWithBalServiceImpl extends OrderServiceImpl implements OrderSe
     @Override
     public boolean addOrder(Order order) {
         initService();
+        order = DiscountService.getInstance().discountOrder(order);
         if (balanceService.payment(order)){
             super.addOrder(order);
             return true;

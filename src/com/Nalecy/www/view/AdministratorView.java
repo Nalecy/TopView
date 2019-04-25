@@ -89,11 +89,11 @@ public class AdministratorView extends View{
         labelsCreater.addLine("您可以：");
         labelVBox = labelsCreater.getVBox();
 
-        hotelManagerButton = ButtonCreater.getNewButton("管理所有酒店");
-        addDateButton = ButtonCreater.getNewButton("时间流逝～（一天）");
-        cancelLoginButton = ButtonCreater.getNewButton("取消自动登录");
-        psnlInfoButton = ButtonCreater.getNewButton("修改个人信息");
-        backButton = ButtonCreater.getNewButton("返回");
+        hotelManagerButton = ComponentCreater.newButton("管理所有酒店");
+        addDateButton = ComponentCreater.newButton("时间流逝～（一天）");
+        cancelLoginButton = ComponentCreater.newButton("取消自动登录");
+        psnlInfoButton = ComponentCreater.newButton("修改个人信息");
+        backButton = ComponentCreater.newButton("返回");
 
         vBox = new VBox();
         vBox.getChildren().addAll(labelVBox,hotelManagerButton,addDateButton,cancelLoginButton,psnlInfoButton,backButton);

@@ -169,36 +169,23 @@ public class RegisterView extends View{
         group = new ToggleGroup();
         group.getToggles().addAll(customerRegBut, HAdminRegBut, AdministratorRegBut);
 
-        userLabel = new Label("用户名：");
-        passwordLabel = new Label("密码：");
-        phoneLabel = new Label("电话：");
-        idNumberLabel = new Label("身份证：");
-        hotelNameLabel = new Label("酒店名字：");
-        resNumLabel = new Label("注册码：");
+        userLabel = ComponentCreater.newLabel("用户名：");
+        passwordLabel = ComponentCreater.newLabel("密码：");
+        phoneLabel = ComponentCreater.newLabel("电话：");
+        idNumberLabel = ComponentCreater.newLabel("身份证：");
+        hotelNameLabel = ComponentCreater.newLabel("酒店名字：");
+        resNumLabel = ComponentCreater.newLabel("注册码：");
 
-        userText = new TextField();
-        passwordText = new PasswordField();
-        resNumberText = new TextField();
-        phoneText = new TextField();
-        idNumberText = new TextField();
-        hotelNameText = new TextField();
+        userText = ComponentCreater.newTextField("允许5-12位字母数字",80);
+        passwordText = ComponentCreater.newPasswordField("允许6-12位字母数字",80);
+        phoneText = ComponentCreater.newTextField("允许11位数字",80);
+        idNumberText = ComponentCreater.newTextField("允许18位数身份证",80);
+        hotelNameText = ComponentCreater.newTextField("仅允许汉字",80);
+        resNumberText = ComponentCreater.newTextField("请输入注册码",80);
 
-        userText.setPromptText("允许5-12位字母数字");
-        passwordText.setPromptText("允许6-12位字母数字");
-        phoneText.setPromptText("允许11位数字");
-        idNumberText.setPromptText("允许18位数身份证");
-        hotelNameText.setPromptText("仅允许汉字");
-        resNumberText.setPromptText("请输入注册码");
 
-        userText.setMinWidth(80);
-        passwordText.setMinWidth(80);
-        phoneText.setMinWidth(80);
-        idNumberText.setMinWidth(80);
-        hotelNameText.setMinWidth(80);
-        resNumberText.setMinWidth(80);
-
-        resButton = ButtonCreater.getNewButton("注册");
-        backButton = ButtonCreater.getNewButton("返回");
+        resButton = ComponentCreater.newButton("注册");
+        backButton = ComponentCreater.newButton("返回");
 
         toggleHBox = new HBox();
         toggleHBox.getChildren().addAll(customerRegBut, HAdminRegBut, AdministratorRegBut);

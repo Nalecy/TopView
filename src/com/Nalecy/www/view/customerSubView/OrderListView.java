@@ -5,7 +5,7 @@ import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.forTableView.OrderT;
 import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.OrderService;
-import com.Nalecy.www.util.ButtonCreater;
+import com.Nalecy.www.util.ComponentCreater;
 import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
@@ -139,9 +139,9 @@ public class OrderListView extends View {
 
         tipLabel = new Label("您可以：");
 
-        commentButton = ButtonCreater.getNewButton("评价已完成订单",150);
-        cancelOrderButton = ButtonCreater.getNewButton("取消未完成订单",150);
-        backButton = ButtonCreater.getNewButton("返回",100);
+        commentButton = ComponentCreater.newButton("评价已完成订单",150);
+        cancelOrderButton = ComponentCreater.newButton("取消未完成订单",150);
+        backButton = ComponentCreater.newButton("返回",100);
 
         hBox = new HBox();
         hBox.setSpacing(50);

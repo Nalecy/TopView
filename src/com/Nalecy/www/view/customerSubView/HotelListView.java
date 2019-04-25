@@ -3,7 +3,7 @@ package com.Nalecy.www.view.customerSubView;
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.HotelService;
-import com.Nalecy.www.util.ButtonCreater;
+import com.Nalecy.www.util.ComponentCreater;
 import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
@@ -109,8 +109,8 @@ public class HotelListView extends View {
         tableView.setMaxSize(800, 800);
         tableView.setItems(getList());
 
-        enterHotelButton = ButtonCreater.getNewButton("进入选中酒店", 800);
-        backButton = ButtonCreater.getNewButton("返回", 800);
+        enterHotelButton = ComponentCreater.newButton("进入选中酒店", 800);
+        backButton = ComponentCreater.newButton("返回", 800);
 
         vBox = new VBox();
         vBox.setSpacing(20);

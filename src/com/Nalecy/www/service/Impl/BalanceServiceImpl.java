@@ -36,7 +36,7 @@ public class BalanceServiceImpl implements BalanceService {
     public boolean payment(Order order) {
         initService();
         //获取价格
-        Integer price = roomService.getRoomById(order.getRoomID()).getPrice();
+        Integer price = order.getBalance() ;
         //获取顾客
         Customer customer = (Customer) personService.searchPerson(order.getUserName());
         //确保余额充足
@@ -52,7 +52,7 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public void recharge(int number) {
+    public void recharge(Integer number) {
         initService();
         //获取当前已登录的用户
         Customer customer = (Customer) personService.searchPerson(currentRecorder.getCurrentUserName());

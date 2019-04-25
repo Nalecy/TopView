@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 使用同包下的连接池获取数据库连接
  */
-public class DatabaseUtil {
+public final class DatabaseUtil {
     private DatabaseUtil(){//防止非法实例化 (无法子类化)
         throw new AssertionError("请勿实例化DatabaseUtil");
     }

@@ -85,8 +85,8 @@ public class RoomListView extends View {
 
         //右边
         dateChoiceBox = new ChoiceBox<>();
-        dateChoiceBox.setItems(FXCollections.observableArrayList(DateUtil.getCurrentDate(),DateUtil.getOneDay(1),DateUtil.getOneDay(2)));
-        dateChoiceBox.setValue(DateUtil.getCurrentDate());
+        dateChoiceBox.setItems(FXCollections.observableArrayList(DateUtil.getOneDay(1),DateUtil.getOneDay(2),DateUtil.getOneDay(3)));
+        dateChoiceBox.setValue(DateUtil.getOneDay(1));
         dateChoiceBox.setMinWidth(200);
 
         timeChoiceBox = new ChoiceBox<>();
@@ -94,8 +94,8 @@ public class RoomListView extends View {
         timeChoiceBox.setValue("上午");
         timeChoiceBox.setMinWidth(200);
 
-        reserveButton = ButtonCreater.getNewButton("预定",200);
-        backButton = ButtonCreater.getNewButton("返回",200);
+        reserveButton = ComponentCreater.newButton("预定",200);
+        backButton = ComponentCreater.newButton("返回",200);
 
         rightVBox = new VBox();
         rightVBox.getChildren().addAll(dateChoiceBox,timeChoiceBox,reserveButton,backButton);

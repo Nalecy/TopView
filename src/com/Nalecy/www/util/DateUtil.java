@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class DateUtil {
+public final class DateUtil {
     private static Date currentDate;
     private static Calendar calendar ;
     static {

@@ -123,10 +123,10 @@ public class HotelManagerView extends View {
         roomTableView = tvc.getTableView();
         roomTableView.setItems(getHotelList());
 
-        addButton = ButtonCreater.getNewButton("增加");
-        deleteButton = ButtonCreater.getNewButton("删除");
-        modifyButton = ButtonCreater.getNewButton("修改");
-        backButton = ButtonCreater.getNewButton("返回");
+        addButton = ComponentCreater.newButton("增加");
+        deleteButton = ComponentCreater.newButton("删除");
+        modifyButton = ComponentCreater.newButton("修改");
+        backButton = ComponentCreater.newButton("返回");
         buttonHBox = new HBox();
         buttonHBox.getChildren().addAll(backButton, addButton, deleteButton, modifyButton);
         buttonHBox.setSpacing(50);

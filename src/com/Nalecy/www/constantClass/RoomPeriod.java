@@ -1,13 +1,10 @@
 package com.Nalecy.www.constantClass;
 
-public interface  RoomPeriod {
-    int MORNING = 1;
-    int AFTERNOON = 2;
-    int NIGHT = 3;
-    String MORNING_VALUE = "早上";
-    String AFTERNOON_VALUE = "下午";
-    String NIGHT_VALUE = "晚上";
-    int ONE_DAY_LATER = 1;
-    int TWO_DAY_LATER = 2;
-    int THREE_DAY_LATER = 3;
+public final class  RoomPeriod {
+    public static final int MORNING = 1;
+    public static final int AFTERNOON = 2;
+    public static final int NIGHT = 3;
+    public static final String MORNING_VALUE = "早上";
+    public static final String AFTERNOON_VALUE = "下午";
+    public static final String NIGHT_VALUE = "晚上";
 }

@@ -79,9 +79,9 @@ public class LoginView extends View {
     }
 
     private void init() {
-        loginButton = ButtonCreater.getNewButton("登录");
-        registerButton = ButtonCreater.getNewButton("注册");
-        exitButton = ButtonCreater.getNewButton("退出");
+        loginButton = ComponentCreater.newButton("登录");
+        registerButton = ComponentCreater.newButton("注册");
+        exitButton = ComponentCreater.newButton("退出");
 
         dateLabel = new Label("当前时间：" + DateUtil.getCurrentDate());
         userLabel = new Label("用户名：");
@@ -130,7 +130,7 @@ public class LoginView extends View {
         String password = personService.getPassword(userName);
 
         if (password == null) {
-            //若无法由用户名获取密码 即不存在该用户
+            //若由用户名获取密码为空 即不存在该用户
             PromptAlert.display("错误", "用户名不存在");
             return;
         }
@@ -151,7 +151,7 @@ public class LoginView extends View {
         //进行服务的某些初始化设置并开始进入对应菜单
         currentRecorder.setCurrentUserName(userText.getText());
         Integer p = personService.searchPerson(personService.getPersonID(userName)).getPermission();
-        switch (p) {
+        switch (p) { //通过不同身份固有的权限等级判断用户类型
             case 1:
                 ViewManger.switchView(new CustomerView());
 

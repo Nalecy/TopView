@@ -115,13 +115,13 @@ public class HotelAdminView extends View{
         labelsCreater.addLine("您可以：");
         labelVBox = labelsCreater.getVBox();
 
-        infoButton = ButtonCreater.getNewButton("查看本酒店信息",150);
-        roomButton = ButtonCreater.getNewButton("管理本酒店房间",150);
-        orderButton = ButtonCreater.getNewButton("管理本酒店订单",150);
-        accountButton = ButtonCreater.getNewButton("查看本酒店账单",150);
-        cancelLoginButton = ButtonCreater.getNewButton("取消自动登录",150);
-        psnlInfoButton = ButtonCreater.getNewButton("修改个人信息",150);
-        backButton = ButtonCreater.getNewButton("退出至登录界面",150);
+        infoButton = ComponentCreater.newButton("查看本酒店信息",150);
+        roomButton = ComponentCreater.newButton("管理本酒店房间",150);
+        orderButton = ComponentCreater.newButton("管理本酒店订单",150);
+        accountButton = ComponentCreater.newButton("查看本酒店账单",150);
+        cancelLoginButton = ComponentCreater.newButton("取消自动登录",150);
+        psnlInfoButton = ComponentCreater.newButton("修改个人信息",150);
+        backButton = ComponentCreater.newButton("退出至登录界面",150);
 
         vBox = new VBox();
         vBox.setPadding(new Insets(30));

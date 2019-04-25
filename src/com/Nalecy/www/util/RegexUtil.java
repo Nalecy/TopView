@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * 正则表达式匹配工具
  */
-public class RegexUtil {
+public final class RegexUtil {
     private RegexUtil(){
         throw  new AssertionError("请勿实例化ServiceFactory");
     }

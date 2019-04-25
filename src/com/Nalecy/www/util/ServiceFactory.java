@@ -3,7 +3,7 @@ package com.Nalecy.www.util;
 import com.Nalecy.www.service.*;
 import com.Nalecy.www.service.Impl.*;
 
-public class ServiceFactory {
+public final class ServiceFactory {
     private ServiceFactory(){
         throw  new AssertionError("请勿实例化ServiceFactory");
     }

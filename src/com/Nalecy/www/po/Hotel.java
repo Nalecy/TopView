@@ -19,10 +19,6 @@ public class Hotel {
 
 
 
-    public void updateScore(Integer score){
-        this.score = (this.score * numOfScore + score)/(++numOfScore);
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(name+"，");
@@ -32,6 +28,7 @@ public class Hotel {
     }
 
     public Integer getNumOfScore() { return numOfScore; }
+
     public void setNumOfScore(Integer numOfScore) {this.numOfScore = numOfScore; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -46,6 +43,9 @@ public class Hotel {
     }
     public void setScore(Double score) {
         this.score = score;
+    }
+    public void updateScore(Integer score){
+        this.score = (this.score * numOfScore + score)/(++numOfScore);
     }
 
     public String getDescription() { return description; }
