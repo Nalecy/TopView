@@ -17,7 +17,7 @@ public final class RegexUtil {
     private final static String PASSWORD_REGEX ="^[0-9a-zA-Z_]{6,12}$";
     private final static String ZH_REGEX = "^[\\u4e00-\\u9fa5]+$";
     private final static String ONE_TO_THREE_REGEX = "^[1-3]$";
-    private final static String ONE_TO_FIVE_REGEX = "^[0-9]{11}$";
+    private final static String ONE_TO_FIVE_REGEX = "^[1-5]$";
 
 
 

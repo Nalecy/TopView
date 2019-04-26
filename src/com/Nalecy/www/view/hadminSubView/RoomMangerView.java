@@ -50,15 +50,30 @@ public class RoomMangerView extends View {
             ViewManger.back();
         });
         addButton.setOnAction(e -> {
-            addRoom();
+            try{
+                addRoom();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
         deleteButton.setOnAction(e -> {
-            deleteRoom();
+            try{
+                deleteRoom();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
         modifyButton.setOnAction(e -> {
-            modifyRoom();
+            try{
+                modifyRoom();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
     }

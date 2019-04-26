@@ -73,7 +73,12 @@ public class CommentView extends View {
         });
 
         submitButton.setOnAction(e->{
-            if(submit())ViewManger.back();//如果提交成功 则返回
+            try{
+                if(submit())ViewManger.back();//如果提交成功 则返回
+            }catch (Exception exception){
+                PromptAlert.display("错误","出现了未知错误");
+                exception.printStackTrace();
+            }
         });
         backButton.setOnAction(e->{
             ViewManger.back();

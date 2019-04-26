@@ -67,7 +67,12 @@ public class OrderMangerView extends View {
             ViewManger.back();
         });
         cancelOrderButton.setOnAction(e -> {
-            cancelOrder();
+            try{
+                cancelOrder();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
 

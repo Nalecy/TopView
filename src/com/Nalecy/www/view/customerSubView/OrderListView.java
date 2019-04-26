@@ -74,6 +74,7 @@ public class OrderListView extends View {
             ViewManger.back();
         });
         commentButton.setOnAction((e ->{
+            //检测订单是否已评价
             OrderT orderT = finTableView.getSelectionModel().getSelectedItem();
             if(orderT == null){
                 PromptAlert.display("错误","未选择订单");
@@ -83,11 +84,17 @@ public class OrderListView extends View {
                 PromptAlert.display("错误","您已评价过该订单了");
                 return;
             }
+            //设置当前订单
             currentRecorder.setCurrentOrderId(orderT.getOrder().getId());
             ViewManger.switchView(new CommentView());
         }));
         cancelOrderButton.setOnAction(e -> {
-            cancelOrder();
+            try{
+                cancelOrder();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
 

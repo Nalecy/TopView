@@ -90,35 +90,44 @@ public class RegisterView extends View{
         });
 
         resButton.setOnAction(e -> {
-            boolean success = false;
-            if (customerRegBut.isSelected()) {  //选择的是顾客
-                success = save();//直接返回是否注册成功
-            } else if (HAdminRegBut.isSelected()) {
-                //选择的是酒管
-                //先检查注册码是否正确
-                if (checkPermission("HotelAdmin", resNumberText.getText())) {
-                    success = save();
-                } else {
-                    //注册码错误
-                    PromptAlert.display("错误", "注册码错误！");
-                }
-            } else if (AdministratorRegBut.isSelected()) {
-                //选择的是超管
-                //先检查注册码是否正确
-                if (checkPermission("Administrator", resNumberText.getText())) {
-                    success = save();
-                } else {
-                    //注册码错误
-                    PromptAlert.display("错误", "注册码错误！");
-                }
+            try{
+                register();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
             }
-            if(success){
-                PromptAlert.display("成功","注册成功");
-                ViewManger.back();
-            }
-            else PromptAlert.display("错误","注册失败");
-            clearText();
         });
+    }
+
+    private void register() {
+        boolean success = false;
+        if (customerRegBut.isSelected()) {  //选择的是顾客
+            success = save();//直接返回是否注册成功
+        } else if (HAdminRegBut.isSelected()) {
+            //选择的是酒管
+            //先检查注册码是否正确
+            if (checkPermission("HotelAdmin", resNumberText.getText())) {
+                success = save();
+            } else {
+                //注册码错误
+                PromptAlert.display("错误", "注册码错误！");
+            }
+        } else if (AdministratorRegBut.isSelected()) {
+            //选择的是超管
+            //先检查注册码是否正确
+            if (checkPermission("Administrator", resNumberText.getText())) {
+                success = save();
+            } else {
+                //注册码错误
+                PromptAlert.display("错误", "注册码错误！");
+            }
+        }
+        if(success){
+            PromptAlert.display("成功","注册成功");
+            ViewManger.back();
+        }
+        else PromptAlert.display("错误","注册失败");
+        clearText();
     }
 
     /**

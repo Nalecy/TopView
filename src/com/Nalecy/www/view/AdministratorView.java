@@ -46,18 +46,32 @@ public class AdministratorView extends View{
         hotelManagerButton.setOnAction(e->{
             ViewManger.switchView(new HotelManagerView());
         });
+
         addDateButton.setOnAction(e->{
             DateUtil.incrDate();
             PromptAlert.display("成功","成功流逝");
             labelsCreater.setLine(0,"今天是"+ DateUtil.getCurrentDate());
         });
+
         cancelLoginButton.setOnAction(e->{
-            personService.cancelLogin(currentRecorder.getCurrentUserName());
+            try{
+                personService.cancelLogin(currentRecorder.getCurrentUserName());
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             PromptAlert.display("恭喜","取消成功");
         });
+
         psnlInfoButton.setOnAction(e->{
-            modifyInfo();
+            try{
+                modifyInfo();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
         });
+
         backButton.setOnAction(e->{
             ViewManger.switchView(new LoginView());
         });

@@ -46,15 +46,30 @@ public class HotelManagerView extends View {
 
     private void setButtonAction() {
         addButton.setOnAction(e->{
-            addHotel();
+            try{
+                addHotel();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
         deleteButton.setOnAction(e->{
-            deleteHotel();
+            try{
+                deleteHotel();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
         modifyButton.setOnAction(e->{
-            modifyHotel();
+            try{
+                modifyHotel();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refresh();
         });
         backButton.setOnAction(e -> {

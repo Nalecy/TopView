@@ -62,7 +62,13 @@ public class LoginView extends View {
     private void setButtonAction() {
 
         loginButton.setOnAction(e -> {
-            login();
+            ;
+            try{
+                login();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
         });
 
         exitButton.setOnAction(e -> window.close());

@@ -74,35 +74,59 @@ public class CustomerView extends View{
             ViewManger.switchView( new OrderListView());
         });
         psnlInfoButton.setOnAction( e -> {
-            modifyInfo();
+            try{
+                modifyInfo();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
         });
         rechargeButton.setOnAction(e->{
-            recharge();
+            try{
+                recharge();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             refreshData();
         });
         toBeVipButton.setOnAction(e->{
-            //获取当前用户名
-            String userName = currentRecorder.getCurrentUserName();
-            //判断是否是VIP
-            if(DiscountService.getInstance().isVip(userName))
-                //是
-                PromptAlert.display("提示","你本来就是VIP了");
-            else {
-                //不是 成为VIP
-                if(DiscountService.getInstance().toBeVip(userName)){
-                    PromptAlert.display("恭喜","您成为了VIP");
-                }else {
-                    PromptAlert.display("错误","成为VIP失败");
-                }
+            try{
+                toBeVip();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
             }
         });
         cancelLoginButton.setOnAction(e -> {
-            personService.cancelLogin(currentRecorder.getCurrentUserName());
+            try{
+                personService.cancelLogin(currentRecorder.getCurrentUserName());
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             PromptAlert.display("恭喜","取消成功");
         });
         backButton.setOnAction( e -> {
             ViewManger.back();
         });
+    }
+
+    private void toBeVip() {
+        //获取当前用户名
+        String userName = currentRecorder.getCurrentUserName();
+        //判断是否是VIP
+        if(DiscountService.getInstance().isVip(userName))
+            //是
+            PromptAlert.display("提示","你本来就是VIP了");
+        else {
+            //不是 成为VIP
+            if(DiscountService.getInstance().toBeVip(userName)){
+                PromptAlert.display("恭喜","您成为了VIP");
+            }else {
+                PromptAlert.display("错误","成为VIP失败");
+            }
+        }
     }
 
     private void recharge() {

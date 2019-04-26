@@ -79,11 +79,22 @@ public class HotelAdminView extends View{
             ViewManger.switchView(new AccountListView());
         });
         cancelLoginButton.setOnAction(e -> {
-            personService.cancelLogin(currentRecorder.getCurrentUserName());
+            try{
+                personService.cancelLogin(currentRecorder.getCurrentUserName());
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
             PromptAlert.display("恭喜","取消成功");
         });
         psnlInfoButton.setOnAction(e -> {
-            modifyInfo();
+            try{
+                modifyInfo();
+            }catch (Exception exception){
+                PromptAlert.display("错误", "出现未知错误");
+                exception.printStackTrace();
+            }
+
         });
         backButton.setOnAction(e -> {
             ViewManger.back();
