@@ -172,7 +172,7 @@ public class LoginView extends View {
                 ViewManger.switchView(new CustomerView());
 
                 break;
-            case (Permission.HOTELADMIN):
+            case (Permission.HOTEL_ADMIN):
                 ViewManger.switchView(new HotelAdminView());
 
                 break;

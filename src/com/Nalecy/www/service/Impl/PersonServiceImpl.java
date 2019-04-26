@@ -79,7 +79,7 @@ public class PersonServiceImpl implements PersonService {
         id = userDao.getUser(person.getUserName()).getId();
         person.setId(id);
         if (person.getPermission() == Permission.CUSTOMER) customerDao.addCustomer(person);
-        else if (person.getPermission() == Permission.HOTELADMIN) hotelAdminDao.addHotelAdmin(person);
+        else if (person.getPermission() == Permission.HOTEL_ADMIN) hotelAdminDao.addHotelAdmin(person);
         else if (person.getPermission() == Permission.ADMINISTRATOR) administratorDao.addAdministrator(person);
         return true;
     }
@@ -92,7 +92,7 @@ public class PersonServiceImpl implements PersonService {
         userDao.updateUser(user);
         person.setId(id);
         if (person.getPermission() == Permission.CUSTOMER) customerDao.updateCustomer((Customer) person);
-        else if (person.getPermission() == Permission.HOTELADMIN) hotelAdminDao.updateHotelAdmin((HotelAdmin) person);
+        else if (person.getPermission() == Permission.HOTEL_ADMIN) hotelAdminDao.updateHotelAdmin((HotelAdmin) person);
         else if (person.getPermission() == Permission.ADMINISTRATOR) administratorDao.updateAdministrator((Administrator) person);
         return true;
     }
