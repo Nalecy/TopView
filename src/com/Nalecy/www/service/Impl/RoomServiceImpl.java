@@ -1,6 +1,7 @@
 package com.Nalecy.www.service.Impl;
 
 import com.Nalecy.www.dao.RoomDao;
+import com.Nalecy.www.dao.daoFactory.DaoFactory;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.Room;
 import com.Nalecy.www.service.CurrentRecorder;
@@ -20,7 +21,10 @@ public class RoomServiceImpl implements RoomService {
             instance = new RoomServiceImpl();
         return instance;
     }
+    //定义需要引用的Dao类
+    private RoomDao roomDao = DaoFactory.getRoomDao();
 
+    //定义需要引用的Service类
     private OrderService orderService;
     private CurrentRecorder currentRecorder;
     private boolean hasInit = false;
@@ -37,7 +41,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List< Room> getRoomList(Integer hotelId) {
         initService();
-        List< Room> allRoom = RoomDao.getRoomList();
+        List< Room> allRoom = roomDao.getRoomList();
         if(allRoom == null)return null;
 
         List<Room> roomList = new ArrayList<>();
@@ -75,22 +79,22 @@ public class RoomServiceImpl implements RoomService {
     }
     @Override
     public Room getRoomById(Integer roomID) {
-        return RoomDao.getRoom(roomID);
+        return roomDao.getRoom(roomID);
     }
     @Override
     public boolean saveRoomInfo(Room room) {
-        RoomDao.updateRoom(room);
+        roomDao.updateRoom(room);
         return true;
     }
     @Override
     public boolean addRoom(Room room) {
         initService();
         room.setHotelID(currentRecorder.getCurrentHotelId());
-        RoomDao.addRoom(room);
+        roomDao.addRoom(room);
         return true;
     }
     @Override
     public void deleteRoom(Integer id) {
-        RoomDao.deleteRoom(id);
+        roomDao.deleteRoom(id);
     }
 }

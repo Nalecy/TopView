@@ -1,6 +1,7 @@
 package com.Nalecy.www.service.Impl;
 
 import com.Nalecy.www.dao.AccountDao;
+import com.Nalecy.www.dao.daoFactory.DaoFactory;
 import com.Nalecy.www.po.Account;
 import com.Nalecy.www.po.Customer;
 import com.Nalecy.www.po.Order;
@@ -16,6 +17,8 @@ public class BalanceServiceImpl implements BalanceService {
             instance = new BalanceServiceImpl();
         return instance;
     }
+    //定义需要引用的Dao类
+    private AccountDao accountDao = DaoFactory.getAccountDao();
     //定义需要引用的其他服务
     private PersonService personService;
     private RoomService roomService;
@@ -77,7 +80,7 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public List<Account> getAccountList() {
         initService();
-        List<Account> allList = AccountDao.getAccountList();
+        List<Account> allList = accountDao.getAccountList();
         List<Account> accountList = new ArrayList<>();
         if (allList != null) {
             for (Account account : allList)
@@ -97,6 +100,6 @@ public class BalanceServiceImpl implements BalanceService {
         account.setRoomId(order.getRoomID());
         account.setRoomPeriod(order.getRoomPeriod());
         //添加账单
-        AccountDao.addAccount(account);
+        accountDao.addAccount(account);
     }
 }

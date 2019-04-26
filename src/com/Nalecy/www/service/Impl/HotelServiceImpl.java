@@ -1,6 +1,8 @@
 package com.Nalecy.www.service.Impl;
 
 import com.Nalecy.www.dao.HotelDao;
+import com.Nalecy.www.dao.daoFactory.DaoFactory;
+import com.Nalecy.www.dao.mysqlDaoImpl.HotelDaoImpl;
 import com.Nalecy.www.po.Hotel;
 import com.Nalecy.www.service.HotelService;
 
@@ -13,47 +15,48 @@ public class HotelServiceImpl implements HotelService {
             instance = new HotelServiceImpl();
         return instance;
     }
-
+    //定义需要引用的Dao类
+    private HotelDao hotelDao = DaoFactory.getHotelDao();
 
     @Override
     public List<Hotel> getHotelList() {
         List<Hotel> hotelList;
-        hotelList = HotelDao.getHotelList();
+        hotelList = hotelDao.getHotelList();
         return hotelList;
     }
 
     @Override
     public void addHotel(Hotel hotel){
-        HotelDao.addHotel(hotel);
+        hotelDao.addHotel(hotel);
     }
 
     @Override
     public void deleteHotel(Integer id) {
-        HotelDao.deleteHotel(id);
+        hotelDao.deleteHotel(id);
     }
 
     @Override
     public void updateHotel(Hotel hotel){
-        HotelDao.updateHotel(hotel);
+        hotelDao.updateHotel(hotel);
     }
 
 
     @Override
     public Hotel getHotel(Integer hotelID) {
         Hotel hotel;
-        hotel = HotelDao.getHotel(hotelID);
+        hotel = hotelDao.getHotel(hotelID);
         return hotel;
     }
 
     @Override
     public Hotel getHotel(String name){
         Hotel hotel;
-        hotel = HotelDao.getHotel(name);
+        hotel = hotelDao.getHotel(name);
         return hotel;
     }
 
     @Override
     public List<Hotel> fuzzySearchHotel(String name) {
-        return HotelDao.getHotelList(name);
+        return hotelDao.getHotelList(name);
     }
 }

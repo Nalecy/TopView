@@ -1,6 +1,8 @@
 package com.Nalecy.www.service.Impl;
 
 import com.Nalecy.www.dao.OrderDao;
+import com.Nalecy.www.dao.daoFactory.DaoFactory;
+import com.Nalecy.www.dao.mysqlDaoImpl.OrderDaoImpl;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.service.OrderService;
 import com.Nalecy.www.util.DateUtil;
@@ -16,15 +18,16 @@ public class OrderServiceImpl  implements OrderService {
             instance = new OrderServiceImpl();
         return instance;
     }
-
+    //定义需要引用的Dao类
+    private OrderDao orderDao = DaoFactory.getOrderDao();
     @Override
     public Order getOrderById(Integer id) {
-        return OrderDao.getOrder(id);
+        return orderDao.getOrder(id);
     }
 
     @Override
     public List<Order> getCompleteOrder() {
-        List<Order> allOrders = OrderDao.getOrderList();
+        List<Order> allOrders = orderDao.getOrderList();
         if (allOrders == null) return null;
         List<Order> orders = new ArrayList<>();
         Date today = DateUtil.getCurrentDate();
@@ -82,7 +85,7 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     public List<Order> getIncompleteOrder() {
-        List<Order> allOrders = OrderDao.getOrderList();
+        List<Order> allOrders = orderDao.getOrderList();
         if (allOrders == null) return null;
         List<Order> orders = new ArrayList<>();
         Date today = DateUtil.getCurrentDate();
@@ -94,12 +97,12 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     public void cancelOrder(Order order) {
-        OrderDao.deleteOrder(order.getId());
+        orderDao.deleteOrder(order.getId());
     }
 
     @Override
     public boolean addOrder(Order order) {
-        OrderDao.addOrder(order);
+        orderDao.addOrder(order);
         return true;
     }
 }
