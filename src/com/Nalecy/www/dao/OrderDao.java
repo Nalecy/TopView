@@ -1,5 +1,6 @@
 package com.Nalecy.www.dao;
 
+import com.Nalecy.www.constantClass.IsComment;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.util.DatabaseUtil;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class OrderDao {
     public static void addOrder(Order order) {
-    DatabaseUtil.addOneRowData("orderR", null, order.getUserName(), order.getDate().toString(), String.valueOf(order.getRoomPeriod()), String.valueOf(order.getHotelID()), String.valueOf(order.getRoomID()),String.valueOf(order.getBalance()));
+    DatabaseUtil.addOneRowData("orderR", null, order.getUserName(), order.getDate().toString(), String.valueOf(order.getRoomPeriod()), String.valueOf(order.getHotelID()), String.valueOf(order.getRoomID()),String.valueOf(order.getBalance()), String.valueOf(order.getIsComment().ordinal()));
 }
 
     public static Order getOrder(String userName) {
@@ -48,6 +49,7 @@ public class OrderDao {
         order.setHotelID(Integer.valueOf(orderInfo.get(4)));
         order.setRoomID(Integer.valueOf(orderInfo.get(5)));
         order.setBalance(Integer.valueOf(orderInfo.get(6)));
+        order.setIsComment(IsComment.get(Integer.parseInt(orderInfo.get(7))));
     }
 
     public static void deleteOrder(Integer id) {
@@ -62,6 +64,7 @@ public class OrderDao {
         lhm.put("roomPeriod", String.valueOf(order.getRoomPeriod()));
         lhm.put("hotelID", String.valueOf(order.getHotelID()));
         lhm.put("roomID", String.valueOf(order.getRoomID()));
+        lhm.put("isComment", String.valueOf(order.getIsComment().ordinal()));
 
         DatabaseUtil.updateRowsData("orderR", "id", String.valueOf(order.getId()), lhm);
     }

@@ -1,5 +1,6 @@
 package com.Nalecy.www.po;
 
+import com.Nalecy.www.constantClass.IsComment;
 import com.Nalecy.www.constantClass.RoomPeriod;
 import com.Nalecy.www.constantClass.RoomType;
 
@@ -13,6 +14,8 @@ public class Order {
     private Integer hotelID;
     private Integer roomID;
     private Integer balance;
+    private IsComment isComment;
+
 
     public Order(){
         userName = "";
@@ -21,9 +24,10 @@ public class Order {
         hotelID = 0;
         roomID = 0;
         balance = 0;
+        isComment = IsComment.NO;
     }
 
-    public Order(Integer id,String userName, Date date, Integer roomPeriod, Integer hotelID, Integer roomID,Integer balance) {
+    public Order(Integer id,String userName, Date date, Integer roomPeriod, Integer hotelID, Integer roomID,Integer balance,IsComment isComment) {
         this.id = id;
         this.userName = userName;
         this.date = date;
@@ -31,6 +35,7 @@ public class Order {
         this.hotelID = hotelID;
         this.roomID = roomID;
         this.balance = balance;
+        this.isComment = isComment;
     }
 
     @Override
@@ -58,4 +63,6 @@ public class Order {
     public void setRoomID(Integer roomID) { this.roomID = roomID; }
     public Integer getBalance() { return balance; }
     public void setBalance(Integer balance) { this.balance = balance; }
+    public IsComment getIsComment() { return isComment; }
+    public void setIsComment(IsComment isComment) { this.isComment = isComment; }
 }

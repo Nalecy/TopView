@@ -13,6 +13,7 @@ public class CurrentRecorderImpl implements CurrentRecorder {
     private String currentUserName = "";
     private Integer currentHotelId = 0;
     private Integer currentRoomId = 0;
+    private Integer currentOrderId = 0;
     @Override
     public void setCurrentUserName(String userName) {
         currentUserName = userName;
@@ -42,4 +43,10 @@ public class CurrentRecorderImpl implements CurrentRecorder {
     public void setCurrentRoomId(Integer roomId) {
         currentRoomId = roomId;
     }
+
+    @Override
+    public void setCurrentOrderId(Integer orderId) { currentOrderId = orderId; }
+
+    @Override
+    public Integer getCurrentOrderId() { return currentOrderId; }
 }

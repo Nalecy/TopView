@@ -18,6 +18,11 @@ public class OrderServiceImpl  implements OrderService {
     }
 
     @Override
+    public Order getOrderById(Integer id) {
+        return OrderDao.getOrder(id);
+    }
+
+    @Override
     public List<Order> getCompleteOrder() {
         List<Order> allOrders = OrderDao.getOrderList();
         if (allOrders == null) return null;

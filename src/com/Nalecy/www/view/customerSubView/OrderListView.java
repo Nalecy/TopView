@@ -1,6 +1,7 @@
 
 package com.Nalecy.www.view.customerSubView;
 
+import com.Nalecy.www.constantClass.IsComment;
 import com.Nalecy.www.po.Order;
 import com.Nalecy.www.po.forTableView.OrderT;
 import com.Nalecy.www.service.CurrentRecorder;
@@ -10,6 +11,7 @@ import com.Nalecy.www.util.ServiceFactory;
 import com.Nalecy.www.util.TableViewCreater;
 import com.Nalecy.www.util.ViewManger;
 import com.Nalecy.www.view.View;
+import com.Nalecy.www.view.customerSubView.sub.CommentView;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,8 +50,12 @@ public class OrderListView extends View {
 
     @Override
     public void display(){
-        init();
-        setButtonAction();
+        if(!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
+        refresh();
         window.show();
     }
 
@@ -68,7 +74,17 @@ public class OrderListView extends View {
             ViewManger.back();
         });
         commentButton.setOnAction((e ->{
-            commentOrder();
+            OrderT orderT = finTableView.getSelectionModel().getSelectedItem();
+            if(orderT == null){
+                PromptAlert.display("错误","未选择订单");
+                return;
+            }
+            if(orderT.getOrder().getIsComment() == IsComment.YES){
+                PromptAlert.display("错误","您已评价过该订单了");
+                return;
+            }
+            currentRecorder.setCurrentOrderId(orderT.getOrder().getId());
+            ViewManger.switchView(new CommentView());
         }));
         cancelOrderButton.setOnAction(e -> {
             cancelOrder();
@@ -77,9 +93,7 @@ public class OrderListView extends View {
 
     }
 
-    private void commentOrder() {
 
-    }
 
     private void refresh(){
         finTableView.setItems(getFOrderList());
@@ -123,6 +137,7 @@ public class OrderListView extends View {
         tvc.addColumn("酒店名字","hotelName",100);
         tvc.addColumn("房间名字","roomName",100);
         tvc.addColumn("金额","balance",50);
+        tvc.addColumn("状态","commentStatement",100);
         finTableView = tvc.getTableView();
         finTableView.setItems(getFOrderList());
 

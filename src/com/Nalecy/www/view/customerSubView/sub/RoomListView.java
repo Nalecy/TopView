@@ -41,8 +41,11 @@ public class RoomListView extends View {
     private Button backButton;
 
     public void display(){
-        init();
-        setButtonAction();
+        if (!hasInit) {
+            init();
+            setButtonAction();
+            hasInit = true;
+        }
         stage.show();
     }
 

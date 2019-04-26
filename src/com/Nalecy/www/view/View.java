@@ -6,7 +6,7 @@ public abstract class View {
      */
     protected boolean hasInit = false;
     /**
-     * 展示
+     * 判断是否已初始化，若已初始化直接展示，若未初始化先初始化再展示
      */
     public abstract void display();
 

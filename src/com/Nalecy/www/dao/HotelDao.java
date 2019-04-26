@@ -65,7 +65,8 @@ public class HotelDao {
         LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         lhm.put("name", hotel.getName());
         lhm.put("star", String.valueOf(hotel.getStar()));
-        lhm.put("score", String.valueOf(hotel.getNumOfScore()));
+        lhm.put("score", String.valueOf(hotel.getScore()));
+        lhm.put("numOfScore",String.valueOf(hotel.getNumOfScore()));
         lhm.put("description", hotel.getDescription());
         DatabaseUtil.updateRowsData("hotel", "id", String.valueOf(hotel.getId()), lhm);
     }

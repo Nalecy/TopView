@@ -45,7 +45,8 @@ public class Hotel {
         this.score = score;
     }
     public void updateScore(Integer score){
-        this.score = (this.score * numOfScore + score)/(++numOfScore);
+        this.score =  ((this.score * numOfScore + score) / (numOfScore + 1));
+        numOfScore = numOfScore + 1;
     }
 
     public String getDescription() { return description; }

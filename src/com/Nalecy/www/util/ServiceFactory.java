@@ -50,4 +50,11 @@ public final class ServiceFactory {
     public static CurrentRecorder getCurrentRecorder() {
         return CurrentRecorderImpl.getInstance();
     }
+
+    /**
+     * @return 评论服务类的实例
+     */
+    public static CommentService getCommentService() {
+        return new CommentServiceImpl();
+    }
 }

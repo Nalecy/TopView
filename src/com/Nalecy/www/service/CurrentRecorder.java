@@ -38,4 +38,16 @@ public interface CurrentRecorder {
      * @return Integer
      */
     Integer getCurrentRoomId();
+
+    /**
+     * 传入当前已选择的订单ID并保存下来已备调用
+     * @param currentOrderId
+     */
+    void setCurrentOrderId(Integer currentOrderId);
+
+    /**
+     * 返回已存入的的房间ID
+     * @return Integer
+     */
+    Integer getCurrentOrderId();
 }
