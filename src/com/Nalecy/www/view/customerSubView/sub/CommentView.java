@@ -55,6 +55,7 @@ public class CommentView extends View {
     }
 
     private void setButtonAction() {
+
         oneStarButton.setOnAction(e->{
             starLabel.setText("★☆☆☆☆");
         });
@@ -70,8 +71,9 @@ public class CommentView extends View {
         fiveStarButton.setOnAction(e->{
             starLabel.setText("★★★★★");
         });
+
         submitButton.setOnAction(e->{
-            if(submit())ViewManger.back();
+            if(submit())ViewManger.back();//如果提交成功 则返回
         });
         backButton.setOnAction(e->{
             ViewManger.back();
@@ -81,10 +83,12 @@ public class CommentView extends View {
     private boolean submit() {
         Order order = orderService.getOrderById(currentRecorder.getCurrentOrderId());
         String content = commentArea.getText();
+        //判断字符是否过多
         if(content.length() > 100){
             PromptAlert.display("错误","你字数太多啦");
             return false;
         }
+        //组装comment对象
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setOrderId(order.getId());
@@ -93,11 +97,12 @@ public class CommentView extends View {
         commentService.submitComment(comment);
         return true;
     }
-
+    /** 初始化布局元素 */
     private void init() {
         starLabel = ComponentCreater.newLabel("★★★★★");
         starLabel.setFont(new Font(50));
 
+        //初始化选择按钮
         starGroup = new ToggleGroup();
         oneStarButton = new ToggleButton("一星");
         oneStarButton.setUserData(1);
@@ -116,10 +121,12 @@ public class CommentView extends View {
         starHBox.setAlignment(Pos.CENTER);
         starHBox.setSpacing(10);
 
+        //初始化文本域
         commentArea = new TextArea();
-        commentArea.setPromptText("不超过100字");
+        commentArea.setPromptText("不超过100字符");
         commentArea.setWrapText(true);
 
+        //初始化按钮
         backButton = ComponentCreater.newButton("返回");
         submitButton = ComponentCreater.newButton("提交");
 

@@ -78,13 +78,14 @@ public class OrderMangerView extends View {
 
     private void cancelOrder() {
         try {
+            //获取选择的订单
             Order order = unfinTableView.getSelectionModel().getSelectedItem().getOrder();
             orderService.cancelOrder(order);
         }catch (NullPointerException e){
             PromptAlert.display("错误","请检查是否选择");
         }
     }
-
+    /** 初始化布局元素 */
     private void init(){
         finOrderLabel = new Label("已完成订单：");
 

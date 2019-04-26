@@ -10,7 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- *
+ * 用于二次确认的弹窗工具
  */
 public final class ConfirmAlert {
     //防止实例化
@@ -27,8 +27,23 @@ public final class ConfirmAlert {
     private static Button noButton;
     private static boolean res = false;
 
+    /**
+     * 传入弹窗标题 弹窗内容 且展示
+     * @param title 标题
+     * @param message 内容
+     * @return 是否确认
+     */
     public static boolean display(String title, String message){
+        if(title == null||message == null){
+            throw new NullPointerException();
+        }
         init(title, message);
+        setButtonAction();
+        window.showAndWait();
+        return res;
+    }
+
+    private static void setButtonAction() {
         yesButton.setOnAction(e ->{
             res = true;
             window.close();
@@ -37,9 +52,9 @@ public final class ConfirmAlert {
             res = false;
             window.close();
         });
-        window.showAndWait();
-        return res;
     }
+
+    /** 初始化布局元素 */
     private static void init(String title, String message){
         yesButton = new Button("确定");
         noButton = new Button("取消");

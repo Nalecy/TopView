@@ -21,7 +21,7 @@ public class HotelAdminDaoImpl implements HotelAdminDao {
         DatabaseUtil.addOneRowData("hotelAdmin", String.valueOf(hotelAdmin.getId()), hotelAdmin.getUserName(), hotelAdmin.getPassword(), hotelAdmin.getIdNumber(), hotelAdmin.getTelephone(), String.valueOf(hotelAdmin.getHotelID()));
     }
 
-    public HotelAdmin searchHotelAdmin(String userName) {
+    public HotelAdmin getHotelAdmin(String userName) {
         HotelAdmin hotelAdmin = new HotelAdmin ();
         List<String> list = DatabaseUtil.getOneRowData("hotelAdmin", "userName", userName);
         if (list == null|| list.size() == 0) return null;
@@ -29,7 +29,7 @@ public class HotelAdminDaoImpl implements HotelAdminDao {
         return hotelAdmin;
     }
 
-    public HotelAdmin searchHotelAdmin(Integer id) {
+    public HotelAdmin getHotelAdmin(Integer id) {
         HotelAdmin hotelAdmin = new HotelAdmin();
         List<String> list = DatabaseUtil.getOneRowData("hotelAdmin", "id", String.valueOf(id));
         if (list == null||list.size() == 0) return null;

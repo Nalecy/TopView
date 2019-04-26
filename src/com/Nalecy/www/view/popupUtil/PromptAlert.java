@@ -8,7 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+/**
+ * 用于显示提示文本的弹窗工具
+ */
 public final class PromptAlert {
     //防止实例化
     private PromptAlert(){
@@ -20,7 +22,16 @@ public final class PromptAlert {
 
     private static Label messageLabel;
     private static Button yesButton;
+
+    /**
+     * 传入弹窗标题 弹窗内容 且展示
+     * @param title 标题
+     * @param message 内容
+     */
     public static void display(String title, String message){
+        if(title == null||message == null){
+            throw new NullPointerException();
+        }
         init(title, message);
         yesButton.setOnAction(e ->{
             window.close();
@@ -29,7 +40,7 @@ public final class PromptAlert {
 
     }
 
-
+    /** 初始化布局元素 */
     private static void init(String title, String message){
         yesButton = new Button("确定");
         messageLabel = new Label(message);

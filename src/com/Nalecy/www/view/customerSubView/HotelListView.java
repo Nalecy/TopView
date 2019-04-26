@@ -74,6 +74,7 @@ public class HotelListView extends View {
         backButton.setOnAction(e -> {
             ViewManger.back();
         });
+        //设置搜索框监听
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             //如果文本框为空 默认不搜索，显示所有酒店
             if (newValue.length() == 0) {
@@ -89,15 +90,17 @@ public class HotelListView extends View {
             }
         });
     }
-
+    /** 初始化布局元素 */
     private void init() {
         label = new Label("酒店列表：");
 
+        //初始化搜索框
         searchField = new TextField();
         searchField.setPromptText("请在此输入酒店名字");
         searchField.setMinWidth(800);
         searchField.setMaxWidth(800);
 
+        //初始化表
         TableViewCreater<Hotel> tvc = new TableViewCreater<>();
         tvc.addColumn("酒店名字", "name", 100);
         tvc.addColumn("星级", "star", 50);
@@ -109,6 +112,7 @@ public class HotelListView extends View {
         tableView.setMaxSize(800, 800);
         tableView.setItems(getList());
 
+        //初始化按钮
         enterHotelButton = ComponentCreater.newButton("进入选中酒店", 800);
         backButton = ComponentCreater.newButton("返回", 800);
 

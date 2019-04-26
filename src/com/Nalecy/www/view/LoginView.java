@@ -1,6 +1,7 @@
 package com.Nalecy.www.view;
 
 
+import com.Nalecy.www.constantClass.Permission;
 import com.Nalecy.www.service.CurrentRecorder;
 import com.Nalecy.www.service.PersonService;
 import com.Nalecy.www.util.ServiceFactory;
@@ -77,19 +78,23 @@ public class LoginView extends View {
             }
         });
     }
-
+    /** 初始化布局元素 */
     private void init() {
+        //初始化按钮
         loginButton = ComponentCreater.newButton("登录");
         registerButton = ComponentCreater.newButton("注册");
         exitButton = ComponentCreater.newButton("退出");
 
+        //初始化文本框上方及左侧标签
         dateLabel = ComponentCreater.newLabel("当前时间：" + DateUtil.getCurrentDate());
         userLabel = ComponentCreater.newLabel("用户名：");
         passwordLabel = ComponentCreater.newLabel("密码：");
 
+        //初始化文本框
         userText = ComponentCreater.newTextField("请输入用户名");
         passwordText =ComponentCreater.newPasswordField("请输入密码");
 
+        //初始化网格布局
         GridPane.setConstraints(dateLabel, 1, 0);
         GridPane.setConstraints(userLabel, 0, 1);
         GridPane.setConstraints(userText, 1, 1);
@@ -105,16 +110,17 @@ public class LoginView extends View {
         grid.setHgap(10);
         grid.getChildren().addAll(dateLabel, loginButton, registerButton, exitButton, userLabel, passwordLabel, userText, passwordText);
 
+        //初始化窗口属性
         scene = new Scene(grid);
-
         window = new Stage();
         window.setScene(scene);
         window.setResizable(false);
         window.setTitle("登录页面");
     }
-
+    /** 登录操作 */
     private void login() {
-        //正则判断
+        //正则判断用户输入是否合法
+        //不合法弹出警告
         if (!RegexUtil.isUserName(userText.getText())) {
             PromptAlert.display("错误", "检查用户名输入");
             return;
@@ -124,6 +130,7 @@ public class LoginView extends View {
             return;
         }
 
+        //获取用户密码数据
         String userName = userText.getText();
         String password = personService.getPassword(userName);
 
@@ -132,33 +139,38 @@ public class LoginView extends View {
             PromptAlert.display("错误", "用户名不存在");
             return;
         }
-
-        password = passwordText.getText();
-        boolean b = password.equals(personService.getPassword(userName));//进行密码是否正确判断
-        if (b) {//密码正确
-            if (!personService.hasLogin(userName)) {//未保存密码才需要进行
-                if (ConfirmAlert.display("保存", "确定保存密码？")) {
+        String inputPassword = passwordText.getText();
+        boolean b = password.equals(inputPassword);//进行密码是否正确判断
+        if (b) {
+            //密码正确
+            if (!personService.hasLogin(userName)) {
+                //若未保存密码
+                //判断用户是否需要保存密码
+                if (ConfirmAlert.display("保存", "是否保存密码？")) {
                     if (personService.saveLogin(userName)) PromptAlert.display("恭喜", "保存成功");
                     else PromptAlert.display("错误", "保存失败");
                 }
             }
         } else {
+            //密码错误
             PromptAlert.display("错误", "密码错误");
             return;
         }
         //进行服务的某些初始化设置并开始进入对应菜单
-        currentRecorder.setCurrentUserName(userText.getText());
+        //记录当前登录的用户名
+        currentRecorder.setCurrentUserName(userText.getText().toLowerCase());
+        //获取用户的权限等级
         Integer p = personService.searchPerson(personService.getPersonID(userName)).getPermission();
         switch (p) { //通过不同身份固有的权限等级判断用户类型
-            case 1:
+            case (Permission.CUSTOMER):
                 ViewManger.switchView(new CustomerView());
 
                 break;
-            case 2:
+            case (Permission.HOTELADMIN):
                 ViewManger.switchView(new HotelAdminView());
 
                 break;
-            case 3:
+            case (Permission.ADMINISTRATOR):
                 ViewManger.switchView(new AdministratorView());
                 break;
         }

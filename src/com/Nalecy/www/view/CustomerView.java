@@ -12,6 +12,7 @@ import com.Nalecy.www.view.customerSubView.OrderListView;
 import com.Nalecy.www.view.popupUtil.InfoEditPopup;
 import com.Nalecy.www.view.popupUtil.PromptAlert;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -26,7 +27,7 @@ public class CustomerView extends View{
 
     private Stage window;
     private Scene scene;
-    private VBox tipLabelVbox;
+    private VBox tipLabelVBox;
     private VBox vBox;
 
     private LabelsCreater tipLabel;
@@ -35,6 +36,7 @@ public class CustomerView extends View{
     private Button psnlInfoButton;
     private Button rechargeButton;
     private Button toBeVipButton;
+    private Button cancelLoginButton;
     private Button backButton;
 
     @Override
@@ -79,10 +81,14 @@ public class CustomerView extends View{
             refreshData();
         });
         toBeVipButton.setOnAction(e->{
+            //获取当前用户名
             String userName = currentRecorder.getCurrentUserName();
+            //判断是否是VIP
             if(DiscountService.getInstance().isVip(userName))
+                //是
                 PromptAlert.display("提示","你本来就是VIP了");
             else {
+                //不是 成为VIP
                 if(DiscountService.getInstance().toBeVip(userName)){
                     PromptAlert.display("恭喜","您成为了VIP");
                 }else {
@@ -90,34 +96,46 @@ public class CustomerView extends View{
                 }
             }
         });
+        cancelLoginButton.setOnAction(e -> {
+            personService.cancelLogin(currentRecorder.getCurrentUserName());
+            PromptAlert.display("恭喜","取消成功");
+        });
         backButton.setOnAction( e -> {
             ViewManger.back();
         });
-
     }
 
     private void recharge() {
+        //获取编辑框构造器对象
         InfoEditPopup rechargePopup = new InfoEditPopup();
+        //设置编辑框的标签
         rechargePopup.setInfoNameList("你想充值(元): ");
+        //启动窗口并准备获取其返回值
         List<String> rb = rechargePopup.display("充值");
+        //如果返回值为空,直接返回
         if(rb == null)return;
+        //判断是否是数字
         if(!RegexUtil.isNumber(rb.get(0))){
+            //不是 向用户报错
             PromptAlert.display("错误","请输入正确的充值金额");
             return;
         }
         int balance = Integer.parseInt(rb.get(0));
-        if( balance <= 0){
-            throw new RuntimeException("充值金额不能为负数");
-        }
+        //充值
         balanceService.recharge(balance);
         PromptAlert.display("成功","充值成功");
     }
 
     private void modifyInfo() {
+        //获取编辑框构造器对象
         InfoEditPopup editPopup = new InfoEditPopup();
-        Customer customer = (Customer) personService.searchPerson(currentRecorder.getCurrentUserName());//先获取当前登录用户的用户名再获取对应顾客对象
+        //先获取当前登录用户的用户名再获取对应顾客对象
+        Customer customer = (Customer) personService.searchPerson(currentRecorder.getCurrentUserName());
+        //设置编辑框的标签
         editPopup.setInfoNameList("密码","身份证号码","电话");
+        //设置编辑框的值
         editPopup.setInfoValueList(customer.getPassword(),customer.getIdNumber(),customer.getTelephone());
+        //启动窗口并准备获取其返回值
         List<String> infoList = editPopup.display("个人信息修改");  //启动窗口并准备获取其返回值
         if(infoList != null) {
             //正则判断
@@ -131,7 +149,7 @@ public class CustomerView extends View{
             personService.updatePeron(customer);       //保存信息
         }
     }
-
+    /** 初始化布局元素 */
     private void init(){
         String userName = currentRecorder.getCurrentUserName();
         Customer customer = (Customer) personService.searchPerson(userName);
@@ -140,19 +158,22 @@ public class CustomerView extends View{
         tipLabel.addLine("今天是"+ DateUtil.getCurrentDate());
         tipLabel.addLine("您好,用户名为"+ userName +"的顾客。");
         tipLabel.addLine("您的余额："+ customer.getBalance() +"元");
-        tipLabelVbox = tipLabel.getVBox();
+        tipLabelVBox = tipLabel.getVBox();
+        tipLabelVBox.setAlignment(Pos.CENTER);
 
         hotelListButton = ComponentCreater.newButton("查看酒店",300);
         orderListButton = ComponentCreater.newButton("查看订单",300);
         psnlInfoButton = ComponentCreater.newButton("修改个人信息",300);
         rechargeButton = ComponentCreater.newButton("充值",300);
         toBeVipButton = ComponentCreater.newButton("成为VIP",300);
+        cancelLoginButton = ComponentCreater.newButton("取消自动登录",300);
         backButton = ComponentCreater.newButton("退出",300);
 
         vBox = new VBox();
-        vBox.getChildren().addAll(tipLabelVbox,hotelListButton,orderListButton,psnlInfoButton,rechargeButton,toBeVipButton,backButton);
+        vBox.getChildren().addAll(tipLabelVBox,hotelListButton,orderListButton,psnlInfoButton,rechargeButton,toBeVipButton,cancelLoginButton,backButton);
         vBox.setSpacing(20);
-        vBox.setPadding(new Insets(50,200,50,200));
+        vBox.setPadding(new Insets(50));
+        vBox.setAlignment(Pos.CENTER);
 
         scene = new Scene(vBox);
         window = new Stage();

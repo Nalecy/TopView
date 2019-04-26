@@ -22,14 +22,6 @@ public class RoomDaoImpl implements RoomDao {
         DatabaseUtil.addOneRowData("room", null, room.getName(), String.valueOf(room.getType()), String.valueOf(room.getArea()), String.valueOf(room.getBedWidth()), String.valueOf(room.getHotelID()), String.valueOf(room.getPrice()));
     }
 
-    public Room getRoom(String roomName) {
-        Room room = new Room();
-        List<String> roomInfo = DatabaseUtil.getOneRowData("room", "name", roomName);
-        if (roomInfo == null) return null;
-        setInfo(room, roomInfo);
-        return room;
-    }
-
     public Room getRoom(Integer roomId) {
         Room room = new Room();
         List<String> roomInfo = DatabaseUtil.getOneRowData("room", "id", String.valueOf(roomId));

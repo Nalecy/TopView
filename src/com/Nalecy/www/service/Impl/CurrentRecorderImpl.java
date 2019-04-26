@@ -9,7 +9,7 @@ public class CurrentRecorderImpl implements CurrentRecorder {
         instance = new CurrentRecorderImpl();
         return instance;
     }
-
+    //定义需要记录的对象
     private String currentUserName = "";
     private Integer currentHotelId = 0;
     private Integer currentRoomId = 0;

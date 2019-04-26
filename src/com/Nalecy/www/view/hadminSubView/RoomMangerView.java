@@ -85,6 +85,7 @@ public class RoomMangerView extends View {
             if(!RegexUtil.isNumber(infoList.get(2))){PromptAlert.display("错误","检查面积输入");return;}
             if(!RegexUtil.isNumber(infoList.get(3))){PromptAlert.display("错误","检查床宽输入");return;}
             if(!RegexUtil.isNumber(infoList.get(4))){PromptAlert.display("错误","检查价格输入");return;}
+            //组装room对象
             room.setName(infoList.get(0));
             room.setType(Integer.valueOf(infoList.get(1)));
             room.setArea(Integer.valueOf(infoList.get(2)));
@@ -128,7 +129,7 @@ public class RoomMangerView extends View {
             roomService.addRoom(room);
         }
     }
-
+    /** 初始化布局元素 */
     private void init() {
         TableViewCreater<Room> tvc = new TableViewCreater<>();
         tvc.addColumn("房间名称", "name", 100);

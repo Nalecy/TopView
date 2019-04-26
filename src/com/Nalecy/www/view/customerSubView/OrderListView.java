@@ -126,7 +126,7 @@ public class OrderListView extends View {
         }
         return orders;
     }
-
+    /** 初始化布局元素 */
     private void init(){
         finOrderLabel = new Label("已完成订单：");
 
@@ -154,6 +154,7 @@ public class OrderListView extends View {
 
         tipLabel = new Label("您可以：");
 
+        //初始化按钮
         commentButton = ComponentCreater.newButton("评价已完成订单",150);
         cancelOrderButton = ComponentCreater.newButton("取消未完成订单",150);
         backButton = ComponentCreater.newButton("返回",100);

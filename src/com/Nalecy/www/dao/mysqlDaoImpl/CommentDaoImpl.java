@@ -46,7 +46,7 @@ public class CommentDaoImpl implements CommentDao {
         DatabaseUtil.updateRowsData("comment", "id", String.valueOf(comment.getId()), lhm);
     }
 
-    public  List<Comment> getOrderList() {
+    public  List<Comment> getCommentList() {
         List<String> idList = DatabaseUtil.getOneColumnData("comments", "id");
         List<Comment> comments = new ArrayList<>();
         if (idList == null) return null;

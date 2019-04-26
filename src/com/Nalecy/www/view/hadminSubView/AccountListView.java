@@ -47,7 +47,7 @@ public class AccountListView extends View {
             ViewManger.back();
         });
     }
-
+    /** 初始化布局元素 */
     private void init(){
         tipLabel = new Label("下面是账单列表");
 

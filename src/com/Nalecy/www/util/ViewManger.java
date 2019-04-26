@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 public class ViewManger {
     private ViewManger (){
+        throw new AssertionError("请勿实例化ViewManger");
     }
 
     private static LinkedList<View> viewStack;

@@ -17,9 +17,10 @@ public class CommentServiceImpl implements CommentService {
     //定义需要引用的Dao类
     private CommentDao commentDao = DaoFactory.getCommentDao();
     private OrderDao orderDao = DaoFactory.getOrderDao();
-
+    //定义需要引用的其他服务
     private HotelService hotelService = ServiceFactory.getHotelService();
     private OrderService orderService = ServiceFactory.getOrderService();
+
     @Override
     public void submitComment(Comment comment) {
         Hotel hotel = hotelService.getHotel(comment.getHotelId());

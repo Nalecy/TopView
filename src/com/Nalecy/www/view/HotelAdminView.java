@@ -80,6 +80,7 @@ public class HotelAdminView extends View{
         });
         cancelLoginButton.setOnAction(e -> {
             personService.cancelLogin(currentRecorder.getCurrentUserName());
+            PromptAlert.display("恭喜","取消成功");
         });
         psnlInfoButton.setOnAction(e -> {
             modifyInfo();
@@ -89,11 +90,16 @@ public class HotelAdminView extends View{
         });
     }
     private void modifyInfo() {
+        //获取编辑框构造器对象
         InfoEditPopup editPopup = new InfoEditPopup();
-        HotelAdmin hotelAdmin = (HotelAdmin) personService.searchPerson(currentRecorder.getCurrentUserName());//先获取当前登录用户的用户名再获取对应顾客对象
+        //先获取当前登录用户的用户名再获取对应顾客对象
+        HotelAdmin hotelAdmin = (HotelAdmin) personService.searchPerson(currentRecorder.getCurrentUserName());
+        //设置编辑框的标签
         editPopup.setInfoNameList("密码","身份证号码","电话");
+        //设置编辑框的值
         editPopup.setInfoValueList(hotelAdmin.getPassword(),hotelAdmin.getIdNumber(),hotelAdmin.getTelephone());
-        List<String> infoList = editPopup.display("个人信息修改");  //启动窗口并准备获取其返回值
+        //启动窗口并准备获取其返回值
+        List<String> infoList = editPopup.display("个人信息修改");
         if(infoList != null) {
             //正则判断
             if(!RegexUtil.isPassword(infoList.get(0))){PromptAlert.display("错误","检查密码输入");return;}
@@ -106,15 +112,16 @@ public class HotelAdminView extends View{
             personService.updatePeron(hotelAdmin);       //保存信息·
         }
     }
-
+    /** 初始化布局元素 */
     private void init(){
+        //初始化提示性文字段
         labelsCreater = new LabelsCreater();
         labelsCreater.addLine("今天是"+ DateUtil.getCurrentDate());
         labelsCreater.addLine("您好,用户名为"+ currentRecorder.getCurrentUserName()+"的酒店管理员。");
         labelsCreater.addLine("您是"+ hotelService.getHotel(user.getHotelID()).getName()+"酒店的管理员");
         labelsCreater.addLine("您可以：");
         labelVBox = labelsCreater.getVBox();
-
+        //初始化按钮
         infoButton = ComponentCreater.newButton("查看本酒店信息",150);
         roomButton = ComponentCreater.newButton("管理本酒店房间",150);
         orderButton = ComponentCreater.newButton("管理本酒店订单",150);
@@ -122,12 +129,12 @@ public class HotelAdminView extends View{
         cancelLoginButton = ComponentCreater.newButton("取消自动登录",150);
         psnlInfoButton = ComponentCreater.newButton("修改个人信息",150);
         backButton = ComponentCreater.newButton("退出至登录界面",150);
-
+        //初始化总布局容器
         vBox = new VBox();
         vBox.setPadding(new Insets(30));
         vBox.setSpacing(20);
         vBox.getChildren().addAll(labelVBox,infoButton,roomButton,orderButton,accountButton,cancelLoginButton,psnlInfoButton,backButton);
-
+        //初始化窗口属性
         scene = new Scene(vBox);
         stage = new Stage();
         stage.setScene(scene);

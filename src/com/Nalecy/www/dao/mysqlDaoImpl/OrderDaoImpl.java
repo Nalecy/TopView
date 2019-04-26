@@ -22,13 +22,6 @@ public class OrderDaoImpl implements OrderDao {
         DatabaseUtil.addOneRowData("orderR", null, order.getUserName(), order.getDate().toString(), String.valueOf(order.getRoomPeriod()), String.valueOf(order.getHotelID()), String.valueOf(order.getRoomID()), String.valueOf(order.getBalance()), String.valueOf(order.getIsComment().ordinal()));
     }
 
-    public Order getOrder(String userName) {
-        Order order = new Order();
-        List<String> orderInfo = DatabaseUtil.getOneRowData("orderR", "userName", userName);
-        if (orderInfo == null) return null;
-        setInfo(order, orderInfo);
-        return order;
-    }
 
     public Order getOrder(Integer orderId) {
         Order order = new Order();

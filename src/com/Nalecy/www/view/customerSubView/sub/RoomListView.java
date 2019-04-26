@@ -67,10 +67,11 @@ public class RoomListView extends View {
             ViewManger.back();
         });
     }
-
+    /** 初始化布局元素 */
     private void init(){
         label = new Label("房间列表：");
 
+        //初始化表
         TableViewCreater<Room> tvc = new TableViewCreater<>();
         tvc.addColumn("房间名称","name",100);
         tvc.addColumn("房间类型","type",100);
@@ -86,7 +87,7 @@ public class RoomListView extends View {
         leftVBox.getChildren().addAll(label,roomListTable);
         leftVBox.setPadding(new Insets(50));
 
-        //右边
+        //右边的布局
         dateChoiceBox = new ChoiceBox<>();
         dateChoiceBox.setItems(FXCollections.observableArrayList(DateUtil.getOneDay(1),DateUtil.getOneDay(2),DateUtil.getOneDay(3)));
         dateChoiceBox.setValue(DateUtil.getOneDay(1));

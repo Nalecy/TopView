@@ -21,7 +21,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
         DatabaseUtil.addOneRowData("administrator", String.valueOf(administrator.getId()), administrator.getUserName(), administrator.getPassword(), administrator.getIdNumber(), administrator.getTelephone());
     }
 
-    public Administrator searchAdministrator(String userName) {
+    public Administrator getAdministrator(String userName) {
         Administrator administrator = new Administrator();
         List<String> list = DatabaseUtil.getOneRowData("administrator", "userName", userName);
         if (list == null||list.size() == 0) return null;
@@ -29,7 +29,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
         return administrator;
     }
 
-    public Administrator searchAdministrator(Integer id) {
+    public Administrator getAdministrator(Integer id) {
         Administrator administrator = new Administrator();
         List<String> list = DatabaseUtil.getOneRowData("administrator", "id", String.valueOf(id));
         if (list == null|| list.size() == 0) return null;

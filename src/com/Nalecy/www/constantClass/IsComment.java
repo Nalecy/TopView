@@ -7,6 +7,11 @@ public enum IsComment{
     /** 表示订单已评论 */
     YES;
 
+    /**
+     * 通过下标获取枚举值
+     * @param ordinal
+     * @return
+     */
     public static IsComment get(int ordinal){
         switch (ordinal){
             case 0:return NO;

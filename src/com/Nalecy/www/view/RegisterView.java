@@ -85,23 +85,30 @@ public class RegisterView extends View{
         });
 
         backButton.setOnAction(e -> {
+            //返回
             ViewManger.back();
         });
 
         resButton.setOnAction(e -> {
             boolean success = false;
             if (customerRegBut.isSelected()) {  //选择的是顾客
-                success = save();
-            } else if (HAdminRegBut.isSelected()) {//选择的是酒管
+                success = save();//直接返回是否注册成功
+            } else if (HAdminRegBut.isSelected()) {
+                //选择的是酒管
+                //先检查注册码是否正确
                 if (checkPermission("HotelAdmin", resNumberText.getText())) {
                     success = save();
                 } else {
+                    //注册码错误
                     PromptAlert.display("错误", "注册码错误！");
                 }
-            } else if (AdministratorRegBut.isSelected()) {//选择的是超管
+            } else if (AdministratorRegBut.isSelected()) {
+                //选择的是超管
+                //先检查注册码是否正确
                 if (checkPermission("Administrator", resNumberText.getText())) {
                     success = save();
                 } else {
+                    //注册码错误
                     PromptAlert.display("错误", "注册码错误！");
                 }
             }
@@ -141,18 +148,22 @@ public class RegisterView extends View{
         Person person;
         //判断所选身份
         if (group.getSelectedToggle() == customerRegBut) {
+            //如果选择是顾客
             person = new Customer();
         }
         else if (group.getSelectedToggle() == HAdminRegBut){
+            //如果选择是酒管
+            //通过酒店名字获取酒店对象判断是否存在
             Hotel hotel = hotelService.getHotel(hotelNameText.getText());
-            if (hotel == null)return false;
+            if (hotel == null)return false;//不存在返回失败
             person = new HotelAdmin();
             ((HotelAdmin) person).setHotelID(hotel.getId());
         }
         else {
+            //如果选择是超管
             person = new Administrator();
         }
-        //注入信息
+        //组装person对象
         person.setUserName(userText.getText());
         person.setPassword(passwordText.getText());
         person.setIdNumber(idNumberText.getText());
@@ -160,8 +171,9 @@ public class RegisterView extends View{
         personService.addPerson(person);
         return true;
     }
-
+    /** 初始化布局元素 */
     private void init() {
+        //初始化 选择按钮组
         customerRegBut = new ToggleButton("顾客");
         HAdminRegBut = new ToggleButton("酒管");
         AdministratorRegBut = new ToggleButton("超管");
@@ -169,6 +181,12 @@ public class RegisterView extends View{
         group = new ToggleGroup();
         group.getToggles().addAll(customerRegBut, HAdminRegBut, AdministratorRegBut);
 
+        //初始化选择按钮组横向容器
+        toggleHBox = new HBox();
+        toggleHBox.getChildren().addAll(customerRegBut, HAdminRegBut, AdministratorRegBut);
+        toggleHBox.setSpacing(10);
+
+        //初始化文本框前的标签
         userLabel = ComponentCreater.newLabel("用户名：");
         passwordLabel = ComponentCreater.newLabel("密码：");
         phoneLabel = ComponentCreater.newLabel("电话：");
@@ -176,21 +194,19 @@ public class RegisterView extends View{
         hotelNameLabel = ComponentCreater.newLabel("酒店名字：");
         resNumLabel = ComponentCreater.newLabel("注册码：");
 
-        userText = ComponentCreater.newTextField("允许5-12位字母数字",80);
-        passwordText = ComponentCreater.newPasswordField("允许6-12位字母数字",80);
-        phoneText = ComponentCreater.newTextField("允许11位数字",80);
-        idNumberText = ComponentCreater.newTextField("允许18位数身份证",80);
-        hotelNameText = ComponentCreater.newTextField("仅允许汉字",80);
-        resNumberText = ComponentCreater.newTextField("请输入注册码",80);
+        //初始化文本框
+        userText = ComponentCreater.newTextField("允许5-12位字母数字");
+        passwordText = ComponentCreater.newPasswordField("允许6-12位字母数字");
+        phoneText = ComponentCreater.newTextField("允许11位数字");
+        idNumberText = ComponentCreater.newTextField("允许18位数身份证");
+        hotelNameText = ComponentCreater.newTextField("仅允许汉字");
+        resNumberText = ComponentCreater.newTextField("请输入注册码");
 
-
+        //初始化按钮
         resButton = ComponentCreater.newButton("注册");
         backButton = ComponentCreater.newButton("返回");
 
-        toggleHBox = new HBox();
-        toggleHBox.getChildren().addAll(customerRegBut, HAdminRegBut, AdministratorRegBut);
-        toggleHBox.setSpacing(10);
-
+        //初始化网格布局
         grid = new GridPane();
         GridPane.setConstraints(toggleHBox, 1, 0);
         GridPane.setConstraints(userLabel, 0, 1);
@@ -212,6 +228,7 @@ public class RegisterView extends View{
         grid.getChildren().addAll(toggleHBox, userLabel, userText, passwordLabel, passwordText, phoneLabel, phoneText, idNumberLabel, idNumberText, hotelNameLabel, hotelNameText, resNumLabel, resNumberText, resButton, backButton);
         grid.setPadding(new Insets(20, 20, 20, 20));
 
+        //初始化窗口属性
         scene = new Scene(grid);
         window = new Stage();
         window.setResizable(false);
@@ -221,12 +238,11 @@ public class RegisterView extends View{
 
     /**+
      * 检查注册码是否正确
-     * @param s
-     * @param input
+     * @param identify 身份的名字 如:HotelAdmin
+     * @param input 注册码输入
      * @return true/false
      */
-    private boolean checkPermission(String s, String input) {
-        return ProGetter.getInstance().get(s).equals(input);
-
+    private boolean checkPermission(String identify, String input) {
+        return ProGetter.getInstance().get(identify).equals(input);
     }
 }

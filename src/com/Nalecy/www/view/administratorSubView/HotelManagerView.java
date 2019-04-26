@@ -105,15 +105,16 @@ public class HotelManagerView extends View {
             if(!RegexUtil.isZh(infoList.get(0))){ PromptAlert.display("错误","检查酒店名称输入");return;}
             if(!RegexUtil.isOneToFive(infoList.get(1))){PromptAlert.display("错误","检查星级输入");return;}
             if(!RegexUtil.isZh(infoList.get(2))){PromptAlert.display("错误","检查描述输入");return;}
-
+            //组装hotel对象
             hotel.setName(infoList.get(0));
             hotel.setStar(Integer.valueOf(infoList.get(1)));
             hotel.setDescription(infoList.get(2));
             hotelService.updateHotel(hotel);
         }
     }
-
+    /** 初始化布局元素 */
     private void init() {
+        //初始化表
         TableViewCreater<Hotel> tvc = new TableViewCreater<>();
         tvc.addColumn("酒店名称", "name", 100);
         tvc.addColumn("星级", "star", 50);
@@ -123,6 +124,7 @@ public class HotelManagerView extends View {
         roomTableView = tvc.getTableView();
         roomTableView.setItems(getHotelList());
 
+        //初始化按钮
         addButton = ComponentCreater.newButton("增加");
         deleteButton = ComponentCreater.newButton("删除");
         modifyButton = ComponentCreater.newButton("修改");

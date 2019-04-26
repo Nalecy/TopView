@@ -22,7 +22,7 @@ public class CustomerDaoImpl implements CustomerDao {
         DatabaseUtil.addOneRowData("customer", String.valueOf(customer.getId()), customer.getUserName(), customer.getPassword(), customer.getIdNumber(), customer.getTelephone(), String.valueOf(customer.getBalance()),String.valueOf(customer.getIsVip()));
     }
 
-    public Customer searchCustomer(String userName) {
+    public Customer getCustomer(String userName) {
         Customer customer = new Customer();
         List<String> list = DatabaseUtil.getOneRowData("customer", "userName", userName);
         if (list == null|| list.size() == 0) return null;
@@ -30,7 +30,7 @@ public class CustomerDaoImpl implements CustomerDao {
         return customer;
     }
 
-    public Customer searchCustomer(Integer id) {
+    public Customer getCustomer(Integer id) {
         Customer customer = new Customer();
         List<String> list = DatabaseUtil.getOneRowData("customer", "id", String.valueOf(id));
         if (list == null|| list.size() == 0) return null;

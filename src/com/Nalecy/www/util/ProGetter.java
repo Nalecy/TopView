@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ProGetter {
+public final class ProGetter {
     private static ProGetter ourInstance;
     private static Properties pro;
 

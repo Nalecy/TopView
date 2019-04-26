@@ -53,6 +53,7 @@ public class AdministratorView extends View{
         });
         cancelLoginButton.setOnAction(e->{
             personService.cancelLogin(currentRecorder.getCurrentUserName());
+            PromptAlert.display("恭喜","取消成功");
         });
         psnlInfoButton.setOnAction(e->{
             modifyInfo();
@@ -81,7 +82,7 @@ public class AdministratorView extends View{
             personService.updatePeron(administrator);       //保存信息·
         }
     }
-
+    /** 初始化布局元素 */
     private void init(){
         labelsCreater = new LabelsCreater();
         labelsCreater.addLine("今天是"+ DateUtil.getCurrentDate());
